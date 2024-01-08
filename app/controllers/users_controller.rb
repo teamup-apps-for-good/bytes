@@ -32,10 +32,16 @@ class UsersController < ApplicationController
   end
   def do_transfer
 
-    credit_num = params[:credits]
+    #grab who is doing the transfer, and how much
+    credit_num = params[:credits].to_i #TODO needs to be string for sure
+    uin = params[:uin]
+
     puts "params: #{params}"
-    puts params[:uin]
-    puts credit_num
+    puts "uin #{params[:uin]} is sending #{params[:credits]} credits to the pool"
+
+    @user = User.find_by_uin(uin)
+
+    @user.subtract_credits(credit_num)
 
   end
 end
