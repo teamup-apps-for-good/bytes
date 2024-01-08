@@ -22,8 +22,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-
-  # action -> controller#action
+  #route for the actual transfer page
   get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
+
+  #route for the post request that will be the transfer functionality
   post '/users/:uin/transfer/transfer_donor_credits', to: 'users#do_transfer'
 end
