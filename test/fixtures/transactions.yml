@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  uin: MyString
+  type: 
+  time: 2024-01-08 03:00:27
+  amount: 1
+
+two:
+  id: 
+  uin: MyString
+  type: 
+  time: 2024-01-08 03:00:27
+  amount: 1
