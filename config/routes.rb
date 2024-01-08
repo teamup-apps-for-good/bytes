@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'transactions/index'
+  get 'transactions/new'
+  get 'transactions/show'
+  get 'transactions/create'
+  get 'transactions/edit'
+  get 'transactions/update'
+  get 'transactions/search'
   get 'users/index'
   get 'users/new'
   get 'users/show'
