@@ -21,4 +21,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+
+  # action -> controller#action
+  get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
+  post '/transfer_donor_credits', to: 'users#do_transfer'
 end
