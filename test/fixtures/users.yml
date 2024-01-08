@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uin: MyString
+  name: MyString
+  email: MyString
+  credits: 1
+  type: 
+  date_joined: 2024-01-08
+
+two:
+  uin: MyString
+  name: MyString
+  email: MyString
+  credits: 1
+  type: 
+  date_joined: 2024-01-08
