@@ -25,5 +25,5 @@ Rails.application.routes.draw do
 
   # action -> controller#action
   get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
-  post '/transfer_donor_credits', to: 'users#do_transfer'
+  post '/users/:uin/transfer/transfer_donor_credits', to: 'users#do_transfer'
 end
