@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root :to => 'pages#index'
+  
   get 'transactions/index'
   get 'transactions/new'
   get 'transactions/show'
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-
+  
 
   # action -> controller#action
   get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
