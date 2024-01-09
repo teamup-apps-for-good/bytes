@@ -28,4 +28,8 @@ Rails.application.routes.draw do
   # action -> controller#action
   get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
   post '/users/:uin/transfer/transfer_donor_credits', to: 'users#do_transfer'
+
+  #oauth stuff
+  get '/logout', to: 'sessions#logout', as: 'logout'
+  get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
 end
