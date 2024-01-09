@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
   get 'sessions/logout'
   get 'sessions/omniauth'
   get 'transactions/index'
@@ -24,9 +23,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-
-  root 'welcome#index'
-  get 'welcome/index', to: 'welcome#index', as: 'welcome'
+  root :to => 'pages#index'
 
   # action -> controller#action
   get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
