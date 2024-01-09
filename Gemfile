@@ -92,4 +92,10 @@ end
 
 group :production do
   gem 'pg'
+
+# omniauth for google login
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 end

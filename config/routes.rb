@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/logout'
+  get 'sessions/omniauth'
   get 'transactions/index'
   get 'transactions/new'
   get 'transactions/show'
