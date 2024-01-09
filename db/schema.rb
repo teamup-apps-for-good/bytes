@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_08_012832) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_08_090908) do
+  create_table "transactions", force: :cascade do |t|
+    t.string "uin"
+    t.string "transaction_type"
+    t.datetime "time"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_transactions_on_id", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "uin"
     t.string "name"
     t.string "email"
     t.integer "credits"
-    t.string "type"
+    t.string "user_type"
     t.date "date_joined"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
