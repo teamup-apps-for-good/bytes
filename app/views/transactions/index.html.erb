@@ -1,2 +1,34 @@
-<h1>Transactions#index</h1>
-<p>Find me in app/views/transactions/index.html.erb</p>
+<h1>Transactions</h1>
+
+<table id="transactions">
+  <thead>
+    <tr>
+      <th>UIN</th>
+      <th>Type</th>
+      <th>Time</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td>
+          <%= transaction.uin %>
+        </td>
+        <td>
+          <%= transaction.transaction_type %>
+        </td>
+        <td>
+          <%= transaction.time %>
+        </td>
+        <td>
+          <%= transaction.amount %>
+        </td>
+        <td>
+          <%= link_to "View transaction",  transaction_path(transaction) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
