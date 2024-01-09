@@ -44,4 +44,10 @@ class UsersController < ApplicationController
     @user.subtract_credits(credit_num)
 
   end
+  
+  def get_credits
+    @user = User.find_by_uin(params[:uin])
+    @uin = @user.uin
+    @credits = @user.credits
+  end
 end
