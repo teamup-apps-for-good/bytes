@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/logout'
+  get 'sessions/omniauth'
   get 'transactions/index'
   get 'transactions/new'
   get 'transactions/show'
@@ -21,10 +23,16 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-
+  root :to => 'pages#index'
 
   # action -> controller#action
   get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
   get '/users/:uin/credits', to: 'users#get_credits', as: 'user-credits'
   post '/users/:uin/transfer/transfer_donor_credits', to: 'users#do_transfer'
+
+  get '/users/:id', to: 'users#show', as: 'user'
+
+  #oauth stuff
+  get '/logout', to: 'sessions#logout', as: 'logout'
+  get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
 end
