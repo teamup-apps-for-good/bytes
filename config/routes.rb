@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :credit_pools
   get 'transactions/index'
   get 'transactions/new'
   get 'transactions/show'
@@ -27,4 +28,7 @@ Rails.application.routes.draw do
 
   #route for the post request that will be the transfer functionality
   post '/users/:uin/transfer/transfer_donor_credits', to: 'users#do_transfer'
+
+  #route to add to the credit pool
+  post 'transaction/add_to_pool', to: 'credit_pools#add_to_pool'
 end

@@ -19,4 +19,11 @@ class TransactionsController < ApplicationController
 
   def search
   end
+
+  def add_to_pool
+
+    puts "params #{params}"
+    credits_to_add = params[:credits]
+
+  end
 end
