@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'transactions/index'
+  get 'transactions/new'
+  get 'transactions/show'
+  get 'transactions/create'
+  get 'transactions/edit'
+  get 'transactions/update'
+  get 'transactions/search'
   get 'users/index'
   get 'users/new'
   get 'users/show'
@@ -14,4 +21,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+
+  # action -> controller#action
+  get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
+  post '/users/:uin/transfer/transfer_donor_credits', to: 'users#do_transfer'
 end
