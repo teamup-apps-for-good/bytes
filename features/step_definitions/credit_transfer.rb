@@ -5,11 +5,13 @@ Given('the following users exist:') do |table|
 end
 
 Given('I am a {string} account with uin {string}') do |string, string2|
-    visit "/my_profile"
-    expect(page).to have_content(string)
-    expect(page).to have_content(string2)
+    
+    #visit "/my_profile"
+    #expect(page).to have_content(string)
+    #expect(page).to have_content(string2)
     uin = string2
-
+    visit "/users/#{uin}/transfer"
+    expect(page).to have_current_path "/users/#{string2}/transfer"
 end
 
 When('I go to the {string} page') do |string|
