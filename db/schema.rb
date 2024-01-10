@@ -36,6 +36,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_09_031239) do
     t.date "date_joined"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uid"
+    t.string "provider"
     t.index ["uin"], name: "index_users_on_uin", unique: true
   end
 

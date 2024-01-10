@@ -2,6 +2,11 @@ source "https://rubygems.org"
 
 ruby "3.2.2"
 
+# omniauth for google login
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.2"
 
@@ -92,4 +97,5 @@ end
 
 group :production do
   gem 'pg'
+
 end
