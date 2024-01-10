@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    validates :email, presence: true
+    
     def subtract_credits(amount)
         #do the actual subtraction update in the database
         puts "before update: #{self.credits}"
