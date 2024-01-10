@@ -119,9 +119,9 @@ class UsersController < ApplicationController
     @creditpool.subtract_credits(amount)
     @user.add_credits(amount)
     flash[:notice] = "#{amount} Credits received"
-    redirect_to :user
+    redirect_to controller: 'users', action: 'show', id: @user.id
   end
-  
+
   private
   def new_user_params
     params.require(:user).permit(:uin, :credits, :user_type).merge(email: params[:email], name: params[:name], date_joined: Time.current, created_at: Time.current, updated_at: Time.current)
