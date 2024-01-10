@@ -11,7 +11,7 @@ Feature: profile view
 Background: Users in database
 
     Given the following users exist:
-    |   name   |   uin   |    email     |   credits   |    type      |   date_joined   |
+    |   name   |   uin   |    email     |   credits   |    user_type      |   date_joined   |
     |   John   | 123456  |  j@tamu.edu  |     50      |    donor     |    01/01/2022   |
     |   Todd   | 324567  |  t@tamu.edu  |     10      |   recipient  |    01/01/2022   |
     |   Jim    | 124124  |  ji@tamu.edu |     70      |    donor     |    01/01/2022   |
