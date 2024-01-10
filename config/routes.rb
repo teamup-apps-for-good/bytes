@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
   resources :transactions
-  # get 'transactions/index'
-  # get 'transactions/new'
-  # get 'transactions/show'
-  # get 'transactions/create'
-  # get 'transactions/edit'
-  # get 'transactions/update'
-  # get 'transactions/search'
+
+  get 'sessions/logout'
+  get 'sessions/omniauth'
+
   get 'users/index'
   get 'users/new'
   get 'users/show'
