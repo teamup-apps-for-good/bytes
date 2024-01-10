@@ -3,6 +3,7 @@
         <h1>User transfer page!!</h1>
         <h3>Here, you can donate meal credits into the pool</h3>
         <h3>For testing purposes, here's the number of credits: <%=@user.credits%></h3>
+        <h3>Also for testing purposes, here's the number of credits in the pool: <%=@creditpool.credits%></h3>
     </div>
     <div class="main-container">
         <form action="/users/<%=@uin%>/transfer/transfer_donor_credits" method='post'>

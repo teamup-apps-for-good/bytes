@@ -1,0 +1,10 @@
+<% #this is code from PA3 written by professor ritchey!! %>
+<% if flash[:notice] %>
+  <div class="alert alert-info" role="alert" id="notice">
+    <%= flash[:notice] %>
+  </div>
+<% elsif flash[:warning] %>
+  <div class="alert alert-danger" role="alert" id="warning">
+    <%= flash[:warning] %>
+  </div>
+<% end %>

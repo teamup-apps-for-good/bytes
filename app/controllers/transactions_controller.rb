@@ -39,4 +39,11 @@ class TransactionsController < ApplicationController
     flash[:notice] = "#{@amount} Credits received"
     redirect_to profile_path
   end
+  
+  def add_to_pool
+
+    puts "params #{params}"
+    credits_to_add = params[:credits]
+
+  end
 end

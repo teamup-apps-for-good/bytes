@@ -1,0 +1,22 @@
+<%= form_with(model: credit_pool) do |form| %>
+  <% if credit_pool.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(credit_pool.errors.count, "error") %> prohibited this credit_pool from being saved:</h2>
+
+      <ul>
+        <% credit_pool.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :credits, style: "display: block" %>
+    <%= form.number_field :credits %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
