@@ -3,7 +3,7 @@ Given('the following transactions exist:') do |table|
     Transaction.create transaction
   end
 end
-#
+
 Given('I am logged in as a donor') do
   pending # Write code here that turns the phrase above into concrete actions
 end
