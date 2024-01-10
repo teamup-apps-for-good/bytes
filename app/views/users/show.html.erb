@@ -1,7 +1,7 @@
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
 <%= link_to "Logout", logout_path %>
-<h2>Howdy <%= @current_user.first_name %>!</h2>
+<h2>Howdy <%= @current_user.name %>!</h2>
 <div id="user-details">
   <p>
     <strong>Email:</strong>
@@ -10,11 +10,6 @@
 
   <p>
     <strong>First name:</strong>
-    <%= @current_user.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= @current_user.last_name %>
+    <%= @current_user.name %>
   </p>
 </div>

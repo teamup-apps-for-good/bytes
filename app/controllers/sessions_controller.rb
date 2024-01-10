@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
     @user = User.find_or_create_by(uid: auth['uid'], provider: auth['provider']) do |u|
       u.email = auth['info']['email']
       names = auth['info']['name'].split
-      u.first_name = names[0]
-      u.last_name = names[1..].join(' ')
+      u.name = names[0]
     end
 
     if @user.valid?
