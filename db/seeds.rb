@@ -9,4 +9,5 @@
 #   end
 users = [{name: "John", uin: "123456", email: "j@tamu.edu", credits: 50, user_type:"donor", date_joined: "01/01/2022"},
         {name: "Todd", uin: "324567", email: "t@tamu.edu", credits: 10, user_type:"recipient", date_joined: "01/01/2022"}]
+CreditPool.create({credits: 0})
 User.create(users)

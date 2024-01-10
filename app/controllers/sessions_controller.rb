@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   
   def logout
     reset_session
-    redirect_to '/', notice: 'You are logged out.'
+    redirect_to root_path, notice: 'You are logged out.'
   end
 
   def omniauth  
@@ -26,6 +26,5 @@ class SessionsController < ApplicationController
     rescue
       redirect_to new_user_path({:email => auth['info']['email'], :name => auth['info']['name']})
     end
-
   end
 end
