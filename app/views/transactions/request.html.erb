@@ -1,0 +1,8 @@
+<div>
+  <h1>Request Meal Credits</h1>
+  <%= form_with url: "/transactions/receive", method: :post do |form| %>
+    <%= form.label :num_credits, "Number of Credits: " %>
+    <%= form.number_field :num_credits %>
+    <%= form.submit "Request" %>
+  <% end %>
+</div>
