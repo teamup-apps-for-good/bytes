@@ -35,42 +35,41 @@ class UsersController < ApplicationController
 
     #this is the controller for the actual transfer page
     #all we really want to do is set the global uin and user so we can use it later when we make our transfer call
-    @user = User.find_by_uin(params[:uin])
-    @uin = @user.uin
+    @user = User.find_by_id(params[:id])
 
     puts "params #{params}"
-    puts @uin
+    puts @user.name
 
     if CreditPool.all.length > 1
       raise Exception.new "There are multiple pools... there shouldn't be"
     end
     @creditpool = CreditPool.all[0]
-
     puts "credit pool: #{@creditpool}"
 
   end
   
   def do_transfer
 
+    puts "INITIATING TRANSFER!"
     #grab who is doing the transfer, and how much
     credit_num = params[:credits].to_i #TODO needs to be string for sure
-    uin = params[:uin]
+    id = params[:id]
     puts "params: #{params}"
-    puts "uin #{params[:uin]} is sending #{params[:credits]} credits to the pool"
-    @user = User.find_by_uin(uin)
+    puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
+    @user = User.find_by_id(id)
 
 
     #check to see if there are any errors with credit amount
     if credit_num > @user.credits
       flash[:notice] = "ERROR Trying to donate more credits than you have!"
-      redirect_to "/users/#{@user.uin}/transfer" #messy..
+      redirect_to "/users/#{@user.id}/transfer" #messy..
       return
 
     end
 
     if credit_num == 0 || credit_num == ""
       flash[:notice] = "ERROR input invalid!"
-      redirect_to "/users/#{@user.uin}/transfer" #messy..
+      redirect_to "/users/#{@user.id}/transfer" #messy..
       return
     end
     
@@ -89,7 +88,7 @@ class UsersController < ApplicationController
 
     #notify user it's successful somehow
     flash[:notice] = "CONFIRMATION Sucessfully donated #{credit_num} credits to the pool!"
-    redirect_to "/users/#{@user.uin}/transfer" #messy..
+    redirect_to "/users/#{@user.id}/transfer" #messy..
 
 
   end
