@@ -57,10 +57,11 @@ class UsersController < ApplicationController
     end
 
     if credit_num == 0 || credit_num == ""
-      flash[:notice] = "ERROR Trying to donate 0 credits!"
+      flash[:notice] = "ERROR input invalid!"
       redirect_to "/users/#{@user.uin}/transfer" #messy..
       return
     end
+    
     #now, subtract credits from their account
     @user.subtract_credits(credit_num)
 
