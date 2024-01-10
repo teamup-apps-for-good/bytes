@@ -1,5 +1,14 @@
-<h1>BYTES</h1>
+<%= stylesheet_link_tag "landing" %>
 
-<div class="row">
-<p><%= button_to "Login with Google", "/auth/google_oauth2", data: {turbo: "false"} %></p>
+<div class="banner">
+  <%= button_to "Login with Google", "/auth/google_oauth2", class: 'login-button', data: {turbo: "false"} %>
 </div>
+
+<div class="body">
+  <p>BYTES</p>
+  <div class="imgs">
+    <img src="logo_url" alt="Bytes logo goes here">
+    <img src="school_logo_url" alt="School logo goes here">
+  </div>
+</div>
+
