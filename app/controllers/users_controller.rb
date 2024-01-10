@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       @user = User.create!(new_user_params)
       flash[:notice] = "#{@user.name}'s account was successfully created."
       session[:user_id] = @user.id
+      session[:creating] = false
       redirect_to user_path(@user), notice: 'You are logged in.'
     rescue
       flash[:notice] = "Error has occurred"
