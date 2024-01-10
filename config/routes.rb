@@ -17,9 +17,6 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  get 'transactions/receive', to: 'transactions#receive', as: 'transaction_receive'
-  post 'transactions/do_receive', to: 'transactions#do_receive', as: 'transaction_do_receive'
-
   get '/users/:uin/receive', to: 'users#receive', as: 'user_receive'
   post '/users/:uin/do_receive', to: 'users#do_receive', as: 'user_do_receive'
 
