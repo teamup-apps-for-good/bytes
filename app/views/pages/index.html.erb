@@ -1,5 +1,15 @@
-<h1>BYTES</h1>
+<%= stylesheet_link_tag "landing" %>
 
-<div class="row">
-  <%= link_to 'Login', transactions_index_path(), :class => 'btn btn-primary col-2' %>
-</div>
+  <div class="banner">
+    <btn class="test">
+      <%= link_to 'Login', transactions_index_path(), class: 'login-button' %>
+    </btn>
+  </div>
+
+  <div class="body">
+    <p>BYTES</p>
+    <div class="imgs">
+      <img src="logo_url" alt="Bytes logo goes here">
+      <img src="school_logo_url" alt="School logo goes here">
+    </div>
+  </div>
