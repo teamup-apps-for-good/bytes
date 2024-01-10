@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :credit_pools
   get 'sessions/logout'
   get 'sessions/omniauth'
+  resources :users
+  resources :pages
   get 'transactions/index'
   get 'transactions/new'
   get 'transactions/show'
@@ -9,13 +11,6 @@ Rails.application.routes.draw do
   get 'transactions/edit'
   get 'transactions/update'
   get 'transactions/search'
-  get 'users/index'
-  get 'users/new'
-  get 'users/show'
-  get 'users/create'
-  get 'users/edit'
-  get 'users/update'
-  get 'users/search'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -35,15 +30,14 @@ Rails.application.routes.draw do
   root :to => 'pages#index'
 
   # action -> controller#action
-  get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
+  get '/users/:id/transfer', to: 'users#transfer', as: 'user-transfer'
 
   #route for the post request that will be the transfer functionality
-  post '/users/:uin/transfer/transfer_donor_credits', to: 'users#do_transfer'
+  post '/users/:id/transfer/transfer_donor_credits', to: 'users#do_transfer'
 
   # route to add to the credit pool
   post 'transaction/add_to_pool', to: 'credit_pools#add_to_pool'
-  get '/users/:id', to: 'users#show', as: 'user'
-
+  
   #oauth stuff
   get '/logout', to: 'sessions#logout', as: 'logout'
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
