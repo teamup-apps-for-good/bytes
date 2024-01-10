@@ -46,9 +46,11 @@ class UsersController < ApplicationController
 
   end
   
-  def get_credits
+  def get_profile
     @user = User.find_by_uin(params[:uin])
     @uin = @user.uin
     @credits = @user.credits
+    @email = @user.email
+    @user_type = @user.user_type
   end
 end
