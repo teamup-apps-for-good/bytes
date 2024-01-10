@@ -16,7 +16,11 @@ class UsersController < ApplicationController
       flash[:notice] = %{#{@user.name}'s account was successfully created.}
       session[:user_id] = @user.id
       session[:creating] = false
+<<<<<<< HEAD
       redirect_to '/users/profile'
+=======
+      redirect_to user_path(@user), notice: 'You are logged in.'
+>>>>>>> 6c6229c (Fixed small redirection issues within account creation)
     rescue
       flash[:notice] = "Error has occurred"
       redirect_to '/', alert: 'Login failed.'
