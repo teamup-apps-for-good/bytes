@@ -14,8 +14,6 @@ class SessionsController < ApplicationController
     #   u.name = names[0]
     # end
     begin
-      puts 'uid'
-      puts auth['uid']
       @user = User.find_by(email: auth['info']['email'])
       if @user.valid?
         session[:user_id] = @user.id
@@ -24,6 +22,7 @@ class SessionsController < ApplicationController
         redirect_to '/', alert: 'Login failed.'
       end
     rescue
+      session[:creating] = true 
       redirect_to new_user_path({:email => auth['info']['email'], :name => auth['info']['name']})
     end
   end
