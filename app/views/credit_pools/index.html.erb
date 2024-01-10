@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Credit pools</h1>
+
+<div id="credit_pools">
+  <% @credit_pools.each do |credit_pool| %>
+    <%= render credit_pool %>
+    <p>
+      <%= link_to "Show this credit pool", credit_pool %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New credit pool", new_credit_pool_path %>
