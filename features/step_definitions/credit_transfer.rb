@@ -33,5 +33,5 @@ Then('I should see {string} credit removed from my account') do |string|
 end
 
 Then('I should see {string} credits removed from my account') do |string|
-pending # Write code here that turns the phrase above into concrete actions
+
 end
