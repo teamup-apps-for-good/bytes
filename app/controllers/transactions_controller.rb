@@ -1,6 +1,8 @@
 class TransactionsController < ApplicationController
   def index
-    @transactions = Transaction.all
+    # @transactions = Transaction.all
+    user_uin = User.find(session[:user_id]).uin
+    @transactions = Transaction.where(uin: user_uin)
   end
 
   def new
@@ -37,7 +39,7 @@ class TransactionsController < ApplicationController
   def do_receive
     # @curr_user = User.find(session["uin"])
     amount = params[:num_credits].to_i
-    
+
     @creditpool = CreditPool.all[0]
     # handles there not being enough credits for the request
     if amount > @creditpool.credits

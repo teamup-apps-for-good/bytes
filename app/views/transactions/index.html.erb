@@ -1,4 +1,10 @@
 <h1>Transactions</h1>
+<p>
+  Welcome, <%= User.find(session[:user_id]).name %>.
+</p>
+<p>
+  Viewing transactions for UIN: <%= User.find(session[:user_id]).uin %>
+</p>
 
 <table id="transactions">
   <thead>
