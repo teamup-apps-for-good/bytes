@@ -1,15 +1,25 @@
 class UsersController < ApplicationController
   def index
+    @users = User.all
   end
 
   def new
   end
 
   def show
-    @current_user = User.find(params[:id])
+    @user = User.find(session[:user_id])
   end
 
   def create
+    begin
+      @user = User.create!(new_user_params)
+      flash[:notice] = "#{@user.name}'s account was successfully created."
+      session[:user_id] = @user.id
+      redirect_to user_path(@user), notice: 'You are logged in.'
+    rescue
+      flash[:notice] = "Error has occurred"
+      redirect_to '/', alert: 'Login failed.'
+    end
   end
 
   def edit
@@ -44,5 +54,10 @@ class UsersController < ApplicationController
 
     @user.subtract_credits(credit_num)
 
+  end
+
+  private
+  def new_user_params
+    params.require(:user).permit(:uin, :credits, :user_type).merge(email: params[:email], name: params[:name], date_joined: Time.current, created_at: Time.current, updated_at: Time.current)
   end
 end

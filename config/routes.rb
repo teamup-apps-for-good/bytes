@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'sessions/logout'
   get 'sessions/omniauth'
+  resources :users
+  resources :pages
   get 'transactions/index'
   get 'transactions/new'
   get 'transactions/show'
@@ -8,13 +10,6 @@ Rails.application.routes.draw do
   get 'transactions/edit'
   get 'transactions/update'
   get 'transactions/search'
-  get 'users/index'
-  get 'users/new'
-  get 'users/show'
-  get 'users/create'
-  get 'users/edit'
-  get 'users/update'
-  get 'users/search'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -28,8 +23,6 @@ Rails.application.routes.draw do
   # action -> controller#action
   get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
   post '/users/:uin/transfer/transfer_donor_credits', to: 'users#do_transfer'
-
-  get '/users/:id', to: 'users#show', as: 'user'
 
   #oauth stuff
   get '/logout', to: 'sessions#logout', as: 'logout'
