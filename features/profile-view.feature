@@ -1,4 +1,4 @@
-Feature: see credits
+Feature: profile view
 
     As a student with excess credits,
     So that I can know how many credits I can afford to donate,
@@ -16,18 +16,18 @@ Background: Users in database
     |   Todd   | 324567  |  t@tamu.edu  |     10      |   recipient  |    01/01/2022   |
     |   Jim    | 124124  |  ji@tamu.edu |     70      |    donor     |    01/01/2022   |
 
-Scenario: donor student goes to see credits
+Scenario: student logs in
     Given I am a donor account
-    When I go to the view credit page
-    Then I should see my name
+    When I log in
+    Then I should be on the profile page
+    And I should see my name
+    And I should see my email
     And I should see my uin
-    And I should see my accounnt type
+    And I should see my account type
     And I should see my credits
 
-Scenario: recipient student goes to see credits
-    Given I am a recipient account
-    When I go to the view credit page
-    Then I should see my name
-    And I should see my uin
-    And I should see my accounnt type
-    And I should see my credits
+Scenario: student goes to transfer
+    Given I am a donor account
+    When I log in
+    And I click Go to transfer
+    Then I should be on the transfer page
