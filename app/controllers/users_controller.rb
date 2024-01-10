@@ -38,6 +38,7 @@ class UsersController < ApplicationController
     puts "credit pool: #{@creditpool}"
 
   end
+  
   def do_transfer
 
     #grab who is doing the transfer, and how much
