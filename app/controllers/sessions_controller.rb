@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   
   def logout
     reset_session
-    redirect_to welcome_path, notice: 'You are logged out.'
+    redirect_to root_path, notice: 'You are logged out.'
   end
 
   def omniauth
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user), notice: 'You are logged in.'
     else
-      redirect_to welcome_path, alert: 'Login failed.'
+      redirect_to root_path, alert: 'Login failed.'
     end
   end
 end
