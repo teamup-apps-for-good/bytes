@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @credit_pool %>
+
+<div>
+  <%= link_to "Edit this credit pool", edit_credit_pool_path(@credit_pool) %> |
+  <%= link_to "Back to credit pools", credit_pools_path %>
+
+  <%= button_to "Destroy this credit pool", @credit_pool, method: :delete %>
+</div>
