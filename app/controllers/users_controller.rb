@@ -98,12 +98,4 @@ class UsersController < ApplicationController
   def new_user_params
     params.require(:user).permit(:uin, :credits, :user_type).merge(email: params[:email], name: params[:name], date_joined: Time.current, created_at: Time.current, updated_at: Time.current)
   end
-  
-  def get_profile
-    @user = User.find_by_uin(params[:uin])
-    @uin = @user.uin
-    @credits = @user.credits
-    @email = @user.email
-    @user_type = @user.user_type
-  end
 end
