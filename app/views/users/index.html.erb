@@ -1,3 +1,34 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h2>All Users</h2>
+
+<table class="table table-striped col-md-12" id="users">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Credits</th>
+      <th>Date Joined</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.uin %>
+        </td>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <%= user.credits %>
+        </td>
+        <td>
+          <%= user.date_joined %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <p><%= button_to "Login with Google", "/auth/google_oauth2", data: {turbo: "false"} %></p>

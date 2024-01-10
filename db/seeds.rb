@@ -16,3 +16,4 @@ transactions = [{uin: "254007932", transaction_type: "donated", time: "2024-01-0
                 {uin: "214003865", transaction_type: "donated", time: "2023-11-19T00:52:48", amount: 1},
                 {uin: "284007821", transaction_type: "recieved", time: "2024-01-01T00:52:48", amount: 2}]
 Transaction.create(transactions)
+CreditPool.create({credits: 0})
