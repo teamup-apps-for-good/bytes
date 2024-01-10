@@ -27,10 +27,10 @@ Rails.application.routes.draw do
   root :to => 'pages#index'
 
   # action -> controller#action
-  get '/users/:uin/transfer', to: 'users#transfer', as: 'user-transfer'
+  get '/users/:id/transfer', to: 'users#transfer', as: 'user-transfer'
 
   #route for the post request that will be the transfer functionality
-  post '/users/:uin/transfer/transfer_donor_credits', to: 'users#do_transfer'
+  post '/users/:id/transfer/transfer_donor_credits', to: 'users#do_transfer'
 
   # route to add to the credit pool
   post 'transaction/add_to_pool', to: 'credit_pools#add_to_pool'
