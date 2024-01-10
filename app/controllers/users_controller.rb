@@ -35,6 +35,8 @@ class UsersController < ApplicationController
     end
     @creditpool = CreditPool.all[0]
 
+    puts "credit pool: #{@creditpool}"
+
   end
   def do_transfer
 
@@ -45,6 +47,20 @@ class UsersController < ApplicationController
     puts "uin #{params[:uin]} is sending #{params[:credits]} credits to the pool"
     @user = User.find_by_uin(uin)
 
+
+    #check to see if there are any errors with credit amount
+    if credit_num > @user.credits
+      flash[:notice] = "ERROR Trying to donate more credits than you have!"
+      redirect_to "/users/#{@user.uin}/transfer" #messy..
+      return
+
+    end
+
+    if credit_num == 0 || credit_num == ""
+      flash[:notice] = "ERROR Trying to donate 0 credits!"
+      redirect_to "/users/#{@user.uin}/transfer" #messy..
+      return
+    end
     #now, subtract credits from their account
     @user.subtract_credits(credit_num)
 
@@ -59,8 +75,8 @@ class UsersController < ApplicationController
     @creditpool.add_credits(credit_num)
 
     #notify user it's successful somehow
-    flash[:notice] = "Sucessfully donated #{credit_num} credits to the pool!"
-    redirect_to '/users' #not working..
+    flash[:notice] = "CONFIRMATION Sucessfully donated #{credit_num} credits to the pool!"
+    redirect_to "/users/#{@user.uin}/transfer" #messy..
 
 
   end
