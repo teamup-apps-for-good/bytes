@@ -1,6 +1,5 @@
 Given('the following transactions exist:') do |table|
   table.hashes.each do |transaction|
-    #test commit
     Transaction.create transaction
   end
 end
