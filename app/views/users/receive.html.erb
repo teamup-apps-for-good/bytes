@@ -1,7 +1,7 @@
 <div>
   <h1>Request Meal Credits</h1>
   <h3>Number of credits available in pool: <%=@creditpool.credits%></h3>
-  <%= form_tag :transaction_do_receive, method: :post do %>
+  <%= form_tag :user_do_receive, method: :post do %>
     <%= label_tag :num_credits, "Number of Credits: " %>
     <%= number_field_tag :num_credits %>
     <%= submit_tag "Request" %>

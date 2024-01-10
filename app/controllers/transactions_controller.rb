@@ -45,7 +45,7 @@ class TransactionsController < ApplicationController
 
     # FIXME: REPLACE UIN WITH ACTUAL UIN ONCE USer IS AVAILABLE
     new_transaction = Transaction.create({uin: 123456, transaction_type: "recipient", time: "", amount: amount})
-    @creditpool.subtract amount
+    @creditpool.subtract_credits amount
     # @curr_user.add_credits amount
     flash[:notice] = "#{amount} Credits received"
     redirect_to :transaction_receive
