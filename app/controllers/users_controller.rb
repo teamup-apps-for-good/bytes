@@ -115,7 +115,7 @@ class UsersController < ApplicationController
       return -1
     end
 
-    new_transaction = Transaction.create({uin: @user.id, transaction_type: "recipient", time: "", amount: amount})
+    new_transaction = Transaction.create({uin: @user.uin, transaction_type: "received", time: "", amount: amount})
     @creditpool.subtract_credits(amount)
     @user.add_credits(amount)
     flash[:notice] = "#{amount} Credits received"
