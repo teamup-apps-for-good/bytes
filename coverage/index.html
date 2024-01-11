@@ -2348,7 +2348,7 @@
 
             
 
-            <code class="ruby">    session[:creating] = false</code>
+            <code class="ruby">    if logged_in?</code>
           </li>
         </div>
       
@@ -2359,7 +2359,7 @@
 
             
 
-            <code class="ruby">    if logged_in?</code>
+            <code class="ruby">      redirect_to user_path(@current_user), notice: &#39;Welcome, back!&#39;</code>
           </li>
         </div>
       
@@ -2370,7 +2370,7 @@
 
             
 
-            <code class="ruby">      redirect_to &#39;/users/profile&#39;, notice: &#39;Welcome, back!&#39;</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -2381,23 +2381,12 @@
 
             
 
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="8">
-            
-            
-
-            
-
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="9">
+          <li class="missed" data-hits="0" data-linenumber="8">
             
             
 
@@ -2643,7 +2632,7 @@
 
             
 
-            <code class="ruby">        set_session</code>
+            <code class="ruby">        session[:user_id] = @user.id</code>
           </li>
         </div>
       
@@ -2654,7 +2643,7 @@
 
             
 
-            <code class="ruby">      else    </code>
+            <code class="ruby">        redirect_to user_path(@user), notice: &#39;You are logged in.&#39;</code>
           </li>
         </div>
       
@@ -2665,7 +2654,7 @@
 
             
 
-            <code class="ruby">        redirect_to &#39;/&#39;, alert: &#39;Login failed.&#39;</code>
+            <code class="ruby">      else    </code>
           </li>
         </div>
       
@@ -2676,7 +2665,7 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">        redirect_to &#39;/&#39;, alert: &#39;Login failed.&#39;</code>
           </li>
         </div>
       
@@ -2687,7 +2676,7 @@
 
             
 
-            <code class="ruby">    rescue</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -2698,7 +2687,7 @@
 
             
 
-            <code class="ruby">      session[:creating] = true </code>
+            <code class="ruby">    rescue</code>
           </li>
         </div>
       
@@ -2709,7 +2698,7 @@
 
             
 
-            <code class="ruby">      redirect_to new_user_path({:email =&gt; auth[&#39;info&#39;][&#39;email&#39;], :name =&gt; auth[&#39;info&#39;][&#39;name&#39;]})</code>
+            <code class="ruby">      session[:creating] = true </code>
           </li>
         </div>
       
@@ -2720,7 +2709,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">      redirect_to new_user_path({:email =&gt; auth[&#39;info&#39;][&#39;email&#39;], :name =&gt; auth[&#39;info&#39;][&#39;name&#39;]})</code>
           </li>
         </div>
       
@@ -2731,12 +2720,23 @@
 
             
 
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="28">
+            
+            
+
+            
+
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="28">
+          <li class="never" data-hits="" data-linenumber="29">
             
             
 
@@ -2747,7 +2747,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="29">
+          <li class="missed" data-hits="0" data-linenumber="30">
             
             
 
@@ -2758,7 +2758,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="30">
+          <li class="missed" data-hits="0" data-linenumber="31">
             
             
 
@@ -2769,7 +2769,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="31">
+          <li class="missed" data-hits="0" data-linenumber="32">
             
             
 
@@ -2780,7 +2780,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="32">
+          <li class="missed" data-hits="0" data-linenumber="33">
             
             
 
@@ -2791,7 +2791,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="33">
+          <li class="missed" data-hits="0" data-linenumber="34">
             
             
 
@@ -3304,13 +3304,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="3">
+          <li class="missed" data-hits="0" data-linenumber="3">
             
             
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    @users = User.all</code>
           </li>
         </div>
       
@@ -3321,12 +3321,23 @@
 
             
 
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="5">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="5">
+          <li class="covered" data-hits="1" data-linenumber="6">
             <span class="hits">1</span>
             
 
@@ -3337,7 +3348,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="6">
+          <li class="never" data-hits="" data-linenumber="7">
             
             
 
@@ -3348,24 +3359,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="7">
+          <li class="never" data-hits="" data-linenumber="8">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="8">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  def show</code>
           </li>
         </div>
       
@@ -3376,18 +3376,18 @@
 
             
 
-            <code class="ruby">    @user = User.find(session[:user_id])</code>
+            <code class="ruby">  def show</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="10">
+          <li class="missed" data-hits="0" data-linenumber="10">
             
             
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    @user = User.find(session[:user_id])</code>
           </li>
         </div>
       
@@ -3398,12 +3398,23 @@
 
             
 
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="12">
+          <li class="covered" data-hits="1" data-linenumber="13">
             <span class="hits">1</span>
             
 
@@ -3414,7 +3425,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="13">
+          <li class="never" data-hits="" data-linenumber="14">
             
             
 
@@ -3425,8 +3436,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="14">
-            <span class="hits">2</span>
+          <li class="missed" data-hits="0" data-linenumber="15">
+            
             
 
             
@@ -3436,19 +3447,19 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="15">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="16">
+            
             
 
             
 
-            <code class="ruby">      flash[:notice] = %{#{@user.name}&#39;s account was successfully created.}</code>
+            <code class="ruby">      flash[:notice] = &quot;#{@user.name}&#39;s account was successfully created.&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="16">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="17">
+            
             
 
             
@@ -3458,24 +3469,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="17">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="18">
+            
             
 
             
 
-            <code class="ruby">      session[:creating] = false</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="18">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      redirect_to &#39;/users/profile&#39;</code>
+            <code class="ruby">      redirect_to user_path(@user), notice: &#39;You are logged in.&#39;</code>
           </li>
         </div>
       
@@ -3491,8 +3491,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="20">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="20">
+            
             
 
             
@@ -3502,8 +3502,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="21">
-            <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="21">
+            
             
 
             
@@ -4734,13 +4734,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="133">
+          <li class="missed" data-hits="0" data-linenumber="133">
             
             
 
             
 
-            <code class="ruby">    # puts &#39;PARAMS&#39;</code>
+            <code class="ruby">    params.require(:user).permit(:uin, :credits, :user_type).merge(email: params[:email], name: params[:name], date_joined: Time.current, created_at: Time.current, updated_at: Time.current)</code>
           </li>
         </div>
       
@@ -4751,34 +4751,12 @@
 
             
 
-            <code class="ruby">    # puts params</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="135">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">    params.require(:user).permit(:uin, :credits, :user_type).merge(params.permit(:name, :email)).merge(date_joined: Time.current, created_at: Time.current, updated_at: Time.current)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="136">
-            
-            
-
-            
-
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="137">
+          <li class="never" data-hits="" data-linenumber="135">
             
             
 
