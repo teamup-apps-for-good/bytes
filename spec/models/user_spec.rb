@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
     before(:all) do
+        described_class.destroy_all
         if described_class.where(uin: '123456').empty?
             described_class.create({name: "John", uin: "123456", email: "j@tamu.edu", credits: 50, user_type:"donor", date_joined: "01/01/2022"})
         end

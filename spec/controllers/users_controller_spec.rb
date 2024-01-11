@@ -8,6 +8,7 @@ RSpec.describe UsersController, type: :controller do
     User.create({name: "Todd", uin: "654321", email: "todd@tamu.edu", credits: 100, user_type:"donor", date_joined: "01/01/2022"})
     User.create({name: "Mark", uin: "324156", email: "mark@tamu.edu", credits: 3, user_type:"recipient", date_joined: "01/01/2022"})
     CreditPool.create({credits: 1})
+    
   end
 
   describe 'transfer' do
