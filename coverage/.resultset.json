@@ -117,23 +117,53 @@
           null,
           null,
           null,
-          26,
+          28,
           null,
           null,
           1,
           null,
           null,
-          26,
+          28,
           null,
           null,
           1,
           null,
-          26,
-          0,
-          0,
+          28,
+          null,
           0,
           null,
           null,
+          null
+        ]
+      },
+      "/mnt/d/CSCE431/bytes/app/controllers/sessions_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          2,
+          null,
+          2,
+          2,
+          1,
+          null,
+          0,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
           null,
           null
         ]
@@ -184,13 +214,14 @@
         "lines": [
           1,
           1,
+          0,
           null,
           null,
           1,
           null,
           null,
           1,
-          1,
+          2,
           null,
           null,
           1,
@@ -412,45 +443,6 @@
         "branches": {
         }
       },
-      "/mnt/d/CSCE431/bytes/app/controllers/sessions_controller.rb": {
-        "lines": [
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
       "/mnt/d/CSCE431/bytes/app/controllers/welcome_controller.rb": {
         "lines": [
           0,
@@ -485,6 +477,6 @@
         }
       }
     },
-    "timestamp": 1704984675
+    "timestamp": 1704991330
   }
 }

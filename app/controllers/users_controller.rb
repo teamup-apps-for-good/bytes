@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @users = User.all
   end
 
   def new
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
 
     #this is the controller for the actual transfer page
     #all we really want to do is set the global uin and user so we can use it later when we make our transfer call
-    @user = User.find_by_id(params[:id])
+    @user = User.find_by_id(session[:user_id])
 
     #puts "params #{params}"
     #puts @user.name
@@ -59,7 +60,7 @@ class UsersController < ApplicationController
       return 
     end
     credit_num = params[:credits].to_i
-    id = params[:id]
+    id = session[:user_id]
     #puts "params: #{params}"
     #puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
     @user = User.find_by_id(id)
@@ -100,7 +101,7 @@ class UsersController < ApplicationController
   end
 
   def receive
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: session[:user_id])
     @uin = @user.uin
 
     if CreditPool.all.length > 1
@@ -110,7 +111,7 @@ class UsersController < ApplicationController
   end
 
   def do_receive
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: session[:user_id])
     amount = params[:num_credits].to_i
     
     @creditpool = CreditPool.all[0]

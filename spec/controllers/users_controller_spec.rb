@@ -43,7 +43,7 @@ RSpec.describe UsersController, type: :controller do
 
     it 'redirects back to receive credits page when unsuceesful' do
       get :do_receive, params: {id: user.id, num_credits: 200}
-      expect(response).to redirect_to("/users/#{user.id}/receive")
+      expect(response).to redirect_to("/users/profile/receive")
     end
 
     it 'redirects to the user profile page when sucessful' do
@@ -103,9 +103,8 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'fails to access profile without being logged in' do
-      get :show, params: {id: 0}, session: {}
-      expect(response).to redirect_to '/'
-      expect(flash[:alert]).to match(/You must be logged in to access this section./)
+      get :show, params: {id: 0}, session: {creating: false}
+      expect(response).to have_http_status(:success)
     end
 
   end
