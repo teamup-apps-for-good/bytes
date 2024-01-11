@@ -19,18 +19,19 @@ Background: User and credits in database
 
 Scenario: requesting for credits when there are some available
   Given I am a "recipient" account with uin "44445555"
-  When  I go to the request credits page
+  When  I go to the "receive" page
   And   I fill in "Number of Credits" with 10
-  And   I press "Get Credits"
+  And   I press the "Get Credits" button
   Then  I should be on the profile page
   And   I should see "10 Credits received"
   And   I should have 20 credits
 
 Scenario: requesting more credits then there are available
-  Given the number of available credits is 5
+  Given I am a "recipient" account with uin "44445555"
+  When  I go to the "receive" page
+  And   the number of available credits is 5
   And   I currently have 10 credits
-  When  I go to the request credits page
-  And   I fill in "Number of Credits" with 10
-  And   I press "Get Credits"
+  When  I fill in "Number of Credits" with 10
+  And   I press the "Get Credits" button
   Then  I should see "Error not enough credits available"
   And   I should have 10 credits
