@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   def index
     session[:creating] = false
     if logged_in?
-      redirect_to user_path(@current_user), notice: 'Welcome, back!'
+      redirect_to '/users/profile', notice: 'Welcome, back!'
     end
   end
 end

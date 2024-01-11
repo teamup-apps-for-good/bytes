@@ -382,8 +382,7 @@
           0,
           0
         ],
-        "branches": {
-        }
+        "branches": {}
       },
       "/home/ubuntu/bytes/app/channels/application_cable/connection.rb": {
         "lines": [
@@ -392,8 +391,7 @@
           0,
           0
         ],
-        "branches": {
-        }
+        "branches": {}
       },
       "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/pages_controller.rb": {
         "lines": [
@@ -406,8 +404,7 @@
           0,
           0
         ],
-        "branches": {
-        }
+        "branches": {}
       },
       "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/sessions_controller.rb": {
         "lines": [
@@ -446,8 +443,7 @@
           0,
           0
         ],
-        "branches": {
-        }
+        "branches": {}
       },
       "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/welcome_controller.rb": {
         "lines": [
@@ -456,8 +452,7 @@
           0,
           0
         ],
-        "branches": {
-        }
+        "branches": {}
       },
       "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/jobs/application_job.rb": {
         "lines": [
@@ -469,8 +464,7 @@
           null,
           0
         ],
-        "branches": {
-        }
+        "branches": {}
       },
       "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/mailers/application_mailer.rb": {
         "lines": [
@@ -479,8 +473,7 @@
           0,
           0
         ],
-        "branches": {
-        }
+        "branches": {}
       }
     },
     "timestamp": 1704983579

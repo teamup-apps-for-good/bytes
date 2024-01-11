@@ -82,6 +82,27 @@ RSpec.describe UsersController, type: :controller do
     
   end
 
+  describe 'account creation' do 
+    it 'successfully creates an account' do
+      post :create, params: {user: {uin: 124578, credits: 2, user_type: 'donor'}, email: 'tim@tamu.edu', name: 'Tim'}, session: {creating: true}
+      expect(response).to redirect_to '/users/profile'
+      expect(flash[:notice]).to match(/Tim's account was successfully created./)
+      User.find_by(uin: 124578).destroy
+    end
+
+    it 'able to view account profile' do
+      get :show, params: {id: 0}, session: {user_id: User.find_by(uin: 123456).id}
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'fails to creates an account' do
+      post :create, params: {user: {uin: 124578, credits: 2, user_type: 'donor'}, email: 'tim@tamu.edu'}, session: {creating: true}
+      expect(response).to redirect_to '/'
+      expect(flash[:notice]).to match(/Error has occurred/)
+    end
+
+  end
+
   describe 'transfer' do
 
 

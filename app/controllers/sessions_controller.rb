@@ -16,8 +16,7 @@ class SessionsController < ApplicationController
     begin
       @user = User.find_by(email: auth['info']['email'])
       if @user.valid?
-        session[:user_id] = @user.id
-        redirect_to user_path(@user), notice: 'You are logged in.'
+        set_session
       else    
         redirect_to '/', alert: 'Login failed.'
       end

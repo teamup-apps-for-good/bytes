@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   get 'sessions/logout'
   get 'sessions/omniauth'
 
-  resources :users
   resources :pages
   resources :transactions
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -40,4 +39,7 @@ Rails.application.routes.draw do
   get '/test/login', to: 'sessions#set_session', as: 'test-login'
 
   get '/users/:id/profile', to: 'users#show', as: 'user-profile'
+  get '/users/profile', to: 'users#show', as: 'self-profile'
+  get '/users/new', to: 'users#new', as: 'new-user'
+  post '/users', to: 'users#create', as: 'create-user'
 end

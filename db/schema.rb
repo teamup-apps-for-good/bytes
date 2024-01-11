@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_09_031239) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-``
+
   create_table "transactions", force: :cascade do |t|
     t.string "uin"
     t.string "transaction_type"

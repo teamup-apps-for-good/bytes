@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
   end
 
   def new
@@ -13,10 +12,10 @@ class UsersController < ApplicationController
   def create
     begin
       @user = User.create!(new_user_params)
-      flash[:notice] = "#{@user.name}'s account was successfully created."
+      flash[:notice] = %{#{@user.name}'s account was successfully created.}
       session[:user_id] = @user.id
       session[:creating] = false
-      redirect_to user_path(@user), notice: 'You are logged in.'
+      redirect_to '/users/profile'
     rescue
       flash[:notice] = "Error has occurred"
       redirect_to '/', alert: 'Login failed.'
@@ -131,6 +130,8 @@ class UsersController < ApplicationController
 
   private
   def new_user_params
-    params.require(:user).permit(:uin, :credits, :user_type).merge(email: params[:email], name: params[:name], date_joined: Time.current, created_at: Time.current, updated_at: Time.current)
+    # puts 'PARAMS'
+    # puts params
+    params.require(:user).permit(:uin, :credits, :user_type).merge(params.permit(:name, :email)).merge(date_joined: Time.current, created_at: Time.current, updated_at: Time.current)
   end
 end
