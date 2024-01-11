@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :require_login
 
@@ -18,10 +20,9 @@ class ApplicationController < ActionController::Base
 
   def require_login
     # redirect to the  page unless user is logged in
-    unless logged_in?
-      unless session[:creating]
-        redirect_to root_path, alert: 'You must be logged in to access this section.'
-      end
-    end
+    return if logged_in?
+    return if session[:creating]
+
+    redirect_to root_path, alert: 'You must be logged in to access this section.'
   end
 end
