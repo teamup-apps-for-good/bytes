@@ -13,13 +13,13 @@ Background: Transactions in database
   | 284007821 |    received      | 2024-01-01T00:52:48  |      2     |
 
 Scenario: Donor account can see their donations
-  Given I am logged in as a donor
-  And I have made a donation
-  When I go to the "My transactions" page
+  Given I am logged in
+  And I have made or received a donation
+  And I am on the My Transactions page
   Then I should see my donations
 
 Scenario: Recipient account can see their received donations
-  Given I am logged in as a recipient
-  And I have received a donation
-  When I go to the 'My transactions' page
+  Given I am logged in
+  And I have made or received a donation
+  And I am on the My Transactions page
   Then I should see my received donations
