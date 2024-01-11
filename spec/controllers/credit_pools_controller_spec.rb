@@ -37,6 +37,12 @@ RSpec.describe CreditPoolsController, type: :controller do
         expect(response).to have_http_status(:redirect)
         CreditPool.find_by(credits: 1).destroy
         end
+
+        it 'credit pool bad' do
+            pool = CreditPool.create({credits: 1})
+            session[:user_id] = @user.id
+            post :create, params: {credit_pool: {test: 1}}
+        end
     end
 
     describe 'destroys' do
@@ -60,6 +66,7 @@ RSpec.describe CreditPoolsController, type: :controller do
         it 'not graceful' do
             pool = CreditPool.create({credits: 1})
             session[:user_id] = @user.id
+            patch :update, params: { id: pool.id, credit_pool: {credits: nil }}
         end
     end
 
