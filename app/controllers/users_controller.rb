@@ -37,40 +37,46 @@ class UsersController < ApplicationController
     #all we really want to do is set the global uin and user so we can use it later when we make our transfer call
     @user = User.find_by_id(params[:id])
 
-    puts "params #{params}"
-    puts @user.name
+    #puts "params #{params}"
+    #puts @user.name
 
     if CreditPool.all.length > 1
       raise Exception.new "There are multiple pools... there shouldn't be"
     end
     @creditpool = CreditPool.all[0]
-    puts "credit pool: #{@creditpool}"
+    #puts "credit pool: #{@creditpool}"
 
   end
   
   def do_transfer
 
-    puts "INITIATING TRANSFER!"
+    #puts "INITIATING TRANSFER!"
     #grab who is doing the transfer, and how much
-    credit_num = params[:credits].to_i #TODO needs to be string for sure
+
+    if !(params[:credits].to_i.to_s == params[:credits])
+      flash[:notice] = "ERROR Invalid input!"
+      redirect_to :user_transfer
+      return 
+    end
+    credit_num = params[:credits].to_i
     id = params[:id]
-    puts "params: #{params}"
-    puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
+    #puts "params: #{params}"
+    #puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
     @user = User.find_by_id(id)
 
 
     #check to see if there are any errors with credit amount
     if credit_num > @user.credits
       flash[:notice] = "ERROR Trying to donate more credits than you have!"
-      redirect_to "/users/#{@user.id}/transfer" #messy..
-      return
+      redirect_to :user_transfer
+      return 
 
     end
 
-    if credit_num == 0 || credit_num == ""
-      flash[:notice] = "ERROR input invalid!"
-      redirect_to "/users/#{@user.id}/transfer" #messy..
-      return
+    if credit_num == 0  || credit_num < 0
+      flash[:notice] = "ERROR Invalid input!"
+      redirect_to :user_transfer
+      return 
     end
     
     #now, subtract credits from their account
@@ -88,7 +94,7 @@ class UsersController < ApplicationController
 
     #notify user it's successful somehow
     flash[:notice] = "CONFIRMATION Sucessfully donated #{credit_num} credits to the pool!"
-    redirect_to "/users/#{@user.id}/transfer" #messy..
+    redirect_to :user_transfer
 
 
   end
