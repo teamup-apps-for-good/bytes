@@ -2,13 +2,19 @@
 
 # class that represents the pool of donated credits available
 class CreditPool < ApplicationRecord
+  validates :credits, presence: true
+  
   def add_credits(amt)
-    update(credits: credits + amt)
+
+      self.update(credits: self.credits + amt)
+
   end
 
   def subtract_credits(amt)
-    raise StandardError, 'Not enough credits to subtract this amount' if amt > credits
-
-    update(credits: credits - amt)
+    if (amt > self.credits)
+      raise Exception.new "Not enough credits to subtract this amount"
+    end 
+    
+    self.update(credits: self.credits - amt)
   end
 end
