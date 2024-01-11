@@ -9,9 +9,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-users = [{name: "John", uin: "412334", email: "j@tamu.edu", credits: 50, user_type:"donor", date_joined: "01/01/2022"},
-        {name: "Todd", uin: "324567", email: "t@tamu.edu", credits: 10, user_type:"recipient", date_joined: "01/01/2022"},
-        {name: "Steve", uin: "12321", email: "v@tamu.edu", credits: 10, user_type:"recipient", date_joined: "01/01/2022"}]
+users = [{ name: 'John', uin: '412334', email: 'j@tamu.edu', credits: 50, user_type: 'donor', date_joined: '01/01/2022' },
+         { name: 'Todd', uin: '324567', email: 't@tamu.edu', credits: 10, user_type: 'recipient',
+           date_joined: '01/01/2022' },
+         { name: 'Steve', uin: '12321', email: 'v@tamu.edu', credits: 10, user_type: 'recipient',
+           date_joined: '01/01/2022' }]
 User.create(users)
 
 transactions = [{ uin: '254007932', transaction_type: 'donated', time: '2024-01-09T00:52:48', amount: 3 },
