@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Migration that creates the Transactions table in the DB
 class CreateTransactions < ActiveRecord::Migration[7.1]
   def change
     create_table :transactions do |t|
