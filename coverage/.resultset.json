@@ -148,10 +148,9 @@
           null,
           23,
           0,
+          null,
           0,
           0,
-          null,
-          null,
           null,
           null
         ]
@@ -366,15 +365,11 @@
           1,
           null,
           1,
-          null,
           1,
-          null,
           null,
           null,
           1,
           5,
-          0,
-          null,
           null,
           5,
           null,
@@ -471,17 +466,6 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/welcome_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
       "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/jobs/application_job.rb": {
         "lines": [
           null,
@@ -511,6 +495,6 @@
         }
       }
     },
-    "timestamp": 1704987137
+    "timestamp": 1704988300
   }
 }
