@@ -1,2 +1,23 @@
-<h1>Transactions#show</h1>
-<p>Find me in app/views/transactions/show.html.erb</p>
+<h1>Transaction Details</h1>
+<ul id="details">
+  <li>
+    UIN:
+    <%= @transaction.uin %>
+  </li>
+  <li>
+    Type:
+    <%= @transaction.transaction_type %>
+  </li>
+  <li>
+    Time:
+    <%= @transaction.time %>
+  </li>
+  <li>
+    Amount:
+    <%= @transaction.amount %>
+  </li>
+</ul>
+
+<div class="row">
+  <%= link_to 'Back to transactions', transactions_path, :class => 'btn btn-primary col-2' %>
+</div>
