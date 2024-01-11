@@ -28,6 +28,6 @@ class SessionsController < ApplicationController
 
   def set_session
     session[:user_id] = @user.id
-    redirect_to user_path(@user), notice: 'You are logged in.'
+    redirect_to '/users/profile', notice: 'You are logged in.'
   end
 end

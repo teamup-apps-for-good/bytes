@@ -125,7 +125,7 @@ class UsersController < ApplicationController
     @creditpool.subtract_credits(amount)
     @user.add_credits(amount)
     flash[:notice] = "#{amount} Credits received"
-    redirect_to controller: 'users', action: 'show', id: @user.id
+    redirect_to '/users/profile'
   end
 
   private

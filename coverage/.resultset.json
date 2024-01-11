@@ -1,37 +1,37 @@
 {
   "RSpec": {
     "coverage": {
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/application_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/credit_pools_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/credit_pools_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/pages_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/pages_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/transactions_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/transactions_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/users_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/users_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/ubuntu/bytes/app/controllers/credit_pools_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/credit_pools_controller.rb": {
         "lines": [
           1,
           1,
@@ -105,7 +105,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/application_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -117,18 +117,18 @@
           null,
           null,
           null,
-          14,
+          26,
           null,
           null,
           1,
           null,
           null,
-          14,
+          26,
           null,
           null,
           1,
           null,
-          14,
+          26,
           0,
           0,
           0,
@@ -138,7 +138,7 @@
           null
         ]
       },
-      "/home/ubuntu/bytes/app/controllers/transactions_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/transactions_controller.rb": {
         "lines": [
           1,
           1,
@@ -180,29 +180,29 @@
           null
         ]
       },
-      "/home/ubuntu/bytes/app/controllers/users_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/users_controller.rb": {
         "lines": [
           1,
           1,
-          0,
           null,
           null,
           1,
           null,
           null,
           1,
-          0,
+          1,
           null,
           null,
           1,
           null,
-          0,
-          0,
-          0,
-          0,
+          2,
+          1,
+          1,
+          1,
+          1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
           null,
           null,
@@ -314,12 +314,14 @@
           null,
           1,
           1,
-          0,
+          null,
+          null,
+          2,
           null,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/user.rb": {
+      "/mnt/d/CSCE431/bytes/app/models/user.rb": {
         "lines": [
           1,
           1,
@@ -341,14 +343,14 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/application_record.rb": {
+      "/mnt/d/CSCE431/bytes/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/home/ubuntu/bytes/app/models/credit_pool.rb": {
+      "/mnt/d/CSCE431/bytes/app/models/credit_pool.rb": {
         "lines": [
           1,
           1,
@@ -369,32 +371,35 @@
           null
         ]
       },
-      "/home/ubuntu/bytes/app/models/transaction.rb": {
+      "/mnt/d/CSCE431/bytes/app/models/transaction.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/ubuntu/bytes/app/channels/application_cable/channel.rb": {
+      "/mnt/d/CSCE431/bytes/app/channels/application_cable/channel.rb": {
         "lines": [
           0,
           0,
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       },
-      "/home/ubuntu/bytes/app/channels/application_cable/connection.rb": {
+      "/mnt/d/CSCE431/bytes/app/channels/application_cable/connection.rb": {
         "lines": [
           0,
           0,
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/pages_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/pages_controller.rb": {
         "lines": [
+          0,
           0,
           0,
           0,
@@ -404,9 +409,10 @@
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/sessions_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/sessions_controller.rb": {
         "lines": [
           0,
           0,
@@ -435,7 +441,6 @@
           0,
           0,
           0,
-          0,
           null,
           0,
           0,
@@ -443,18 +448,20 @@
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/welcome_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/welcome_controller.rb": {
         "lines": [
           0,
           0,
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/jobs/application_job.rb": {
+      "/mnt/d/CSCE431/bytes/app/jobs/application_job.rb": {
         "lines": [
           0,
           null,
@@ -464,18 +471,20 @@
           null,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/mailers/application_mailer.rb": {
+      "/mnt/d/CSCE431/bytes/app/mailers/application_mailer.rb": {
         "lines": [
           0,
           0,
           0,
           0
         ],
-        "branches": {}
+        "branches": {
+        }
       }
     },
-    "timestamp": 1704983579
+    "timestamp": 1704984675
   }
 }

@@ -48,7 +48,7 @@ RSpec.describe UsersController, type: :controller do
 
     it 'redirects to the user profile page when sucessful' do
       get :do_receive, params: {id: user.id, num_credits: 5}
-      expect(response).to redirect_to("/users/#{user.id}")
+      expect(response).to redirect_to("/users/profile")
     end
 
     it 'notifies the user that credits have been transferred to their account' do
@@ -91,6 +91,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'able to view account profile' do
+      User.create({name: "John", uin: "123456", email: "j@tamu.edu", credits: 50, user_type:"donor", date_joined: "01/01/2022"})
       get :show, params: {id: 0}, session: {user_id: User.find_by(uin: 123456).id}
       expect(response).to have_http_status(:success)
     end
@@ -99,6 +100,12 @@ RSpec.describe UsersController, type: :controller do
       post :create, params: {user: {uin: 124578, credits: 2, user_type: 'donor'}, email: 'tim@tamu.edu'}, session: {creating: true}
       expect(response).to redirect_to '/'
       expect(flash[:notice]).to match(/Error has occurred/)
+    end
+
+    it 'fails to access profile without being logged in' do
+      get :show, params: {id: 0}, session: {}
+      expect(response).to redirect_to '/'
+      expect(flash[:alert]).to match(/You must be logged in to access this section./)
     end
 
   end
