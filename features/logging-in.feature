@@ -5,6 +5,7 @@ Feature: logging in
     I want the ability to sign into Bytes using my verified school email address
 
 Scenario: user logs in with TAMU email
-    Given the user is on the Google login page
-    When the user logs in with tamu.edu email
-    Then the user should be logged in successfully
+    Given I am on the login page
+    When I click on the "Sign in with Google" button
+    And I log in with a tamu.edu email
+    Then I should be logged in successfully
