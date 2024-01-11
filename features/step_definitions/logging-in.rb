@@ -12,10 +12,6 @@ When('I click on the {string} button') do |string|
     click_on string
 end
 
-When('I log in with a tamu.edu email') do
-    expect(page).to have_current_path('/users/new', ignore_query: true)
-end
-
 Then('I should be logged in successfully') do
-  pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_current_path('/users/new', ignore_query: true)
 end
