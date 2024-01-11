@@ -6,10 +6,6 @@ Given('I am a user with a TAMU email') do
         info: { email: 'example@tamu.edu' }
     )
 end
-  
-When('I am on the login page') do
-  visit root_path
-end
 
 And('I click on the {string} button') do |string|
     click_on string
