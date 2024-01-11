@@ -4,33 +4,28 @@ Feature: receive meal credits
   So that I can get aid in getting food
   I want a way to request credits
 
-Background: User and credits in database
-
-  Given the following users exist:
-  | uin      | name         | email            | credits | user_type | date_joined |
-  | 11112222 | Sponge Bob   | sponge@tamu.edu  | 60      | donor     |  1977-05-26 |
-  | 22223333 | Squid Ward   | patrick@tamu.edu | 50      | donor     |  1978-02-14 |
-  | 33334444 | Patrick Star | squid@tamu.edu   | 5       | recipient |  1979-08-02 |
-  | 44445555 | Eugene Krabs | krabs@tamu.edu   | 10      | recipient |  1967-11-31 |
-
+Background: Credits in database
   Given the following credit pools exist:
   |   credits   |
-  |   20        |
+  |   50        |
 
-Scenario: requesting for credits when there are some available
-  Given I am a "recipient" account with id "1"
-  When  I go to the request credits page
+Scenario: requesting for credits when there are enough available
+  Given that I am logged in an account with 10 credits
+  When  I go to the "receive" page
   And   I fill in "Number of Credits" with 10
-  And   I press "Get Credits"
-  Then  I should be on the profile page
-  And   I should see "10 Credits received"
+  And   I press the "Request" button
+  Then  I should see "10 Credits received"
+  And   I should be on the profile page
   And   I should have 20 credits
 
 Scenario: requesting more credits then there are available
-  Given the number of available credits is 5
+  Given that I am logged in an account with 10 credits
+  When  I go to the "receive" page
+  And   the number of available credits is 50
   And   I currently have 10 credits
-  When  I go to the request credits page
-  And   I fill in "Number of Credits" with 10
-  And   I press "Get Credits"
-  Then  I should see "Error not enough credits available"
-  And   I should have 10 credits
+  When  I fill in "Number of Credits" with 80
+  And   I press the "Request" button
+  Then  I should see "Not enough credits available"
+  And   I should be on the receive page
+  And   the number of available credits is 50
+  And   I currently have 10 credits
