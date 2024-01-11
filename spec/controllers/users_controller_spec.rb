@@ -23,7 +23,6 @@ RSpec.describe UsersController, type: :controller do
   end
 
   let!(:user) { User.find_by(uin: '1234') }
-  let!(:login) { session[:user_id] = user.id }
   let!(:creditpool) { CreditPool.all[0] }
 
   describe 'when visiting the receive page' do
@@ -112,6 +111,20 @@ RSpec.describe UsersController, type: :controller do
     it 'tries to transfer non-numeric input' do # stealing !!!!
       get :do_transfer, params: { id: user.id, credits: 'lololol' }
       expect(flash[:notice]).to eq('ERROR Invalid input!')
+    end
+  end
+
+  describe 'the user index page' do
+    before { session[:user_id] = user.id }
+
+    it 'it uses all users for rendering the page' do
+      get :index
+      expect(assigns[:users]).to eq(User.all)
+    end
+
+    it 'renders the index template' do
+      get :index
+      expect(response).to render_template('index')
     end
   end
 end
