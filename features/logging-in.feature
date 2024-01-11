@@ -6,6 +6,6 @@ Feature: logging in
 
 Scenario: user logs in with TAMU email
     Given I am on the login page
-    When I click on the "Sign in with Google" button
+    When I click on the "Login with Google" button
     And I log in with a tamu.edu email
     Then I should be logged in successfully
