@@ -7,7 +7,7 @@ Feature: receive meal credits
 Background: User and credits in database
 
   Given the following users exist:
-  | uin      | name         | email            | credits | type      | date_joined |
+  | uin      | name         | email            | credits | user_type | date_joined |
   | 11112222 | Sponge Bob   | sponge@tamu.edu  | 60      | donor     |  1977-05-26 |
   | 22223333 | Squid Ward   | patrick@tamu.edu | 50      | donor     |  1978-02-14 |
   | 33334444 | Patrick Star | squid@tamu.edu   | 5       | recipient |  1979-08-02 |
