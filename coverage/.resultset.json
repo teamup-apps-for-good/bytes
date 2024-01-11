@@ -1,37 +1,37 @@
 {
   "RSpec": {
     "coverage": {
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/application_helper.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/credit_pools_helper.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/helpers/credit_pools_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/pages_helper.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/helpers/pages_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/transactions_helper.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/helpers/transactions_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/users_helper.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/helpers/users_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/ubuntu/bytes/app/controllers/credit_pools_controller.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/controllers/credit_pools_controller.rb": {
         "lines": [
           1,
           1,
@@ -105,7 +105,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/application_controller.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -117,18 +117,18 @@
           null,
           null,
           null,
-          14,
+          24,
           null,
           null,
           1,
           null,
           null,
-          14,
+          24,
           null,
           null,
           1,
           null,
-          14,
+          23,
           0,
           0,
           0,
@@ -138,7 +138,19 @@
           null
         ]
       },
-      "/home/ubuntu/bytes/app/controllers/transactions_controller.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/controllers/pages_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/tyxfred/CSCE_439/Project/bytes/app/controllers/transactions_controller.rb": {
         "lines": [
           1,
           1,
@@ -180,7 +192,7 @@
           null
         ]
       },
-      "/home/ubuntu/bytes/app/controllers/users_controller.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/controllers/users_controller.rb": {
         "lines": [
           1,
           1,
@@ -319,7 +331,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/user.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/models/user.rb": {
         "lines": [
           1,
           1,
@@ -341,14 +353,14 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/application_record.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/home/ubuntu/bytes/app/models/credit_pool.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/models/credit_pool.rb": {
         "lines": [
           1,
           1,
@@ -369,13 +381,13 @@
           null
         ]
       },
-      "/home/ubuntu/bytes/app/models/transaction.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/models/transaction.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/ubuntu/bytes/app/channels/application_cable/channel.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/channels/application_cable/channel.rb": {
         "lines": [
           0,
           0,
@@ -385,7 +397,7 @@
         "branches": {
         }
       },
-      "/home/ubuntu/bytes/app/channels/application_cable/connection.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/channels/application_cable/connection.rb": {
         "lines": [
           0,
           0,
@@ -395,21 +407,7 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/pages_controller.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/sessions_controller.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/controllers/sessions_controller.rb": {
         "lines": [
           0,
           0,
@@ -449,7 +447,7 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/welcome_controller.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/controllers/welcome_controller.rb": {
         "lines": [
           0,
           0,
@@ -459,7 +457,7 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/jobs/application_job.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/jobs/application_job.rb": {
         "lines": [
           0,
           null,
@@ -472,7 +470,7 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/mailers/application_mailer.rb": {
+      "/home/tyxfred/CSCE_439/Project/bytes/app/mailers/application_mailer.rb": {
         "lines": [
           0,
           0,
@@ -483,6 +481,6 @@
         }
       }
     },
-    "timestamp": 1704983579
+    "timestamp": 1704986950
   }
 }
