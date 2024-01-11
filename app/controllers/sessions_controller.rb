@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:omniauth]
-  
+
   def logout
     reset_session
     redirect_to root_path, notice: 'You are logged out.'
   end
 
-  def omniauth  
+  def omniauth
     auth = request.env['omniauth.auth']
     begin
       @user = User.find_by(email: auth['info']['email'])
@@ -15,9 +17,9 @@ class SessionsController < ApplicationController
       else    
         redirect_to '/', alert: 'Login failed.'
       end
-    rescue
-      session[:creating] = true 
-      redirect_to new_user_path({:email => auth['info']['email'], :name => auth['info']['name']})
+    rescue StandardError
+      session[:creating] = true
+      redirect_to new_user_path({ email: auth['info']['email'], name: auth['info']['name'] })
     end
   end
 
