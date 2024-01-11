@@ -31,6 +31,113 @@
           null
         ]
       },
+      "/home/ubuntu/bytes/app/controllers/credit_pools_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          2,
+          1,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          2,
+          1,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          2,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/ubuntu/bytes/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          12,
+          null,
+          null,
+          1,
+          null,
+          null,
+          12,
+          null,
+          null,
+          1,
+          null,
+          12,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/home/ubuntu/bytes/app/controllers/transactions_controller.rb": {
         "lines": [
           1,
@@ -69,37 +176,6 @@
           null,
           0,
           0,
-          null,
-          null
-        ]
-      },
-      "/home/ubuntu/bytes/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          7,
-          null,
-          null,
-          1,
-          null,
-          null,
-          7,
-          null,
-          null,
-          1,
-          null,
-          7,
-          0,
-          0,
-          null,
-          null,
           null,
           null
         ]
@@ -272,12 +348,6 @@
           null
         ]
       },
-      "/home/ubuntu/bytes/app/models/transaction.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
       "/home/ubuntu/bytes/app/models/credit_pool.rb": {
         "lines": [
           1,
@@ -298,6 +368,12 @@
           null
         ]
       },
+      "/home/ubuntu/bytes/app/models/transaction.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
       "/home/ubuntu/bytes/app/channels/application_cable/channel.rb": {
         "lines": [
           0,
@@ -310,82 +386,6 @@
       },
       "/home/ubuntu/bytes/app/channels/application_cable/connection.rb": {
         "lines": [
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/ubuntu/bytes/app/controllers/credit_pools_controller.rb": {
-        "lines": [
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
           0,
           0,
           0,
@@ -482,6 +482,6 @@
         }
       }
     },
-    "timestamp": 1704969577
+    "timestamp": 1704982393
   }
 }
