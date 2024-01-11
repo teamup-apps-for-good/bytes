@@ -6,7 +6,7 @@ class CreditPool < ApplicationRecord
 
     end
 
-    def subtract(amt)
+    def subtract_credits(amt)
       if (amt > self.credits)
         raise Exception.new "Not enough credits to subtract this amount"
       end 

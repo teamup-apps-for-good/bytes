@@ -93,6 +93,35 @@ class UsersController < ApplicationController
 
   end
 
+  def receive
+    @user = User.find_by(id: params[:uin])
+    @uin = @user.uin
+
+    if CreditPool.all.length > 1
+      raise Exception.new "There are multiple pools... there shouldn't be"
+    end
+    @creditpool = CreditPool.all[0]
+  end
+
+  def do_receive
+    @user = User.find_by(id: params[:uin])
+    amount = params[:num_credits].to_i
+    
+    @creditpool = CreditPool.all[0]
+    # handles there not being enough credits for the request
+    if amount > @creditpool.credits
+      flash[:warning] = "Not enough credits available, only #{@creditpool.credits} credits currently in pool"
+      redirect_to :user_receive
+      return -1
+    end
+
+    new_transaction = Transaction.create({uin: @user.uin, transaction_type: "recipient", time: "", amount: amount})
+    @creditpool.subtract_credits(amount)
+    @user.add_credits(amount)
+    flash[:notice] = "#{amount} Credits received"
+    redirect_to controller: 'users', action: 'show', id: @user.id
+  end
+
   private
   def new_user_params
     params.require(:user).permit(:uin, :credits, :user_type).merge(email: params[:email], name: params[:name], date_joined: Time.current, created_at: Time.current, updated_at: Time.current)
