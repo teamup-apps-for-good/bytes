@@ -26,4 +26,9 @@ class SessionsController < ApplicationController
       redirect_to new_user_path({:email => auth['info']['email'], :name => auth['info']['name']})
     end
   end
+
+  def set_session
+    session[:user_id] = @user.id
+    redirect_to user_path(@user), notice: 'You are logged in.'
+  end
 end

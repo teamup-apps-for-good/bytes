@@ -7,21 +7,26 @@
   </p>
 
   <p>
-    <strong>First name:</strong>
+    <strong>Name:</strong>
     <%= @user.name %>
   </p>
 
   <p>
-    <strong>Number of credits:</strong>
+    <strong>UIN:</strong>
+    <%= @user.uin %>
+  </p>
+
+  <p>
+    <strong>Credits:</strong>
     <%= @user.credits %>
   </p>
 
-  <!--
-  <a href="<%=  %>">
-    <button>Donate Credits</button>
-  </a>
-  <a href="<%=  %>">
-    <button>Recieve Credits</button>
-  </a>
-  -->
+  <p>
+    <strong>Type:</strong>
+    <%= @user.user_type %>
+  </p>
+
+  <div class="row">
+    <p><%= link_to "Go to Transfer", user_transfer_path %></p>
+  </div>
 </div>
