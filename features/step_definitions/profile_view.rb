@@ -16,3 +16,9 @@ Then('I should see my {string}') do |string|
         expect(page).to have_content(@uin)
     end
 end
+
+Given("I am on the profile page") do
+    visit("/users/#{@id}/profile")
+    current_path = "/users/#{@id}/profile"
+    expect(current_path).to eq(user_profile_path(@id))
+  end

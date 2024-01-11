@@ -12,7 +12,7 @@ Background: Users in database
 
 Scenario: student logs in
     Given I am logged in
-    When I go to the "profile" page
+    And I am on the profile page
     Then I should see my "Name"
     And I should see my "Email"
     And I should see my "UIN"

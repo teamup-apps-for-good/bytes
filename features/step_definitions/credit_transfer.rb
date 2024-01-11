@@ -23,12 +23,6 @@ When('I go to the {string} page') do |string|
     if string == "transfer"
         visit "/users/#{@uin}/#{string}"
     end
-    
-    if string == "profile"
-        visit "/users/#{@id}"
-        current_path = "/users/#{@id}"
-        expect(current_path).to eq("/users/#{@id}")
-    end
 end
 
 When('I fill out {string} with {string} credit to transfer') do |string,string2|
