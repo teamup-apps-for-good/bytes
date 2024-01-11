@@ -135,21 +135,35 @@
           null,
           null,
           null,
-          23,
+          26,
           null,
           null,
           1,
           null,
           null,
-          23,
+          26,
           null,
           null,
           1,
           null,
-          23,
+          25,
           0,
           null,
           0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/pages_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
           0,
           null,
           null
@@ -199,7 +213,7 @@
           null,
           1,
           1,
-          0,
+          2,
           null,
           null,
           1,
@@ -408,22 +422,6 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/pages_controller.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
       "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/sessions_controller.rb": {
         "lines": [
           null,
@@ -495,6 +493,6 @@
         }
       }
     },
-    "timestamp": 1704988300
+    "timestamp": 1704990169
   }
 }
