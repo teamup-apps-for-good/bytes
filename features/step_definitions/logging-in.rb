@@ -1,5 +1,5 @@
 Given('I am on the login page') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit root_path
 end
 
 When('I click on the {string} button') do |string|
