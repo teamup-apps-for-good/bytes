@@ -6,7 +6,7 @@
         <h5>Total number of credits in the pool: <%=@creditpool.credits%></h3>
     </div>
     <div class="main-container">
-        <form action="/users/<%=@user.id%>/transfer/transfer_donor_credits" method='post'>
+        <form action="/users/profile/transfer/transfer_donor_credits" method='post'>
             <label for='credit-amount'>Enter a credit amount</label>
             <input id='credit-amount' name="credits"/>
             <input name="credit-submission" type="submit" value="Send Credits" />

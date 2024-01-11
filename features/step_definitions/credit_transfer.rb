@@ -26,7 +26,7 @@ end
 # end
 
 When('I go to the {string} page') do |string|
-  visit "/users/#{@user_id}/#{string}"
+  visit "/users/profile/#{string}"
 end
 
 Given('I am a {string} account with uin {string}') do |string, string2|
@@ -49,8 +49,9 @@ Given('I am a {string} account with uin {string}') do |string, string2|
   click_on 'Login with Google'
 end
 
+# could possible be edited to just use I go to {string} page
 When('I go to the transfer page') do
-  visit "/users/#{@user.id}/transfer"
+  visit "/users/profile/transfer"
 end
 
 When('I fill out {string} with {string} credit to transfer') do |string, string2|
