@@ -1,16 +1,16 @@
 <h2>Create New User</h2>
 
-<%= form_tag users_path, :class => 'form' do %>
+<%= form_with url: '/users', method: :post do |f| %>
   <%= label :user, :uin, 'uin', :class => 'col-form-label' %>
   <%= text_field :user, :uin, :class => 'form-control' %>
   <%= label :user, :user_type, 'user type', :class => 'col-form-label'  %>
   <%= select :user, :user_type, ['donor', 'recipient'], {}, :class => 'form-control' %>
   <%= label :user, :credits, 'credits', :class => 'col-form-label' %>
   <%= text_field :user, :credits, :class => 'form-control' %>
-  <%= hidden_field_tag :name, params[:name] %>
-  <%= hidden_field_tag :email, params[:email] %>
+  <%= f.hidden_field :name, value: params[:name] %>
+  <%= f.hidden_field :email, value: params[:email] %>
 
   <br/>
   <%= submit_tag 'Save Changes', :class => 'btn btn-primary' %>
-  <%= link_to 'Cancel', users_path, :class => 'btn btn-secondary' %>
+  <%= link_to 'Cancel', root_path, :class => 'btn btn-secondary' %>
 <% end %>

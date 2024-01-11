@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get 'sessions/logout'
   get 'sessions/omniauth'
 
-  resources :users
   resources :pages
+  resources :users
   resources :transactions
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check
 
-  get '/users/:id/receive', to: 'users#receive', as: 'user_receive'
-  post '/users/:id/do_receive', to: 'users#do_receive', as: 'user_do_receive'
+  get '/users/profile/receive', to: 'users#receive', as: 'user_receive'
+  post '/users/profile/do_receive', to: 'users#do_receive', as: 'user_do_receive'
 
   # Defines the root path route ("/")
   # root "posts#index"
@@ -27,10 +27,10 @@ Rails.application.routes.draw do
   root to: 'pages#index'
 
   # action -> controller#action
-  get '/users/:id/transfer', to: 'users#transfer', as: 'user-transfer'
+  get '/users/profile/transfer', to: 'users#transfer', as: 'user-transfer'
 
-  # route for the post request that will be the transfer functionality
-  post '/users/:id/transfer/transfer_donor_credits', to: 'users#do_transfer'
+  #route for the post request that will be the transfer functionality
+  post '/users/profile/transfer/transfer_donor_credits', to: 'users#do_transfer'
 
   # route to add to the credit pool
   post 'transaction/add_to_pool', to: 'credit_pools#add_to_pool'
@@ -41,5 +41,7 @@ Rails.application.routes.draw do
 
   get '/test/login', to: 'sessions#set_session', as: 'test-login'
 
-  get '/users/:id/profile', to: 'users#show', as: 'user-profile'
+  get '/users/profile', to: 'users#show', as: 'self-profile'
+  # get '/users/new', to: 'users#new', as: 'new-user'
+  # post '/users', to: 'users#create', as: 'create-user'
 end

@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/application_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/application_helper.rb": {
         "lines": [
           null,
           null,
@@ -10,7 +10,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/credit_pools_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/credit_pools_helper.rb": {
         "lines": [
           null,
           null,
@@ -19,7 +19,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/pages_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/pages_helper.rb": {
         "lines": [
           null,
           null,
@@ -28,7 +28,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/transactions_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/transactions_helper.rb": {
         "lines": [
           null,
           null,
@@ -37,7 +37,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/users_helper.rb": {
+      "/mnt/d/CSCE431/bytes/app/helpers/users_helper.rb": {
         "lines": [
           null,
           null,
@@ -46,7 +46,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/credit_pools_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/credit_pools_controller.rb": {
         "lines": [
           null,
           null,
@@ -121,7 +121,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/application_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/application_controller.rb": {
         "lines": [
           null,
           null,
@@ -150,6 +150,28 @@
           0,
           null,
           0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/mnt/d/CSCE431/bytes/app/controllers/sessions_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          2,
+          null,
+          2,
+          2,
+          1,
+          null,
           0,
           null,
           null
@@ -158,6 +180,14 @@
       "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/pages_controller.rb": {
         "lines": [
           null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
           null,
           1,
           1,
@@ -219,7 +249,7 @@
           1,
           null,
           1,
-          0,
+          2,
           null,
           null,
           1,
@@ -228,8 +258,8 @@
           0,
           0,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
           null,
           1,
@@ -329,13 +359,15 @@
           1,
           null,
           1,
-          0,
+          null,
+          null,
+          2,
           null,
           null,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/user.rb": {
+      "/mnt/d/CSCE431/bytes/app/models/user.rb": {
         "lines": [
           null,
           null,
@@ -360,7 +392,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/application_record.rb": {
+      "/mnt/d/CSCE431/bytes/app/models/application_record.rb": {
         "lines": [
           null,
           null,
@@ -422,39 +454,14 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/sessions_controller.rb": {
+      "/mnt/d/CSCE431/bytes/app/controllers/pages_controller.rb": {
         "lines": [
           null,
           null,
           0,
           0,
-          null,
           0,
           0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
           0,
           0,
           0,
@@ -479,7 +486,7 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/mailers/application_mailer.rb": {
+      "/mnt/d/CSCE431/bytes/app/mailers/application_mailer.rb": {
         "lines": [
           null,
           null,

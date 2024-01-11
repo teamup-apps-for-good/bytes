@@ -10,17 +10,11 @@ class SessionsController < ApplicationController
 
   def omniauth
     auth = request.env['omniauth.auth']
-    # @user = User.find_or_create_by(uid: auth['uid'], provider: auth['provider']) do |u|
-    #   u.email = auth['info']['email']
-    #   names = auth['info']['name'].split
-    #   u.name = names[0]
-    # end
     begin
       @user = User.find_by(email: auth['info']['email'])
       if @user.valid?
-        session[:user_id] = @user.id
-        redirect_to user_path(@user), notice: 'You are logged in.'
-      else
+        set_session
+      else    
         redirect_to '/', alert: 'Login failed.'
       end
     rescue StandardError
@@ -31,6 +25,6 @@ class SessionsController < ApplicationController
 
   def set_session
     session[:user_id] = @user.id
-    redirect_to user_path(@user), notice: 'You are logged in.'
+    redirect_to '/users/profile', notice: 'You are logged in.'
   end
 end

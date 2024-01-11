@@ -12,13 +12,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create!(new_user_params)
-    flash[:notice] = "#{@user.name}'s account was successfully created."
-    session[:user_id] = @user.id
-    redirect_to user_path(@user), notice: 'You are logged in.'
-  rescue StandardError
-    flash[:notice] = 'Error has occurred'
-    redirect_to '/', alert: 'Login failed.'
+    begin
+      @user = User.create!(new_user_params)
+      flash[:notice] = %{#{@user.name}'s account was successfully created.}
+      session[:user_id] = @user.id
+      session[:creating] = false
+      redirect_to '/users/profile'
+    rescue
+      flash[:notice] = "Error has occurred"
+      redirect_to '/', alert: 'Login failed.'
+    end
   end
 
   def edit; end
@@ -28,9 +31,9 @@ class UsersController < ApplicationController
   def search; end
 
   def transfer
-    # this is the controller for the actual transfer page
-    # all we really want to do is set the global uin and user so we can use it later when we make our transfer call
-    @user = User.find_by_id(params[:id])
+    #this is the controller for the actual transfer page
+    #all we really want to do is set the global uin and user so we can use it later when we make our transfer call
+    @user = User.find_by_id(session[:user_id])
 
     # puts "params #{params}"
     # puts @user.name
@@ -51,9 +54,9 @@ class UsersController < ApplicationController
       return
     end
     credit_num = params[:credits].to_i
-    id = params[:id]
-    # puts "params: #{params}"
-    # puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
+    id = session[:user_id]
+    #puts "params: #{params}"
+    #puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
     @user = User.find_by_id(id)
 
     # check to see if there are any errors with credit amount
@@ -88,7 +91,7 @@ class UsersController < ApplicationController
   end
 
   def receive
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: session[:user_id])
     @uin = @user.uin
 
     raise StandardError, "There are multiple pools... there shouldn't be" if CreditPool.all.length > 1
@@ -97,7 +100,7 @@ class UsersController < ApplicationController
   end
 
   def do_receive
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: session[:user_id])
     amount = params[:num_credits].to_i
 
     @creditpool = CreditPool.all[0]
@@ -112,13 +115,12 @@ class UsersController < ApplicationController
     @creditpool.subtract_credits(amount)
     @user.add_credits(amount)
     flash[:notice] = "#{amount} Credits received"
-    redirect_to controller: 'users', action: 'show', id: @user.id
+    redirect_to '/users/profile'
   end
 
   private
 
   def new_user_params
-    params.require(:user).permit(:uin, :credits, :user_type).merge(email: params[:email], name: params[:name],
-                                                                   date_joined: Time.current, created_at: Time.current, updated_at: Time.current)
+    params.require(:user).permit(:uin, :credits, :user_type).merge(params.permit(:name, :email)).merge(date_joined: Time.current, created_at: Time.current, updated_at: Time.current)
   end
 end
