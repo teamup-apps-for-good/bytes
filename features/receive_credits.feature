@@ -18,7 +18,7 @@ Background: User and credits in database
   |   20        |
 
 Scenario: requesting for credits when there are some available
-  Given I am a "recipient" account with uin "44445555"
+  Given I am a "recipient" account with id "1"
   When  I go to the request credits page
   And   I fill in "Number of Credits" with 10
   And   I press "Get Credits"

@@ -10,18 +10,18 @@ Given('the following credit pools exist:') do |table|
     end
 end
 
-Given('I am a {string} account with uin {string}') do |string, string2|
+Given('I am a {string} account with id {string}') do |string, string2|
     
-    #visit "/my_profile"
-    #expect(page).to have_content(string)
-    #expect(page).to have_content(string2)
-    @uin = string2
-    visit "/users/#{@uin}/transfer"
+    @id = string2
+    visit "/users/#{@id}/transfer"
     expect(page).to have_current_path "/users/#{string2}/transfer"
+
 end
 
 When('I go to the {string} page') do |string|
-    visit "/users/#{@uin}/#{string}"
+
+    visit "/users/#{@id}/#{string}"
+
 end
 
 When('I fill out {string} with {string} credit to transfer') do |string,string2|
