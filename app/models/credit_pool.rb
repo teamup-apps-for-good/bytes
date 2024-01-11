@@ -1,5 +1,6 @@
 class CreditPool < ApplicationRecord
-
+    validates :credits, presence: true
+    
     def add_credits(amt)
 
         self.update(credits: self.credits + amt)
