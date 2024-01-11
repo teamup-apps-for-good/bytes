@@ -79,7 +79,6 @@ group :test do
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
-  gem 'simplecov', require: false
   gem 'ZenTest'
 end
 
@@ -92,6 +91,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'rubycritic', require: false
+  gem 'simplecov', require: false
   gem "sqlite3", "~> 1.4"
 end
 
