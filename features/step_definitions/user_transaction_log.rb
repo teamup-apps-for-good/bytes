@@ -4,12 +4,6 @@ Given(/the following transactions exist/) do |transactions_table|
   end
 end
 
-Given('I am logged in') do
-  user = User.create(name: 'John', uin: '123456', email: 'j@tamu.edu', credits: '50', user_type: 'donor', date_joined: '01/01/2022')
-
-  expect(user.id).to be_truthy
-end
-
 Given('I have made or received a donation') do
   user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor', date_joined: '01/01/2022')
 
