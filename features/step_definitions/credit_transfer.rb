@@ -1,10 +1,12 @@
 Given('the following users exist:') do |table|
+    User.destroy_all
     table.hashes.each do |user|
         User.create user
     end
 end
 
 Given('the following credit pools exist:') do |table|
+    CreditPool.destroy_all
     table.hashes.each do |pool|
         CreditPool.create pool
     end
