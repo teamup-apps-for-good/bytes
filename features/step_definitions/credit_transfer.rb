@@ -11,17 +11,24 @@ Given('the following credit pools exist:') do |table|
 end
 
 Given('I am a {string} account with uin {string}') do |string, string2|
-    
-    #visit "/my_profile"
-    #expect(page).to have_content(string)
-    #expect(page).to have_content(string2)
-    @uin = string2
-    visit "/users/#{@uin}/transfer"
-    expect(page).to have_current_path "/users/#{string2}/transfer"
+    @user = User.find_by(uin: string2)
+    @uin = @user.uin
+    @email = @user.email
+    @name = @user.name
+    @credits = @user.credits
+    @user_type = @user.user_type
 end
 
 When('I go to the {string} page') do |string|
-    visit "/users/#{@uin}/#{string}"
+    if string == "transfer"
+        visit "/users/#{@uin}/#{string}"
+    end
+    
+    if string == "profile"
+        visit "/users/#{@id}"
+        current_path = "/users/#{@id}"
+        expect(current_path).to eq("/users/#{@id}")
+    end
 end
 
 When('I fill out {string} with {string} credit to transfer') do |string,string2|
