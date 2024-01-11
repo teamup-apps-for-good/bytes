@@ -94,7 +94,7 @@ class UsersController < ApplicationController
   end
 
   def receive
-    @user = User.find_by(id: params[:uin])
+    @user = User.find_by(id: params[:id])
     @uin = @user.uin
 
     if CreditPool.all.length > 1
@@ -104,7 +104,7 @@ class UsersController < ApplicationController
   end
 
   def do_receive
-    @user = User.find_by(id: params[:uin])
+    @user = User.find_by(id: params[:id])
     amount = params[:num_credits].to_i
     
     @creditpool = CreditPool.all[0]
@@ -115,7 +115,7 @@ class UsersController < ApplicationController
       return -1
     end
 
-    new_transaction = Transaction.create({uin: @user.uin, transaction_type: "recipient", time: "", amount: amount})
+    new_transaction = Transaction.create({uin: @user.id, transaction_type: "recipient", time: "", amount: amount})
     @creditpool.subtract_credits(amount)
     @user.add_credits(amount)
     flash[:notice] = "#{amount} Credits received"
