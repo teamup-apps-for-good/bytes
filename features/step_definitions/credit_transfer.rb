@@ -12,6 +12,20 @@ Given('the following credit pools exist:') do |table|
     end
 end
 
+# Given('I am a {string} account with uin {string}') do |user_type, uin|
+    
+#     #visit "/my_profile"
+#     #expect(page).to have_content(string)
+#     #expect(page).to have_content(string2)
+#     @user = User.find_by(uin: uin)
+#     @user_id = @user.id
+#     visit "/users/#{@user_id}/transfer"
+#     # expect(page).to have_current_path "/users/#{@user.uin}/transfer"
+# end
+
+When('I go to the {string} page') do |string|
+    visit "/users/#{@user_id}/#{string}"
+end
 
 Given('I am a {string} account with uin {string}') do |string, string2|
     visit root_path
@@ -30,7 +44,6 @@ Given('I am a {string} account with uin {string}') do |string, string2|
         info: { email: user.email }
     )
     click_on "Login with Google"
-
     
 end
 

@@ -26,7 +26,7 @@ Given('I am on the login page') do
 end
 
 Given("I am logged in") do
-    user = User.create(name: 'John', uin: '123456', email: 'j@tamu.edu', credits: '50', user_type: 'donor', date_joined: '01/01/2022')
+    user = User.create(name: 'John', uin: '11110000', email: 'john@tamu.edu', credits: '50', user_type: 'donor', date_joined: '01/01/2022')
     @user = user
     @id = user.id
     @name = user.name
