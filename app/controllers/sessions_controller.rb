@@ -15,8 +15,6 @@ class SessionsController < ApplicationController
       @user = User.find_by(email: auth['info']['email'])
       if @user.valid?
         set_session
-      else
-        redirect_to '/', alert: 'Login failed.'
       end
     rescue StandardError
       session[:creating] = true
