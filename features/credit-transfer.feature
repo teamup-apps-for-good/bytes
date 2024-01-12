@@ -18,7 +18,7 @@ Background: Users in database
     
 
 Scenario: donor student sends credits to pool
-    Given I am a "donor" account with uin "12346"
+    Given I am a "donor" account with uin "22223333"
     When I go to the transfer page
     And I fill out "credit-amount" with "1" credit to transfer
     And I press the "credit-submission" button
@@ -26,7 +26,7 @@ Scenario: donor student sends credits to pool
     And I should see "1" credit removed from my account
 
 Scenario: donor student tries to send 0 credits to pool
-    Given I am a "donor" account with uin "123456"
+    Given I am a "donor" account with uin "22223333"
     When I go to the transfer page
     And I fill out "credit-amount" with "0" credit to transfer
     And I press the "credit-submission" button
@@ -34,7 +34,7 @@ Scenario: donor student tries to send 0 credits to pool
     And I should see "0" credits removed from my account
 
 Scenario: donor student tries to send more credits then they have
-    Given I am a "donor" account with uin "123456"
+    Given I am a "donor" account with uin "22223333"
     When I go to the transfer page
     And I fill out "credit-amount" with "51" credit to transfer
     And I press the "credit-submission" button

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CreditPoolsController < ApplicationController
-  before_action :set_credit_pool, only: %i[ show edit update destroy ]
+  before_action :set_credit_pool, only: %i[show edit update destroy]
 
   # GET /credit_pools or /credit_pools.json
   def index
@@ -7,8 +9,7 @@ class CreditPoolsController < ApplicationController
   end
 
   # GET /credit_pools/1 or /credit_pools/1.json
-  def show
-  end
+  def show; end
 
   # GET /credit_pools/new
   def new
@@ -16,8 +17,7 @@ class CreditPoolsController < ApplicationController
   end
 
   # GET /credit_pools/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /credit_pools or /credit_pools.json
   def create
@@ -25,7 +25,7 @@ class CreditPoolsController < ApplicationController
 
     respond_to do |format|
       if @credit_pool.save
-        format.html { redirect_to credit_pool_url(@credit_pool), notice: "Credit pool was successfully created." }
+        format.html { redirect_to credit_pool_url(@credit_pool), notice: 'Credit pool was successfully created.' }
         format.json { render :show, status: :created, location: @credit_pool }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class CreditPoolsController < ApplicationController
   def update
     respond_to do |format|
       if @credit_pool.update(credit_pool_params)
-        format.html { redirect_to credit_pool_url(@credit_pool), notice: "Credit pool was successfully updated." }
+        format.html { redirect_to credit_pool_url(@credit_pool), notice: 'Credit pool was successfully updated.' }
         format.json { render :show, status: :ok, location: @credit_pool }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +52,20 @@ class CreditPoolsController < ApplicationController
     @credit_pool.destroy!
 
     respond_to do |format|
-      format.html { redirect_to credit_pools_url, notice: "Credit pool was successfully destroyed." }
+      format.html { redirect_to credit_pools_url, notice: 'Credit pool was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_credit_pool
-      @credit_pool = CreditPool.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def credit_pool_params
-      params.require(:credit_pool).permit(:credits)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_credit_pool
+    @credit_pool = CreditPool.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def credit_pool_params
+    params.require(:credit_pool).permit(:credits)
+  end
 end
