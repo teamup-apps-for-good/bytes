@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# controller class for Pages
 class PagesController < ApplicationController
   skip_before_action :require_login, only: [:index]
   def index
