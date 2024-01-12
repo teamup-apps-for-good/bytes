@@ -23,7 +23,7 @@ And('I fill in {string} with {int}') do |name, value|
 end
 
 Then('I should be on the profile page') do
-  visit "/users/profile"
+  visit '/users/profile'
 end
 
 Then('I should have {int} credits') do |num_credits|
@@ -37,7 +37,7 @@ And('the number of available credits is {int}') do |num_credits|
 end
 
 Then('I should be on the receive page') do
-  expect(current_path).to eq("/users/profile/receive")
+  expect(current_path).to eq('/users/profile/receive')
 end
 
 And('I currently have {int} credits') do |int|

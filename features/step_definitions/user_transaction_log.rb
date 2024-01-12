@@ -39,7 +39,7 @@ Given('I press {string}') do |button|
 end
 
 Then('I should be on the users page') do
-  user = User.create(name: 'James', uin: '284007821', email: 'james@tamu.edu', credits: '15', user_type: 'recipent',
-                     date_joined: '01/01/2023')
+  User.create(name: 'James', uin: '284007821', email: 'james@tamu.edu', credits: '15', user_type: 'recipent',
+              date_joined: '01/01/2023')
   expect(page).to have_current_path('/users/profile')
 end
