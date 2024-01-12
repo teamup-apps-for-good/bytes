@@ -49,6 +49,7 @@ Given('I am a {string} account with uin {string}') do |string, string2|
   click_on 'Login with Google'
 end
 
+# could possible be edited to just use I go to {string} page
 When('I go to the transfer page') do
   visit '/users/profile/transfer'
 end

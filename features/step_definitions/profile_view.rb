@@ -37,9 +37,7 @@ Given('I am logged in') do
 end
 
 When('I go to the profile page') do
-  visit(user_profile_path)
-  current_path = "/users/profile"
-  expect(current_path).to eq(user_profile_path)
+  visit('/users/profile')
 end
 
 When('I click the {string} link') do |string|

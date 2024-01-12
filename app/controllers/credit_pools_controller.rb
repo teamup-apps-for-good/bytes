@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# controller class for CreditPools
 class CreditPoolsController < ApplicationController
   before_action :set_credit_pool, only: %i[show edit update destroy]
 

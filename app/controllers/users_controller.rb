@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# controller class for Users
 class UsersController < ApplicationController
   def index
     @users = User.all
@@ -12,16 +13,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    begin
-      @user = User.create!(new_user_params)
-      flash[:notice] = %{#{@user.name}'s account was successfully created.}
-      session[:user_id] = @user.id
-      session[:creating] = false
-      redirect_to '/users/profile'
-    rescue
-      flash[:notice] = "Error has occurred"
-      redirect_to '/', alert: 'Login failed.'
-    end
+    @user = User.create!(new_user_params)
+    flash[:notice] = %(#{@user.name}'s account was successfully created.)
+    session[:user_id] = @user.id
+    session[:creating] = false
+    redirect_to '/users/profile'
+  rescue StandardError
+    flash[:notice] = 'Error has occurred'
+    redirect_to '/', alert: 'Login failed.'
   end
 
   def edit; end
@@ -31,8 +30,8 @@ class UsersController < ApplicationController
   def search; end
 
   def transfer
-    #this is the controller for the actual transfer page
-    #all we really want to do is set the global uin and user so we can use it later when we make our transfer call
+    # this is the controller for the actual transfer page
+    # all we really want to do is set the global uin and user so we can use it later when we make our transfer call
     @user = User.find_by_id(session[:user_id])
 
     # puts "params #{params}"
@@ -55,8 +54,8 @@ class UsersController < ApplicationController
     end
     credit_num = params[:credits].to_i
     id = session[:user_id]
-    #puts "params: #{params}"
-    #puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
+    # puts "params: #{params}"
+    # puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
     @user = User.find_by_id(id)
 
     # check to see if there are any errors with credit amount
@@ -121,6 +120,8 @@ class UsersController < ApplicationController
   private
 
   def new_user_params
-    params.require(:user).permit(:uin, :credits, :user_type).merge(params.permit(:name, :email)).merge(date_joined: Time.current, created_at: Time.current, updated_at: Time.current)
+    params.require(:user).permit(:uin, :credits, :user_type).merge(params.permit(:name, :email)).merge(
+      date_joined: Time.current, created_at: Time.current, updated_at: Time.current
+    )
   end
 end

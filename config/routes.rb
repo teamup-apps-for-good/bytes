@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   # action -> controller#action
   get '/users/profile/transfer', to: 'users#transfer', as: 'user-transfer'
 
-  #route for the post request that will be the transfer functionality
+  # route for the post request that will be the transfer functionality
   post '/users/profile/transfer/transfer_donor_credits', to: 'users#do_transfer'
 
   # route to add to the credit pool
