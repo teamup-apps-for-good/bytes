@@ -25,3 +25,10 @@ Scenario: Recipient account can see their received donations
   And I have made or received a donation
   And I am on the My Transactions page
   Then I should see my received donations
+
+Scenario: Can go back to the users page
+  Given I am on the login page
+  And I am logged in
+  And I am on the My Transactions page
+  And I press "Back to user"
+  Then I should be on the users page

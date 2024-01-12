@@ -36,5 +36,13 @@ RSpec.describe TransactionsController, type: :controller do
 
       expect(assigns[:transactions]).to eq(Transaction.where(uin: user.uin))
     end
+
+    it 'does not return transactions by other users' do
+      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                         date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      get :index
+      expect(assigns[:transactions]).not_to eq(Transaction.where(uin: '254009768'))
+    end
   end
 end

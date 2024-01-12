@@ -14,9 +14,10 @@ Given('I have made or received a donation') do
 end
 
 Given('I am on the My Transactions page') do
-  visit('/transactions')
-  current_path = '/transactions'
-  expect(current_path).to eq(transactions_path)
+  visit(transactions_path)
+  # current_path = '/transactions'
+  # expect(current_path).to eq(transactions_path)
+  expect(page).to have_current_path(transactions_path)
 end
 
 Then('I should see my donations') do
@@ -31,4 +32,14 @@ Then('I should see my received donations') do
                      date_joined: '01/01/2023')
 
   Transaction.where(uin: user.uin).exists?
+end
+
+Given('I press {string}') do |button|
+  click_on(button)
+end
+
+Then('I should be on the users page') do
+  user = User.create(name: 'James', uin: '284007821', email: 'james@tamu.edu', credits: '15', user_type: 'recipent',
+                     date_joined: '01/01/2023')
+  expect(page).to have_current_path('/users/6')
 end
