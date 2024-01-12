@@ -23,13 +23,4 @@ class TransactionsController < ApplicationController
 
   def search; end
 
-  def receive
-    # @user = User.find_by_uin(params[:uin])
-    # @uin = @user.uin
-
-    raise StandardError, "There are multiple pools... there shouldn't be" if CreditPool.all.length > 1
-
-    @creditpool = CreditPool.all[0]
-    puts @creditpool
-  end
 end
