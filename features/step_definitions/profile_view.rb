@@ -37,9 +37,9 @@ Given('I am logged in') do
 end
 
 When('I go to the profile page') do
-  visit("/users/#{@id}/profile")
-  current_path = "/users/#{@id}/profile"
-  expect(current_path).to eq(user_profile_path(@id))
+  visit(user_profile_path)
+  current_path = "/users/profile"
+  expect(current_path).to eq(user_profile_path)
 end
 
 When('I click the {string} link') do |string|
@@ -47,5 +47,5 @@ When('I click the {string} link') do |string|
 end
 
 Then('I should be on the Transfer page') do
-  expect(current_path).to eq(user_transfer_path(@id))
+  expect(current_path).to eq(user_transfer_path)
 end

@@ -97,7 +97,6 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'able to view account profile' do
-      User.create({name: "John", uin: "123456", email: "j@tamu.edu", credits: 50, user_type:"donor", date_joined: "01/01/2022"})
       get :show, params: {id: 0}, session: {user_id: User.find_by(uin: 123456).id}
       expect(response).to have_http_status(:success)
     end
@@ -110,7 +109,7 @@ RSpec.describe UsersController, type: :controller do
 
     it 'fails to access profile without being logged in' do
       get :show, params: {id: 0}, session: {creating: false}
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:redirect)
     end
 
   end
