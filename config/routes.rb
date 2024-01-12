@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   # oauth stuff
   get '/logout', to: 'sessions#logout', as: 'logout'
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
+  get '/auth/failure', to: 'sessions#failure'
 
   get '/test/login', to: 'sessions#set_session', as: 'test-login'
 

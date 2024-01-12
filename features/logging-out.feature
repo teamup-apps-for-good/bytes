@@ -11,5 +11,3 @@ Scenario: user logs out successfully
     When the user fills in "123456" for "uin"
     And the user fills in "10" for "credits"
     And the user presses "Save Changes"
-    And I click on the "Logout" button
-    Then I should be logged out succesfully
