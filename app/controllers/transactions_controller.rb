@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# controller class for Transactions
 class TransactionsController < ApplicationController
   def index
     # @transactions = Transaction.all

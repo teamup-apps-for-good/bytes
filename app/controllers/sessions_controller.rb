@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# controller class for Sessions
 class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:omniauth]
 
@@ -14,7 +15,7 @@ class SessionsController < ApplicationController
       @user = User.find_by(email: auth['info']['email'])
       if @user.valid?
         set_session
-      else    
+      else
         redirect_to '/', alert: 'Login failed.'
       end
     rescue StandardError

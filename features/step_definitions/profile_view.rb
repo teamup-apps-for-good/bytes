@@ -37,7 +37,7 @@ Given('I am logged in') do
 end
 
 When('I go to the profile page') do
-  visit("/users/profile")
+  visit('/users/profile')
 end
 
 When('I click the {string} link') do |string|
