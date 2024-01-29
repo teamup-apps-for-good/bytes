@@ -73,7 +73,9 @@ class UsersController < ApplicationController
     end
 
     # now, subtract credits from their account
-    @user.subtract_credits(credit_num)
+    response_code = @user.subtract_credits(credit_num)
+
+    # FIXME HANDLE BAD RESPONSE CODES 
 
     # create a transaction object
     Transaction.create({ uin: @user.uin, transaction_type: 'donor', time: '', amount: credit_num })
@@ -123,7 +125,10 @@ class UsersController < ApplicationController
       return -1
     end
 
-    @user.add_credits(num_credits)
+    response_code = @user.add_credits(num_credits)
+
+    # FIXME HANDLE BAD RESPONSE CODES
+    
     @creditpool.subtract_credits(num_credits)
     Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: num_credits})
     flash[:notice] = "#{num_credits} Credits received"
