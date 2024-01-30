@@ -101,12 +101,6 @@ class UsersController < ApplicationController
   end
 
   def do_receive
-    unless params[:credits].to_i.to_s == params[:credits]
-      flash[:notice] = 'ERROR Invalid input!'
-      redirect_to :user_transfer
-      return
-    end
-
     @user = User.find_by(id: session[:user_id])
     num_credits = params[:num_credits].to_i
 
