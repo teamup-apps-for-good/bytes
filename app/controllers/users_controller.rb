@@ -73,7 +73,9 @@ class UsersController < ApplicationController
     end
 
     # now, subtract credits from their account
-    @user.subtract_credits(credit_num)
+    response_code = @user.subtract_credits(credit_num)
+
+    # FIXME HANDLE BAD RESPONSE CODES 
 
     # create a transaction object
     Transaction.create({ uin: @user.uin, transaction_type: 'donor', time: '', amount: credit_num })
@@ -99,21 +101,37 @@ class UsersController < ApplicationController
   end
 
   def do_receive
+    unless params[:credits].to_i.to_s == params[:credits]
+      flash[:notice] = 'ERROR Invalid input!'
+      redirect_to :user_transfer
+      return
+    end
+
     @user = User.find_by(id: session[:user_id])
-    amount = params[:num_credits].to_i
+    num_credits = params[:num_credits].to_i
+
+    # handles invalid number of credits 
+    if num_credits <= 0
+      flash[:notice] = 'ERROR Invalid input!'
+      redirect_to :user_receive
+      return
+    end
 
     @creditpool = CreditPool.all[0]
     # handles there not being enough credits for the request
-    if amount > @creditpool.credits
+    if num_credits > @creditpool.credits
       flash[:warning] = "Not enough credits available, only #{@creditpool.credits} credits currently in pool"
       redirect_to :user_receive
       return -1
     end
 
-    Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: })
-    @creditpool.subtract_credits(amount)
-    @user.add_credits(amount)
-    flash[:notice] = "#{amount} Credits received"
+    response_code = @user.add_credits(num_credits)
+
+    # FIXME HANDLE BAD RESPONSE CODES
+    
+    @creditpool.subtract_credits(num_credits)
+    Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: num_credits})
+    flash[:notice] = "#{num_credits} Credits received"
     redirect_to '/users/profile'
   end
 
