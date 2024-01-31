@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/simonekang/bytes/app/helpers/application_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/application_helper.rb": {
         "lines": [
           null,
           null,
@@ -10,7 +10,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/helpers/credit_pools_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/credit_pools_helper.rb": {
         "lines": [
           null,
           null,
@@ -19,7 +19,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/helpers/pages_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/pages_helper.rb": {
         "lines": [
           null,
           null,
@@ -28,7 +28,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/helpers/transactions_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/transactions_helper.rb": {
         "lines": [
           null,
           null,
@@ -37,7 +37,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/helpers/users_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/users_helper.rb": {
         "lines": [
           null,
           null,
@@ -46,7 +46,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/controllers/credit_pools_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/credit_pools_controller.rb": {
         "lines": [
           null,
           null,
@@ -122,7 +122,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/controllers/application_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/application_controller.rb": {
         "lines": [
           null,
           null,
@@ -156,7 +156,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/controllers/pages_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/pages_controller.rb": {
         "lines": [
           null,
           null,
@@ -172,7 +172,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/controllers/sessions_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/sessions_controller.rb": {
         "lines": [
           null,
           null,
@@ -205,7 +205,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/controllers/transactions_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/transactions_controller.rb": {
         "lines": [
           null,
           null,
@@ -235,7 +235,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/controllers/users_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/users_controller.rb": {
         "lines": [
           null,
           null,
@@ -366,7 +366,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/models/user.rb": {
+      "/home/ubuntu/bytes/app/models/user.rb": {
         "lines": [
           null,
           null,
@@ -391,7 +391,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/models/application_record.rb": {
+      "/home/ubuntu/bytes/app/models/application_record.rb": {
         "lines": [
           null,
           null,
@@ -401,7 +401,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/models/credit_pool.rb": {
+      "/home/ubuntu/bytes/app/models/credit_pool.rb": {
         "lines": [
           null,
           null,
@@ -421,7 +421,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/models/transaction.rb": {
+      "/home/ubuntu/bytes/app/models/transaction.rb": {
         "lines": [
           null,
           null,
@@ -429,7 +429,7 @@
           null
         ]
       },
-      "/home/simonekang/bytes/app/channels/application_cable/channel.rb": {
+      "/home/ubuntu/bytes/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
           null,
@@ -441,7 +441,7 @@
         "branches": {
         }
       },
-      "/home/simonekang/bytes/app/channels/application_cable/connection.rb": {
+      "/home/ubuntu/bytes/app/channels/application_cable/connection.rb": {
         "lines": [
           null,
           null,
@@ -453,7 +453,7 @@
         "branches": {
         }
       },
-      "/home/simonekang/bytes/app/jobs/application_job.rb": {
+      "/home/ubuntu/bytes/app/jobs/application_job.rb": {
         "lines": [
           null,
           null,
@@ -468,7 +468,7 @@
         "branches": {
         }
       },
-      "/home/simonekang/bytes/app/mailers/application_mailer.rb": {
+      "/home/ubuntu/bytes/app/mailers/application_mailer.rb": {
         "lines": [
           null,
           null,
@@ -482,6 +482,6 @@
         }
       }
     },
-    "timestamp": 1706221395
+    "timestamp": 1706668394
   }
 }
