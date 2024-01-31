@@ -27,11 +27,11 @@
   </p>
 
   <div class="row">
-    <p><%= link_to "Go to Transfer", user_transfer_path %></p>
+    <p><%= link_to "Go to Transfer", user_transfer_path if @user.user_type == "donor"%></p>
   </div>
 
   <div class="row">
-    <p><%= link_to "Go to Receive", user_receive_path %></p>
+    <p><%= link_to "Go to Receive", user_receive_path if @user.user_type == "recipient"%></p>
   </div>
 
   <div class="row">

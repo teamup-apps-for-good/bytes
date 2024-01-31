@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/application_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/application_helper.rb": {
         "lines": [
           null,
           null,
@@ -10,7 +10,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/credit_pools_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/credit_pools_helper.rb": {
         "lines": [
           null,
           null,
@@ -19,7 +19,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/pages_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/pages_helper.rb": {
         "lines": [
           null,
           null,
@@ -28,7 +28,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/transactions_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/transactions_helper.rb": {
         "lines": [
           null,
           null,
@@ -37,7 +37,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/helpers/users_helper.rb": {
+      "/home/ubuntu/bytes/app/helpers/users_helper.rb": {
         "lines": [
           null,
           null,
@@ -46,7 +46,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/credit_pools_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/credit_pools_controller.rb": {
         "lines": [
           null,
           null,
@@ -122,7 +122,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/application_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/application_controller.rb": {
         "lines": [
           null,
           null,
@@ -136,27 +136,27 @@
           null,
           null,
           null,
+          null,
+          34,
+          null,
+          null,
+          1,
+          null,
+          null,
+          34,
+          null,
+          null,
+          1,
           null,
           32,
           null,
           null,
           1,
           null,
-          null,
-          32,
-          null,
-          null,
-          1,
-          null,
-          31,
-          null,
-          null,
-          1,
-          null,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/pages_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/pages_controller.rb": {
         "lines": [
           null,
           null,
@@ -164,15 +164,15 @@
           1,
           1,
           1,
-          1,
-          1,
+          2,
+          2,
           null,
-          0,
+          1,
           null,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/sessions_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/sessions_controller.rb": {
         "lines": [
           null,
           null,
@@ -192,8 +192,6 @@
           2,
           1,
           null,
-          0,
-          null,
           1,
           1,
           1,
@@ -207,7 +205,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/transactions_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/transactions_controller.rb": {
         "lines": [
           null,
           null,
@@ -222,8 +220,8 @@
           1,
           null,
           1,
-          0,
-          0,
+          1,
+          1,
           null,
           null,
           1,
@@ -233,20 +231,11 @@
           1,
           null,
           1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          0,
-          null,
-          0,
-          0,
           null,
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/controllers/users_controller.rb": {
+      "/home/ubuntu/bytes/app/controllers/users_controller.rb": {
         "lines": [
           null,
           null,
@@ -377,7 +366,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/user.rb": {
+      "/home/ubuntu/bytes/app/models/user.rb": {
         "lines": [
           null,
           null,
@@ -402,7 +391,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/application_record.rb": {
+      "/home/ubuntu/bytes/app/models/application_record.rb": {
         "lines": [
           null,
           null,
@@ -412,7 +401,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/credit_pool.rb": {
+      "/home/ubuntu/bytes/app/models/credit_pool.rb": {
         "lines": [
           null,
           null,
@@ -432,7 +421,7 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/models/transaction.rb": {
+      "/home/ubuntu/bytes/app/models/transaction.rb": {
         "lines": [
           null,
           null,
@@ -440,59 +429,59 @@
           null
         ]
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/channels/application_cable/channel.rb": {
+      "/home/ubuntu/bytes/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
           null,
-          0,
-          0,
-          0,
-          0
+          null,
+          null,
+          null,
+          null
         ],
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/channels/application_cable/connection.rb": {
+      "/home/ubuntu/bytes/app/channels/application_cable/connection.rb": {
         "lines": [
           null,
           null,
-          0,
-          0,
-          0,
-          0
+          null,
+          null,
+          null,
+          null
         ],
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/jobs/application_job.rb": {
+      "/home/ubuntu/bytes/app/jobs/application_job.rb": {
         "lines": [
           null,
           null,
-          0,
           null,
           null,
           null,
           null,
           null,
-          0
+          null,
+          null
         ],
         "branches": {
         }
       },
-      "/mnt/c/Users/kelvi/OneDrive/Desktop/bytes/app/mailers/application_mailer.rb": {
+      "/home/ubuntu/bytes/app/mailers/application_mailer.rb": {
         "lines": [
           null,
           null,
           null,
-          0,
-          0,
-          0,
-          0
+          null,
+          null,
+          null,
+          null
         ],
         "branches": {
         }
       }
     },
-    "timestamp": 1705023163
+    "timestamp": 1705712202
   }
 }
