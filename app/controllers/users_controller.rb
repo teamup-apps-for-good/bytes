@@ -52,42 +52,49 @@ class UsersController < ApplicationController
       redirect_to :user_transfer
       return
     end
-    credit_num = params[:credits].to_i
+    num_credits = params[:credits].to_i
     id = session[:user_id]
     # puts "params: #{params}"
     # puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
     @user = User.find_by_id(id)
 
     # check to see if there are any errors with credit amount
-    if credit_num > @user.credits
+    if num_credits > @user.credits
       flash[:notice] = 'ERROR Trying to donate more credits than you have!'
       redirect_to :user_transfer
       return
 
     end
 
-    if credit_num.zero? || credit_num.negative?
+    if num_credits.zero? || num_credits.negative?
       flash[:notice] = 'ERROR Invalid input!'
       redirect_to :user_transfer
       return
     end
 
     # now, subtract credits from their account
-    response_code = @user.subtract_credits(credit_num)
+    response = @user.subtract_credits(num_credits)
 
-    # FIXME HANDLE BAD RESPONSE CODES 
+    # handles bad update_credit api call 
+    if response.code.to_i / 100 == 2
+      puts "Credit update successful"
+    else
+      flash[:warning] = "Error updating credits. Status code: #{response.code}"
+      redirect_to :user_transfer
+      return -1
+    end
 
     # create a transaction object
-    Transaction.create({ uin: @user.uin, transaction_type: 'donor', time: '', amount: credit_num })
+    Transaction.create({ uin: @user.uin, transaction_type: 'donor', time: '', amount: num_credits })
 
     # send the number of transfered credits to the pool TODO: DRY above in page_load (session maybe?)
     raise StandardError, "There are multiple pools... there shouldn't be" if CreditPool.all.length > 1
 
     @creditpool = CreditPool.all[0]
-    @creditpool.add_credits(credit_num)
+    @creditpool.add_credits(num_credits)
 
     # notify user it's successful somehow
-    flash[:notice] = "CONFIRMATION Sucessfully donated #{credit_num} credits to the pool!"
+    flash[:notice] = "CONFIRMATION Sucessfully donated #{num_credits} credits to the pool!"
     redirect_to :user_transfer
   end
 
@@ -119,14 +126,23 @@ class UsersController < ApplicationController
       return -1
     end
 
-    response_code = @user.add_credits(num_credits)
+    response = @user.add_credits(num_credits)
 
-    # FIXME HANDLE BAD RESPONSE CODES
+    # handles bad response from update_credit api call
+    if response.code.to_i / 100 == 2
+      puts "Credit update successful"
+    else
+      flash[:warning] = "Error updating credits. Status code: #{response.code}"
+      redirect_to :user_receive
+      return -1
+    end
     
     @creditpool.subtract_credits(num_credits)
     Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: num_credits})
-    flash[:notice] = "#{num_credits} Credits received"
-    redirect_to '/users/profile'
+
+    # notify user it's successful somehow
+    flash[:notice] = "CONFIRMATION Sucessfully recieved #{num_credits} credits!"
+    redirect_to :user_receive
   end
 
   private
