@@ -26,4 +26,9 @@ class SessionsController < ApplicationController
     session[:user_id] = @user.id
     redirect_to '/users/profile', notice: 'You are logged in.'
   end
+
+  def failure
+    flash[:alert] = "Authentication failed. Please try again."
+    redirect_to root_path
+  end
 end
