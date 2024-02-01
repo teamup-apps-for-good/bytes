@@ -1,9 +1,12 @@
 
 # frozen_string_literal: true
+$user_request_limit = 10
+
 
 # controller class for Users
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
+
 
   def index
     @users = User.all
@@ -126,6 +129,7 @@ class UsersController < ApplicationController
     # NEEDS TO BE FIXED
     # allows for decimal input for num_credits, i.e. 1.5 -> 1
     num_credits = params[:num_credits].to_i
+    user_credits = @user.get_num_credits
 
     # handles invalid number of credits 
     if num_credits <= 0
@@ -134,10 +138,22 @@ class UsersController < ApplicationController
       return
     end
 
+    if user_credits >= $user_request_limit
+      flash[:warning] = "Must have less than #{$user_request_limit} credits in order to make a request"
+      redirect_to :user_receive
+      return -1
+    end
+
     @creditpool = CreditPool.all[0]
     # handles there not being enough credits for the request
     if num_credits > @creditpool.credits
       flash[:warning] = "Not enough credits available, only #{@creditpool.credits} credits currently in pool"
+      redirect_to :user_receive
+      return -1
+    end
+
+    if num_credits > $user_request_limit
+      flash[:warning] = "Request too large, maximum allowed per request is #{$user_request_limit} credits"
       redirect_to :user_receive
       return -1
     end
