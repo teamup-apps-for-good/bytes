@@ -1,19 +1,23 @@
 <%= stylesheet_link_tag "landing" %>
 
 <div class="container">
-
   <div class="body">
-  <div class="row justify-content-center">
+    <div class="row justify-content-center">
       <div class="col-md-6">
-      <%= image_tag asset_path('bytes-transparent.png'), alt: 'School logo goes here', class: 'img-fluid', width: '150', height: 'auto' %>
+        <%= image_tag asset_path('bytes-transparent.png'), alt: 'School logo goes here', class: 'img-fluid', width: '230', height: 'auto' %>
       </div>
-      </div>
-    <h2>A meal sharing app for Texas A&M  University</h2>
+    </div>
+
+    <h2>A meal sharing app</h2>
+    
     <div class="login">
-    <%= button_to "Login with Google", "/auth/google_oauth2", class: 'btn btn-primary', data: {turbo: "false"} %>
+      <%= button_to "Login with Google", "/auth/google_oauth2", class: 'btn btn-primary', data: {turbo: "false"} %>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <%= image_tag asset_path('tamu-logo-words.png'), alt: 'School logo goes here', class: 'img-fluid', width: '350', height: 'auto' %>
+      </div>
     </div>
   </div>
-  <div class="col-md-6">
-      <%= image_tag asset_path('tamu-logo-words.png'), alt: 'School logo goes here', class: 'img-fluid', width: '250', height: 'auto' %>
-      </div>
 </div>
