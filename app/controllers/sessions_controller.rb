@@ -19,8 +19,8 @@ class SessionsController < ApplicationController
         redirect_to '/', alert: 'Login failed.'
       end
     rescue StandardError
-      session[:creating] = true
-      redirect_to new_user_path({ email: auth['info']['email'], name: auth['info']['name'] })
+      session[:email] = auth['info']['email']
+      redirect_to new_user_path
     end
   end
 
