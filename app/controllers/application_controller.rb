@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     # redirect to the  page unless user is logged in
-    return if logged_in? || session[:creating]
+    return if logged_in? || session[:email]
 
     # puts "REDIRECTING TO HOME PAGE"
     redirect_to root_path, alert: 'You must be logged in to access this section.'
