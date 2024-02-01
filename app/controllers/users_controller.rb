@@ -1,7 +1,10 @@
+
 # frozen_string_literal: true
 
 # controller class for Users
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     @users = User.all
   end
@@ -10,7 +13,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(session[:user_id])
-    @user_credit = get_user_info(@user.uin)['credits']
   end
 
   def create
@@ -24,7 +26,7 @@ class UsersController < ApplicationController
       elsif new_params['user_type'] == 'recipient' and user_info['credits'] > 10
         raise 'User has too many credits to create a receipent account'
       end
-      @user = User.create!({uin: user_info['uin'], name: user_info['first_name'] + ' ' + user_info['last_name'], email: user_info['email'], user_type: new_params['user_type']})
+      @user = User.create!({uin: user_info['uin'], name: user_info['first_name'] + ' ' + user_info['last_name'], email: user_info['email'], user_type: new_params['user_type'], credits: 0})
       flash[:notice] = %(#{@user.name}'s account was successfully created.)
       session[:user_id] = @user.id
       session.delete('email')
@@ -55,11 +57,6 @@ class UsersController < ApplicationController
     # puts "credit pool: #{@creditpool}"
   end
 
-  def get_user_info(uin)
-    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}")
-    response = JSON.parse(Net::HTTP.get(uri))
-  end
-
   def do_transfer
     # puts "INITIATING TRANSFER!"
     # grab who is doing the transfer, and how much
@@ -76,7 +73,7 @@ class UsersController < ApplicationController
     @user = User.find_by_id(id)
 
     # check to see if there are any errors with credit amount
-    if num_credits > @user.credits
+    if num_credits > @user.get_num_credits
       flash[:notice] = 'ERROR Trying to donate more credits than you have!'
       redirect_to :user_transfer
       return
@@ -94,7 +91,7 @@ class UsersController < ApplicationController
 
     # handles bad update_credit api call 
     if response.code.to_i / 100 == 2
-      puts "Credit update successful"
+      # puts "Credit update successful"
     else
       flash[:warning] = "Error updating credits. Status code: #{response.code}"
       redirect_to :user_transfer
@@ -126,6 +123,8 @@ class UsersController < ApplicationController
 
   def do_receive
     @user = User.find_by(id: session[:user_id])
+    # NEEDS TO BE FIXED
+    # allows for decimal input for num_credits, i.e. 1.5 -> 1
     num_credits = params[:num_credits].to_i
 
     # handles invalid number of credits 
@@ -147,7 +146,7 @@ class UsersController < ApplicationController
 
     # handles bad response from update_credit api call
     if response.code.to_i / 100 == 2
-      puts "Credit update successful"
+      # puts "Credit update successful"
     else
       flash[:warning] = "Error updating credits. Status code: #{response.code}"
       redirect_to :user_receive
@@ -166,5 +165,10 @@ class UsersController < ApplicationController
 
   def new_user_params
     params.require(:user).permit(:uin, :user_type)
+  end
+
+  def get_user_info(uin)
+    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}")
+    response = JSON.parse(Net::HTTP.get(uri))
   end
 end

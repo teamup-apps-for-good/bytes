@@ -35,7 +35,7 @@ Then('I should see my received donations') do
 end
 
 Given('I press {string}') do |button|
-  click_on(button)
+  click_on button
 end
 
 Then('I should be on the users page') do

@@ -6,5 +6,5 @@ Feature: Landing page
 
 Scenario: landing page displays basic information
     Given I am on the landing page of the site
-    Then I should see 'BYTES' on the landing page
+    Then I should see 'A meal sharing app' on the landing page
     And I should see 'Login with Google' on the landing page

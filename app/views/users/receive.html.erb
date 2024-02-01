@@ -10,7 +10,7 @@
 
   <div class="container2">
     <h1>Request Meal Credits</h1>
-    <h3>You currently have <%= @user.credits %> credits</h3>
+    <h3>You currently have <%= @user.get_num_credits %> credits</h3>
     <h3>Number of credits available in pool: <%= @creditpool.credits %></h3>
 
     <%= form_tag :user_do_receive, method: :post do %>

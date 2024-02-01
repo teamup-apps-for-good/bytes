@@ -4,15 +4,15 @@ require 'net/http'
 
 # Class that represents a user of the app
 class User < ApplicationRecord
-  validates :uin, :name, :email, presence: true
-  validates :credits, numericality: { only_integer: true }
+  validates :uin, :name, :email, :user_type, presence: true
 
   def get_num_credits()
     uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{self.uin}")
     res = Net::HTTP.get(uri)
     json_res = JSON.parse(res)
     update({credits: json_res['credits']})
-    puts "number of credits: #{self.credits}"
+    # puts "number of credits: #{self.credits}"
+    return json_res['credits']
   end
 
   def update_credits(amount)
@@ -24,10 +24,10 @@ class User < ApplicationRecord
     request = Net::HTTP::Patch.new(uri.request_uri)
     response = http.request(request)
 
-    if (response.code.to_i != 200)
-      puts "The response is #{response}"
-      puts "response code is #{response.code}"
-    end
+    # if (response.code.to_i != 200)
+    #   puts "The response is #{response}"
+    #   puts "response code is #{response.code}"
+    # end
 
     return response
   end
@@ -38,7 +38,7 @@ class User < ApplicationRecord
 
     # update user credit count on bytes
     get_num_credits()
-    puts "after update: #{self.credits}"
+    # puts "after update: #{self.credits}"
 
     return response
     # update({ credits: credits - amount })
@@ -50,7 +50,7 @@ class User < ApplicationRecord
 
     # update user credit count on bytes
     get_num_credits()
-    puts "after update: #{self.credits}"
+    # puts "after update: #{self.credits}"
 
     return response
     # update({ credits: credits + amount })

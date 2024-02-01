@@ -7,10 +7,10 @@ Feature: Credit transfer
 Background: Users in database
 
     Given the following users exist:
-    |   name   |   uin   |    email     |   credits   |  user_type   |   date_joined   |
-    |   John   | 897324  |  j@tamu.edu  |     50      |    donor     |    01/01/2022   |
-    |   Todd   | 324567  |  t@tamu.edu  |     10      |   recipient  |    01/01/2022   |
-    |   Jim    | 124124  |  ji@tamu.edu |     70      |    donor     |    01/01/2022   |
+    |   name   |   uin   |    email     |  user_type   |
+    |   John   | 123456  |  j@tamu.edu  |    donor     |
+    |   Todd   | 324567  |  t@tamu.edu  |   recipient  |
+    |   Jim    | 124124  |  ji@tamu.edu |    donor     |
 
     Given the following credit pools exist:
     |   credits   |
@@ -18,26 +18,27 @@ Background: Users in database
     
 
 Scenario: donor student sends credits to pool
-    Given I am a "donor" account with uin "22223333"
-    When I go to the transfer page
-    And I fill out "credit-amount" with "1" credit to transfer
+    Given there is an user with the email of "j@tamu.edu", uin of "123456", and 10 credits in the external API
+    Given I am already logged in as an user with the email of "j@tamu.edu"
+    Given API allows for -1 credit update for user with uin of "123456"
+    When I go to the "transfer" page
+    And I fill out "credit-amount" with "1"
     And I press the "credit-submission" button
-    Then I should see a "CONFIRMATION" popup
-    And I should see "1" credit removed from my account
+    Then I should see "CONFIRMATION Sucessfully donated 1 credits to the pool!"
 
 Scenario: donor student tries to send 0 credits to pool
-    Given I am a "donor" account with uin "22223333"
-    When I go to the transfer page
-    And I fill out "credit-amount" with "0" credit to transfer
+    Given there is an user with the email of "j@tamu.edu", uin of "123456", and 10 credits in the external API
+    Given I am already logged in as an user with the email of "j@tamu.edu"
+    When I go to the "transfer" page
+    And I fill out "credit-amount" with "0"
     And I press the "credit-submission" button
-    Then I should see a "ERROR" popup
-    And I should see "0" credits removed from my account
+    Then I should see "ERROR Invalid input!"
 
 Scenario: donor student tries to send more credits then they have
-    Given I am a "donor" account with uin "22223333"
-    When I go to the transfer page
-    And I fill out "credit-amount" with "51" credit to transfer
+    Given there is an user with the email of "j@tamu.edu", uin of "123456", and 10 credits in the external API
+    Given I am already logged in as an user with the email of "j@tamu.edu"
+    When I go to the "transfer" page
+    And I fill out "credit-amount" with "11"
     And I press the "credit-submission" button
-    Then I should see a "ERROR" popup
-    And I should see "0" credits removed from my account
+    Then I should see "ERROR Trying to donate more credits than you have!"
 

@@ -46,6 +46,20 @@ RSpec.configure do |config|
     }
     stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/-1').
     to_return(status: 404, body: uin_not_found_response.to_json)
+
+    success_transaction_response = {
+      :message => 'Credits updated successfully'
+    }
+    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/5').
+    to_return(status: 200, body: success_transaction_response.to_json)
+    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/-5').
+    to_return(status: 200, body: success_transaction_response.to_json)
+
+    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/-1').
+    to_return(status: 400, body: '')
+
+    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/1').
+    to_return(status: 400, body: '')
   end
 
   # rspec-expectations config goes here. You can use an alternate
