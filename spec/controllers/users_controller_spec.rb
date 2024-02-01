@@ -3,14 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
   before(:each) do
     User.destroy_all
     CreditPool.destroy_all
-    User.create({ name: 'Test', uin: '110011', email: 'test@tamu.edu', user_type: 'donor'})
-    User.create({ name: 'John', uin: '123456', email: 'j@tamu.edu', user_type: 'donor'})
-    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', user_type: 'donor'})
-    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', user_type: 'recipient'})
+    User.create({ name: 'Test', uin: '110011', email: 'test@tamu.edu', user_type: 'donor' })
+    User.create({ name: 'John', uin: '123456', email: 'j@tamu.edu', user_type: 'donor' })
+    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
+    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
     CreditPool.create(credits: 100)
   end
 
@@ -63,7 +62,7 @@ RSpec.describe UsersController, type: :controller do
       get :do_receive, params: { num_credits: -1 }
       expect(flash[:notice]).to match(/ERROR Invalid input!/)
     end
-    
+
     it 'receives a error code from API' do
       get :do_receive, params: { num_credits: 1 }
       expect(flash[:warning]).to match(/Error updating credits. Status code: 4[0-9]{2}/)
@@ -84,7 +83,7 @@ RSpec.describe UsersController, type: :controller do
   describe 'account creation' do
     it 'successfully creates an account' do
       User.find_by(uin: '110011').destroy
-      post :create, params: { user: { uin: '110011', user_type: 'donor' }},
+      post :create, params: { user: { uin: '110011', user_type: 'donor' } },
                     session: { email: 'test@tamu.edu' }
       expect(flash[:notice]).to match(/Test Account's account was successfully created./)
       expect(response).to redirect_to '/users/profile'
@@ -96,21 +95,21 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'fails to creates an account due to incorrect UIN' do
-      post :create, params: { user: { uin: '-1', user_type: 'donor' }},
+      post :create, params: { user: { uin: '-1', user_type: 'donor' } },
                     session: { email: 'test@tamu.edu' }
       expect(response).to redirect_to '/'
       expect(flash[:notice]).to match(/Error has occurred/)
     end
 
     it 'fails to creates an account due to too many credits as recipient' do
-      post :create, params: { user: { uin: '110011', user_type: 'recipient' }},
+      post :create, params: { user: { uin: '110011', user_type: 'recipient' } },
                     session: { email: 'test@tamu.edu' }
       expect(response).to redirect_to '/'
       expect(flash[:notice]).to match(/User has too many credits to create a receipent account/)
     end
 
     it 'fails to creates an account due to UIN and email mismatch' do
-      post :create, params: { user: { uin: '123456', user_type: 'donor' }},
+      post :create, params: { user: { uin: '123456', user_type: 'donor' } },
                     session: { email: 'test@tamu.edu' }
       expect(response).to redirect_to '/'
       expect(flash[:notice]).to match(/Email does not match the UIN/)
@@ -131,34 +130,34 @@ RSpec.describe UsersController, type: :controller do
 
     it 'transfers successfully' do
       # normal happy path for transfer. we do it and expect a refresh for the flash message
-      get :do_transfer, params: {credits: '5' }
+      get :do_transfer, params: { credits: '5' }
       expect(response).to redirect_to :user_transfer
       expect(flash[:notice]).to match(/CONFIRMATION Sucessfully donated 5 credits to the pool!/)
     end
 
     it 'tries to transfer more than you have' do
       # sad path, we try to transfer more than we have
-      get :do_transfer, params: {credits: '100' }
+      get :do_transfer, params: { credits: '100' }
       expect(flash[:notice]).to eq('ERROR Trying to donate more credits than you have!')
     end
 
     it 'tries to transfer 0' do
-      get :do_transfer, params: {credits: '0' }
+      get :do_transfer, params: { credits: '0' }
       expect(flash[:notice]).to eq('ERROR Invalid input!')
     end
 
     it 'tries to transfer negative number' do # stealing !!!!
-      get :do_transfer, params: {credits: '-1' }
+      get :do_transfer, params: { credits: '-1' }
       expect(flash[:notice]).to eq('ERROR Invalid input!')
     end
 
     it 'tries to transfer non-numeric input' do # stealing !!!!
-      get :do_transfer, params: {credits: 'lololol' }
+      get :do_transfer, params: { credits: 'lololol' }
       expect(flash[:notice]).to eq('ERROR Invalid input!')
     end
 
     it 'receives a error code from API' do
-      get :do_transfer, params: {credits: 1 }
+      get :do_transfer, params: { credits: 1 }
       expect(flash[:warning]).to match(/Error updating credits. Status code: 4[0-9]{2}/)
     end
   end

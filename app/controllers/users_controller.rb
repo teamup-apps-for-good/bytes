@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 # controller class for Users
@@ -16,25 +15,25 @@ class UsersController < ApplicationController
   end
 
   def create
-    begin
-      new_params = new_user_params
-      user_info = get_user_info new_params['uin']
-      if user_info.key?('error')
-        raise 'Error has occurred'
-      elsif user_info['email'] != session[:email]
-        raise 'Email does not match the UIN'
-      elsif new_params['user_type'] == 'recipient' and user_info['credits'] > 10
-        raise 'User has too many credits to create a receipent account'
-      end
-      @user = User.create!({uin: user_info['uin'], name: user_info['first_name'] + ' ' + user_info['last_name'], email: user_info['email'], user_type: new_params['user_type'], credits: 0})
-      flash[:notice] = %(#{@user.name}'s account was successfully created.)
-      session[:user_id] = @user.id
-      session.delete('email')
-      redirect_to '/users/profile'
-    rescue StandardError => error
-      flash[:notice] = error.message
-      redirect_to '/', alert: 'Login failed.'
+    new_params = new_user_params
+    user_info = get_user_info new_params['uin']
+    if user_info.key?('error')
+      raise 'Error has occurred'
+    elsif user_info['email'] != session[:email]
+      raise 'Email does not match the UIN'
+    elsif (new_params['user_type'] == 'recipient') && (user_info['credits'] > 10)
+      raise 'User has too many credits to create a receipent account'
     end
+
+    @user = User.create!({ uin: user_info['uin'], name: "#{user_info['first_name']} #{user_info['last_name']}",
+                           email: user_info['email'], user_type: new_params['user_type'], credits: 0 })
+    flash[:notice] = %(#{@user.name}'s account was successfully created.)
+    session[:user_id] = @user.id
+    session.delete('email')
+    redirect_to '/users/profile'
+  rescue StandardError => e
+    flash[:notice] = e.message
+    redirect_to '/', alert: 'Login failed.'
   end
 
   def edit; end
@@ -89,7 +88,7 @@ class UsersController < ApplicationController
     # now, subtract credits from their account
     response = @user.subtract_credits(num_credits)
 
-    # handles bad update_credit api call 
+    # handles bad update_credit api call
     if response.code.to_i / 100 == 2
       # puts "Credit update successful"
     else
@@ -127,7 +126,7 @@ class UsersController < ApplicationController
     # allows for decimal input for num_credits, i.e. 1.5 -> 1
     num_credits = params[:num_credits].to_i
 
-    # handles invalid number of credits 
+    # handles invalid number of credits
     if num_credits <= 0
       flash[:notice] = 'ERROR Invalid input!'
       redirect_to :user_receive
@@ -152,9 +151,9 @@ class UsersController < ApplicationController
       redirect_to :user_receive
       return -1
     end
-    
+
     @creditpool.subtract_credits(num_credits)
-    Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: num_credits})
+    Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: num_credits })
 
     # notify user it's successful somehow
     flash[:notice] = "CONFIRMATION Sucessfully recieved #{num_credits} credits!"
@@ -169,6 +168,6 @@ class UsersController < ApplicationController
 
   def get_user_info(uin)
     uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}")
-    response = JSON.parse(Net::HTTP.get(uri))
+    JSON.parse(Net::HTTP.get(uri))
   end
 end

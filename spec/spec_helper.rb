@@ -19,47 +19,46 @@ require 'webmock/rspec'
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-
   config.before(:each) do
     uin_110011_response = {
-      :email => 'test@tamu.edu',
-      :uin => '110011',
-      :first_name => 'Test',
-      :last_name => 'Account',
-      :credits => 50
+      email: 'test@tamu.edu',
+      uin: '110011',
+      first_name: 'Test',
+      last_name: 'Account',
+      credits: 50
     }
-    stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011').
-    to_return(status: 200, body: uin_110011_response.to_json)
+    stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011')
+      .to_return(status: 200, body: uin_110011_response.to_json)
 
     uin_123456_response = {
-      :email => 'j@tamu.edu',
-      :uin => '123456',
-      :first_name => 'John',
-      :last_name => '',
-      :credits => 0
+      email: 'j@tamu.edu',
+      uin: '123456',
+      first_name: 'John',
+      last_name: '',
+      credits: 0
     }
-    stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/123456').
-    to_return(status: 200, body: uin_123456_response.to_json)
+    stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/123456')
+      .to_return(status: 200, body: uin_123456_response.to_json)
 
     uin_not_found_response = {
-      :error => 'User not found'
+      error: 'User not found'
     }
-    stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/-1').
-    to_return(status: 404, body: uin_not_found_response.to_json)
+    stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/-1')
+      .to_return(status: 404, body: uin_not_found_response.to_json)
 
     success_transaction_response = {
-      :message => 'Credits updated successfully'
+      message: 'Credits updated successfully'
     }
-    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/5').
-    to_return(status: 200, body: success_transaction_response.to_json)
-    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/-5').
-    to_return(status: 200, body: success_transaction_response.to_json)
+    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/5')
+      .to_return(status: 200, body: success_transaction_response.to_json)
+    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/-5')
+      .to_return(status: 200, body: success_transaction_response.to_json)
 
-    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/-1').
-    to_return(status: 400, body: '')
+    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/-1')
+      .to_return(status: 400, body: '')
 
-    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/1').
-    to_return(status: 400, body: '')
+    stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/1')
+      .to_return(status: 400, body: '')
   end
 
   # rspec-expectations config goes here. You can use an alternate

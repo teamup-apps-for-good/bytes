@@ -50,7 +50,7 @@ RSpec.describe TransactionsController, type: :controller do
   describe 'shows correct transaction' do
     it 'returns the correct transaction' do
       user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
-                           date_joined: '01/01/2022')
+                         date_joined: '01/01/2022')
       session[:user_id] = user.id
       transaction = Transaction.create(uin: '254007932',
                                        transaction_type: 'donated',

@@ -22,5 +22,4 @@ class TransactionsController < ApplicationController
   def update; end
 
   def search; end
-
 end

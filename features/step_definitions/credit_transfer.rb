@@ -16,15 +16,15 @@ end
 
 Given('API allows for {int} credit update for user with uin of {string}') do |credit, uin|
   response = {
-    :message => 'Credits updated successfully'
+    message: 'Credits updated successfully'
   }
-  stub_request(:patch, %{https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}/update_credits/#{credit}}).
-  to_return(status: 200, body: response.to_json)
+  stub_request(:patch, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}/update_credits/#{credit}))
+    .to_return(status: 200, body: response.to_json)
 end
 
 Given('API does not allows for {int} credit update for user with uin of {string}') do |credit, uin|
-  stub_request(:patch, %{https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}/update_credits/#{credit}}).
-  to_return(status: 400, body: '')
+  stub_request(:patch, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}/update_credits/#{credit}))
+    .to_return(status: 400, body: '')
 end
 
 When('I go to the {string} page') do |string|

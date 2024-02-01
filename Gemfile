@@ -10,8 +10,8 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
 # Bootstrap
-gem "bootstrap"
-gem "sassc-rails"
+gem 'bootstrap'
+gem 'sassc-rails'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.2'
@@ -58,7 +58,16 @@ gem 'bundler-audit'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'byebug'
   gem 'debug', platforms: %i[mri windows]
+  gem 'launchy'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'rubycritic', require: false
+  gem 'simplecov', require: false
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :development do
@@ -75,34 +84,16 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'selenium-webdriver'
-end
-
-# from pa3
-group :test do
-  gem 'capybara'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
   gem 'ZenTest'
-end
-
-# from pa3
-group :development, :test do
-  gem 'byebug'
-  gem 'launchy'
-  gem 'rubocop', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
-  gem 'rubycritic', require: false
-  gem 'simplecov', require: false
-  gem 'sqlite3', '~> 1.4'
 end
 
 group :production do
   gem 'pg'
 end
 
-gem "webmock", "~> 3.19"
+gem 'webmock', '~> 3.19'

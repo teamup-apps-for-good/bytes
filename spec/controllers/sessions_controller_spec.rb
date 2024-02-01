@@ -5,12 +5,12 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
   before(:each) do
     OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({info: { email: 'j@tamu.edu' }})
+    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({ info: { email: 'j@tamu.edu' } })
     Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
     User.destroy_all
     CreditPool.destroy_all
     User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
-    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', user_type: 'recipient'})
+    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
     CreditPool.create({ credits: 1 })
   end
 
