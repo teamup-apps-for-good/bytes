@@ -18,7 +18,7 @@ And('I am on the {string} page') do |string|
   visit "/users/profile/#{string}"
 end
 
-And('I fill in {string} with {int}') do |name, value|
+And('I fill in {string} with {string}') do |name, value|
   fill_in name, with: value
 end
 

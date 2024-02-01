@@ -9,14 +9,6 @@ Given('I am already logged in as an user with the email of {string}') do |email|
   
 end
 
-Given('there is an user with the email of {string}, uin of {string}, and {int} credits in the external API') do |email, uin, credit|
-  response = {
-    :credits => credit
-  }
-  stub_request(:get, %{https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}}).
-  to_return(status: 200, body: response.to_json)
-end
-
 And('I am on the profile page') do
   visit user_profile_path
 end

@@ -11,5 +11,10 @@ And('I click on the {string} button') do |string|
 end
 
 Then('I should be logged in successfully') do
-  expect(page).to have_current_path('/users/profile', ignore_query: true)
+  expect(page).to have_current_path(user_profile_path)
+end
+
+Then('I should failed to log in with {string}') do |string|
+  expect(page).to have_current_path(root_path)
+  expect(page).to have_content(string)
 end
