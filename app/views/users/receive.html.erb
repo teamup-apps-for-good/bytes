@@ -1,13 +1,27 @@
-<div>
-  <h1>Request Meal Credits</h1>
-  <h3>You currently have <%=@user.credits%> credits</h3>
-  <h3>Number of credits available in pool: <%=@creditpool.credits%></h3>
-  <%= form_tag :user_do_receive, method: :post do %>
-    <%= label_tag :num_credits, "Number of Credits: " %>
-    <%= number_field_tag :num_credits %>
-    <%= submit_tag "Request" %>
-  <% end %>
-  <div class="row">
-        <p><%= link_to "Go back", '/users/profile' %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Request Meal Credits</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <%= stylesheet_link_tag "receive" %>
+</head>
+<body>
+
+  <div class="container2">
+    <h1>Request Meal Credits</h1>
+    <h3>You currently have <%= @user.credits %> credits</h3>
+    <h3>Number of credits available in pool: <%= @creditpool.credits %></h3>
+
+    <%= form_tag :user_do_receive, method: :post do %>
+      <%= label_tag :num_credits, "Number of Credits: " %>
+      <%= number_field_tag :num_credits %>
+      <%= submit_tag "Request", class: 'btn btn-request' %>
+    <% end %>
+
+    <div class="row btn-back">
+      <%= link_to "Go back", '/users/profile', class: 'btn btn-primary col-md-2' %>
     </div>
-</div>
+  </div>
+</body>
+</html>

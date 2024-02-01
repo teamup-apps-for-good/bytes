@@ -1,45 +1,76 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    height: 100%;
-}
-
-div.banner {
-    width: 100%;
-    height: 10%;
+body {
+    background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  }
+  
+  .banner {
     background-color: #500000;
-    position: relative;
-}
-
-a.login-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 0;
-    text-decoration: none;
-    color: white;
-    padding-right: 10px;
-}
-
-div.body {
-    padding-top: 10%;
+    color: #fff;
+    padding: 10px 0;
     text-align: center;
-}
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 50px auto;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .body {
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    color: #343a40;
+    margin-bottom: 30px;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .col-md-6 {
+    flex: 0 0 48%;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    background-color: transparent;
+    box-shadow: none;
+    max-width: 200px;
+  }
 
-div.body p {
-    font-size: 75px;
-}
+  .login {
+    padding: 30px;
+  }
 
-div.imgs {
-    width: 100%;
-    height: 100%;
-}
+  h1 {
+    font-size: 2.5em;
+    color: #fff;
+    margin-bottom: 30px;
+  }
 
-div.imgs img {
-    width: 25%;
-    height: 25%;
-    margin: 50px;
-}
+  h2 {
+    font-size: 2.5em;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+  

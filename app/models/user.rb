@@ -4,7 +4,7 @@ require 'net/http'
 
 # Class that represents a user of the app
 class User < ApplicationRecord
-  validates :uin, :name, :email, :credits, presence: true
+  validates :uin, :name, :email, presence: true
   validates :credits, numericality: { only_integer: true }
 
   def get_num_credits()

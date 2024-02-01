@@ -8,7 +8,6 @@ RSpec.describe SessionsController, type: :controller do
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
                                                                          provider: 'google_oauth2',
                                                                          info: {
-                                                                           name: 'John',
                                                                            email: 'j@tamu.edu'
                                                                          },
                                                                          credentials: {
@@ -19,10 +18,8 @@ RSpec.describe SessionsController, type: :controller do
     Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
     User.destroy_all
     CreditPool.destroy_all
-    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', credits: 100, user_type: 'donor',
-                  date_joined: '01/01/2022' })
-    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', credits: 3, user_type: 'recipient',
-                  date_joined: '01/01/2022' })
+    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
+    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', user_type: 'recipient'})
     CreditPool.create({ credits: 1 })
   end
 
@@ -30,7 +27,7 @@ RSpec.describe SessionsController, type: :controller do
     it 'redirect to new user creation page for new user' do
       request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
       get :omniauth
-      expect(response).to redirect_to '/users/new?email=j%40tamu.edu&name=John'
+      expect(response).to redirect_to '/users/new'
     end
 
     it 'changes session for already established user' do

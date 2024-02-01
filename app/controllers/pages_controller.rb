@@ -4,7 +4,7 @@
 class PagesController < ApplicationController
   skip_before_action :require_login, only: [:index]
   def index
-    session[:creating] = false
+    session.delete('email')
     return unless logged_in?
 
     redirect_to '/users/profile', notice: 'Welcome, back!'

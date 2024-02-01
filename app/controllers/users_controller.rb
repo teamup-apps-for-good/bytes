@@ -10,17 +10,29 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(session[:user_id])
+    @user_credit = get_user_info(@user.uin)['credits']
   end
 
   def create
-    @user = User.create!(new_user_params)
-    flash[:notice] = %(#{@user.name}'s account was successfully created.)
-    session[:user_id] = @user.id
-    session[:creating] = false
-    redirect_to '/users/profile'
-  rescue StandardError
-    flash[:notice] = 'Error has occurred'
-    redirect_to '/', alert: 'Login failed.'
+    begin
+      new_params = new_user_params
+      user_info = get_user_info new_params['uin']
+      if user_info.key?('error')
+        raise 'Error has occurred'
+      elsif user_info['email'] != session[:email]
+        raise 'Email does not match the UIN'
+      elsif new_params['user_type'] == 'recipient' and user_info['credits'] > 10
+        raise 'User has too many credits to create a receipent account'
+      end
+      @user = User.create!({uin: user_info['uin'], name: user_info['first_name'] + ' ' + user_info['last_name'], email: user_info['email'], user_type: new_params['user_type']})
+      flash[:notice] = %(#{@user.name}'s account was successfully created.)
+      session[:user_id] = @user.id
+      session.delete('email')
+      redirect_to '/users/profile'
+    rescue StandardError => error
+      flash[:notice] = error.message
+      redirect_to '/', alert: 'Login failed.'
+    end
   end
 
   def edit; end
@@ -41,6 +53,11 @@ class UsersController < ApplicationController
 
     @creditpool = CreditPool.all[0]
     # puts "credit pool: #{@creditpool}"
+  end
+
+  def get_user_info(uin)
+    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}")
+    response = JSON.parse(Net::HTTP.get(uri))
   end
 
   def do_transfer
@@ -148,8 +165,6 @@ class UsersController < ApplicationController
   private
 
   def new_user_params
-    params.require(:user).permit(:uin, :credits, :user_type).merge(params.permit(:name, :email)).merge(
-      date_joined: Time.current, created_at: Time.current, updated_at: Time.current
-    )
+    params.require(:user).permit(:uin, :user_type)
   end
 end
