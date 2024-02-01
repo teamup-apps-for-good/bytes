@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+$user_request_limit = 10
+
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
@@ -9,8 +11,9 @@ RSpec.describe UsersController, type: :controller do
     CreditPool.destroy_all
     User.create({ name: 'Test', uin: '110011', email: 'test@tamu.edu', user_type: 'donor'})
     User.create({ name: 'John', uin: '123456', email: 'j@tamu.edu', user_type: 'donor'})
-    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', user_type: 'donor'})
+    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', user_type: 'recipient'})
     User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', user_type: 'recipient'})
+    User.create({ name: 'Kyle', uin: '987654', email: 'kyle@tamu.edu', user_type: 'recipient'})
     CreditPool.create(credits: 100)
   end
 
@@ -41,6 +44,16 @@ RSpec.describe UsersController, type: :controller do
 
     it 'redirects back to receive credits page when unsuceesful' do
       get :do_receive, params: { num_credits: 200 }
+      expect(response).to redirect_to(:user_receive)
+    end
+
+    it 'warns the user if they ask for more credits than the request limit allows' do
+      get :do_receive, params: { num_credits: 11 }
+      expect(flash[:warning]).to match(/Request too large, maximum allowed per request is #{$user_request_limit} credits/)
+    end
+
+    it 'redirects back to receive credits page when unsuceesful' do
+      get :do_receive, params: { num_credits: 11 }
       expect(response).to redirect_to(:user_receive)
     end
 
@@ -81,6 +94,20 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe 'when requesting credits when you have too many already' do
+    before { session[:user_id] = User.find_by(uin: '987654').id }
+    
+    it 'does not allow user to make request if they have more credits than the request limit' do
+      get :do_receive, params: { num_credits: 5 }
+      expect(flash[:warning]).to match(/Must have less than #{$user_request_limit} credits in order to make a request/)
+    end
+
+    it 'redirects back to receive credits page when unsuceesful' do
+      get :do_receive, params: { num_credits: 5 }
+      expect(response).to redirect_to(:user_receive)
+    end
+  end
+
   describe 'account creation' do
     it 'successfully creates an account' do
       User.find_by(uin: '110011').destroy
@@ -103,8 +130,8 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'fails to creates an account due to too many credits as recipient' do
-      post :create, params: { user: { uin: '110011', user_type: 'recipient' }},
-                    session: { email: 'test@tamu.edu' }
+      post :create, params: { user: { uin: '654321', user_type: 'recipient' }},
+                    session: { email: 'todd@tamu.edu' }
       expect(response).to redirect_to '/'
       expect(flash[:notice]).to match(/User has too many credits to create a receipent account/)
     end

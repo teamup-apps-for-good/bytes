@@ -26,7 +26,7 @@ RSpec.configure do |config|
       :uin => '110011',
       :first_name => 'Test',
       :last_name => 'Account',
-      :credits => 50
+      :credits => 6
     }
     stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011').
     to_return(status: 200, body: uin_110011_response.to_json)
@@ -40,6 +40,26 @@ RSpec.configure do |config|
     }
     stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/123456').
     to_return(status: 200, body: uin_123456_response.to_json)
+
+    uin_987654_response = {
+      :email => 'kyle@tamu.edu',
+      :uin => '987654',
+      :first_name => 'Kyle',
+      :last_name => '',
+      :credits => 11
+    }
+    stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/987654').
+    to_return(status: 200, body: uin_987654_response.to_json)
+
+    uin_654321_response = {
+      :email => 'todd@tamu.edu',
+      :uin => '654321',
+      :first_name => 'Todd',
+      :last_name => '',
+      :credits => 50
+    }
+    stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/654321').
+    to_return(status: 200, body: uin_654321_response.to_json)
 
     uin_not_found_response = {
       :error => 'User not found'
