@@ -81,38 +81,48 @@ RSpec.describe UsersController, type: :controller do
   before(:all) do
     User.destroy_all
     CreditPool.destroy_all
-    User.create({ name: 'John', uin: '123456', email: 'j@tamu.edu', credits: 50, user_type: 'donor',
-                  date_joined: '01/01/2022' })
-    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', credits: 100, user_type: 'donor',
-                  date_joined: '01/01/2022' })
-    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', credits: 3, user_type: 'recipient',
-                  date_joined: '01/01/2022' })
+    User.create({ name: 'John', uin: '123456', email: 'j@tamu.edu', user_type: 'donor'})
+    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', user_type: 'donor'})
+    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', user_type: 'recipient'})
     CreditPool.create({ credits: 1 })
   end
 
   describe 'account creation' do
     it 'successfully creates an account' do
-      post :create, params: { user: { uin: 124_578, credits: 2, user_type: 'donor' }, email: 'tim@tamu.edu', name: 'Tim' },
-                    session: { creating: true }
+      post :create, params: { user: { uin: '110011', user_type: 'donor' }},
+                    session: { email: 'test@tamu.edu' }
       expect(response).to redirect_to '/users/profile'
-      expect(flash[:notice]).to match(/Tim's account was successfully created./)
-      User.find_by(uin: 124_578).destroy
+      expect(flash[:notice]).to match(/Test Account's account was successfully created./)
     end
 
     it 'able to view account profile' do
-      get :show, params: { id: 0 }, session: { user_id: User.find_by(uin: 123_456).id }
+      get :show, session: { user_id: User.find_by(uin: '123456').id }
       expect(response).to have_http_status(:success)
     end
 
-    it 'fails to creates an account' do
-      post :create, params: { user: { uin: 124_578, credits: 2, user_type: 'donor' }, email: 'tim@tamu.edu' },
-                    session: { creating: true }
+    it 'fails to creates an account due to incorrect UIN' do
+      post :create, params: { user: { uin: '-1', user_type: 'donor' }},
+                    session: { email: 'test@tamu.edu' }
       expect(response).to redirect_to '/'
       expect(flash[:notice]).to match(/Error has occurred/)
     end
 
+    it 'fails to creates an account due to too many credits as recipient' do
+      post :create, params: { user: { uin: '110011', user_type: 'recipient' }},
+                    session: { email: 'test@tamu.edu' }
+      expect(response).to redirect_to '/'
+      expect(flash[:notice]).to match(/User has too many credits to create a receipent account/)
+    end
+
+    it 'fails to creates an account due to UIN and email mismatch' do
+      post :create, params: { user: { uin: '123456', user_type: 'donor' }},
+                    session: { email: 'test@tamu.edu' }
+      expect(response).to redirect_to '/'
+      expect(flash[:notice]).to match(/Email does not match the UIN/)
+    end
+
     it 'fails to access profile without being logged in' do
-      get :show, params: { id: 0 }, session: { creating: false }
+      get :show, params: { id: 0 }, session: {}
       expect(response).to have_http_status(:redirect)
     end
   end

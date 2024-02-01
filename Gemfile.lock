@@ -113,6 +113,9 @@ GEM
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
+    crack (0.4.6)
+      bigdecimal
+      rexml
     crass (1.0.6)
     cucumber (9.1.1)
       builder (~> 3.2, >= 3.2.4)
@@ -204,6 +207,7 @@ GEM
       sexp_processor (~> 4.8)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hashdiff (1.1.0)
     hashie (5.0.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
@@ -478,6 +482,10 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webmock (3.19.1)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     webrick (1.8.1)
     websocket (1.2.10)
     websocket-driver (0.7.6)
@@ -531,6 +539,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  webmock (~> 3.19)
 
 RUBY VERSION
    ruby 3.2.2p53

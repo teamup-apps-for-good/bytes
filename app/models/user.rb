@@ -2,9 +2,7 @@
 
 # Class that represents a user of the app
 class User < ApplicationRecord
-  validates :uin, :name, :email, :credits, presence: true
-  validates :credits, numericality: { only_integer: true }
-
+  validates :uin, :name, :email, presence: true
   def subtract_credits(amount)
     # do the actual subtraction update in the database
     # puts "before update: #{self.credits}"
