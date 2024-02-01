@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <title>Transactions</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <%= stylesheet_link_tag "transactions" %>
 </head>
 <body>
-
-  <div class="container">
+  <div class="container2">
     <h1>Transactions</h1>
     <p>
       Welcome, <%= User.find(session[:user_id]).name %>.
@@ -17,7 +17,7 @@
     </p>
 
     <table class="table table-striped">
-      <thead>
+      <thead class="thead-dark">
         <tr>
           <th>UIN</th>
           <th>Type</th>
@@ -41,8 +41,8 @@
       </tbody>
     </table>
 
-    <div class="row">
-      <%= link_to 'Back to user', '/users/profile', class: 'btn btn-primary col-xs-2' %>
+    <div class="row btn-back">
+      <%= link_to 'Back to user', '/users/profile', class: 'btn btn-primary col-md-2' %>
     </div>
   </div>
 
