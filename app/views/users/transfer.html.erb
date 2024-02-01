@@ -10,10 +10,10 @@
         <form action="/users/profile/transfer/transfer_donor_credits" method='post'>
             <label for='credit-amount'>Enter a credit amount</label>
             <input id='credit-amount' name="credits"/>
-            <input name="credit-submission" type="submit" value="Send Credits" />
+            <input name="credit-submission" type="submit" class="btn btn-primary" value="Send Credits" />
         </form>
     </div>
     <div class="row">
-        <p><%= link_to "Go back", '/users/profile' %></p>
+        <p><%= link_to "Go back", '/users/profile', class: 'btn btn-secondary'%></p>
     </div>
 </div>
