@@ -1,0 +1,40 @@
+body {
+  background: url('background3.jpg') center center/cover no-repeat fixed;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.container2 {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #007bff;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+table {
+  margin-top: 20px;
+  width: 100%;
+}
+
+th, td {
+  text-align: center;
+  padding: 10px;
+}
+
+thead th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-back {
+  margin-top: 20px;
+}

@@ -1,0 +1,63 @@
+@import 'bootstrap';
+
+.global {
+  padding: 20px;
+  background: url('background2.jpg') center center/cover no-repeat;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+.heading {
+  margin-bottom: 20px;
+}
+
+.heading h1 {
+  color: #007bff;
+}
+
+.main-container {
+  margin-bottom: 20px;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+label {
+  font-weight: bold;
+}
+
+#credit-amount {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.row {
+  text-align: center;
+}
+
+p {
+  margin-bottom: 0;
+}
+
