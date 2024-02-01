@@ -100,3 +100,5 @@ end
 group :production do
   gem 'pg'
 end
+
+gem "webmock", "~> 3.19"
