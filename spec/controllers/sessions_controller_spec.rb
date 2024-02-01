@@ -5,16 +5,7 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
   before(:each) do
     OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-                                                                         provider: 'google_oauth2',
-                                                                         info: {
-                                                                           email: 'j@tamu.edu'
-                                                                         },
-                                                                         credentials: {
-                                                                           token: 'token',
-                                                                           refresh_token: 'refresh token'
-                                                                         }
-                                                                       })
+    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({info: { email: 'j@tamu.edu' }})
     Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
     User.destroy_all
     CreditPool.destroy_all
@@ -32,8 +23,7 @@ RSpec.describe SessionsController, type: :controller do
 
     it 'changes session for already established user' do
       request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
-      User.create({ name: 'John', uin: '123456', email: 'j@tamu.edu', credits: 50, user_type: 'donor',
-                    date_joined: '01/01/2022' })
+      User.create({ name: 'John', uin: '123456', email: 'j@tamu.edu', user_type: 'donor' })
       get :omniauth
       expect(session[:user_id]).to eq(User.find_by(email: 'j@tamu.edu').id)
     end
@@ -41,7 +31,7 @@ RSpec.describe SessionsController, type: :controller do
 
   describe 'When logging out' do
     it 'clears the session' do
-      get :logout, session: { user_id: User.find_by(email: 'todd@tamu.edu').id }
+      get :logout, session: { user_id: User.find_by(uin: '654321').id }
       expect(response).to redirect_to '/'
     end
   end

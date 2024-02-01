@@ -1,19 +1,30 @@
-Given('that I am logged in') do
-  visit('/users')
-end
-
-When('I am on the home page') do
+Given('I am already logged in as an user with the email of {string}') do |email|
   visit root_path
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(
+    :google_oauth2,
+    info: { email: email }
+  )
+  click_on 'Login with Google'
+  
 end
 
-Then('I should be logged out succesfully') do
-  expect(page).to have_content('Login')
+Given('there is an user with the email of {string}, uin of {string}, and {int} credits in the external API') do |email, uin, credit|
+  response = {
+    :credits => credit
+  }
+  stub_request(:get, %{https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}}).
+  to_return(status: 200, body: response.to_json)
 end
 
-When('the user fills in {string} for {string}') do |string, string2|
-  fill_in string2, with: string
+And('I am on the profile page') do
+  visit user_profile_path
 end
 
 When('the user presses {string}') do |string|
-    click_button string
+    click_on string
+end
+
+Then('I should be logged out successfully') do
+  expect(page).to have_current_path(root_path)
 end
