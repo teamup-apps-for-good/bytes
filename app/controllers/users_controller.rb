@@ -90,7 +90,7 @@ class UsersController < ApplicationController
     end
 
     # now, subtract credits from their account
-    response = @user.subtract_credits(num_credits)
+    response = @user.update_credits(-1 * num_credits)
 
     # handles bad update_credit api call 
     if response.code.to_i / 100 == 2
@@ -158,7 +158,7 @@ class UsersController < ApplicationController
       return -1
     end
 
-    response = @user.add_credits(num_credits)
+    response = @user.update_credits(num_credits)
 
     # handles bad response from update_credit api call
     if response.code.to_i / 100 == 2
