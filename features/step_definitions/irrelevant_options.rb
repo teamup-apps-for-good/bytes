@@ -1,6 +1,7 @@
 Given('I am a {string} profile') do |string|
-    user = User.create(name: 'John', uin: '11110000', email: 'john@tamu.edu', credits: '50', user_type: "#{string}",
+    user = User.create(name: 'John', uin: '11110000', email: 'john@tamu.edu', credits: '9', user_type: "#{string}",
                            date_joined: '01/01/2022')
+
     @user = user
     @id = user.id
     @name = user.name

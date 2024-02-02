@@ -5,6 +5,17 @@ Given('that I am logged in an account with {int} credits') do |int|
   @user = User.create(name: 'Sam', uin: '11112222', email: 's@tamu.edu', credits: int, user_type: 'recipient',
                       date_joined: '01/01/2022')
   @user_id = @user.id
+
+  # This stub is for handling the external api call that is made when logging in
+  response = {
+    :credits => @user.credits,
+    :first_name => @user.name,
+    :email => @user.email,
+    :uin => @user.uin
+  }
+  stub_request(:get, %{https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uin}}).
+  to_return(status: 200, body: response.to_json)
+
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(
     :google_oauth2,
