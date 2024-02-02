@@ -22,6 +22,17 @@ Given('I am logged in') do
   
   user = User.create(name: 'John', uin: '3242985', email: 'john@tamu.edu', credits: '50', user_type: 'donor',
                      date_joined: '01/01/2022')
+
+  # This stub is for handling the external api call that is made when logging in
+  response = {
+    :credits => user.credits,
+    :first_name => user.name,
+    :email => user.email,
+    :uin => user.uin
+  }
+  stub_request(:get, %{https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uin}}).
+  to_return(status: 200, body: response.to_json)
+
   @user = user
   @id = user.id
   @name = user.name
