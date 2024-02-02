@@ -18,6 +18,8 @@ Given('I am on the login page') do
 end
 
 Given('I am logged in') do
+
+  
   user = User.create(name: 'John', uin: '3242985', email: 'john@tamu.edu', credits: '50', user_type: 'donor',
                      date_joined: '01/01/2022')
   @user = user
@@ -28,11 +30,22 @@ Given('I am logged in') do
   @user_type = user.user_type
   @uin = user.uin
   OmniAuth.config.test_mode = true
-  OmniAuth.config.add_mock(
-    :google_oauth2,
-    uid: user.id,
-    info: { email: user.email }
-  )
+  #
+  #OmniAuth.config.add_mock(
+  #  :google_oauth2,
+  #  uid: user.id,
+  #  info: { email: user.email }
+  #)
+  stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uin}").
+        with(
+          headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
+          'User-Agent'=>'Ruby'
+          }).
+        to_return(status: 200, body: "", headers: {})
+  
   click_on 'Login with Google'
 end
 
