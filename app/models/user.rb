@@ -29,30 +29,8 @@ class User < ApplicationRecord
     #   puts "response code is #{response.code}"
     # end
 
-    return response
-  end
-
-  def subtract_credits(amount)
-    # puts "before update: #{self.credits}"
-    response = update_credits(-1 * amount)
-
-    # update user credit count on bytes
     get_num_credits()
-    # puts "after update: #{self.credits}"
 
     return response
-    # update({ credits: credits - amount })
-  end
-
-  def add_credits(amount)
-    # puts "before update: #{self.credits}"
-    response = update_credits(amount)
-
-    # update user credit count on bytes
-    get_num_credits()
-    # puts "after update: #{self.credits}"
-
-    return response
-    # update({ credits: credits + amount })
   end
 end
