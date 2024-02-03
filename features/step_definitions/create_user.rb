@@ -8,6 +8,9 @@ Given('there is an user with the email of {string}, uin of {string}, and {int} c
     :email => email,
     :uin => uin
   }
+  @uin = uin
+  @email = email
+  @credit = credit
   stub_request(:get, %{https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}}).
   to_return(status: 200, body: response.to_json)
 end

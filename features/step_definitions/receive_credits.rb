@@ -2,7 +2,7 @@
 
 Given('that I am logged in an account with {int} credits') do |int|
   visit root_path
-  @user = User.create(name: 'Sam', uin: '11112222', email: 's@tamu.edu', credits: int, user_type: 'recipient',
+  @user = User.create(name: 'John', uin: '123456', email: 's@tamu.edu', credits: int, user_type: 'recipient',
                       date_joined: '01/01/2022')
   @user_id = @user.id
 
@@ -18,8 +18,8 @@ Given('that I am logged in an account with {int} credits') do |int|
 
   OmniAuth.config.test_mode = true
   #OmniAuth.config.add_mock(
-  #  :google_oauth2,
-  #  uid: @user.id,
+    #:google_oauth2,
+   # uid: @user.id,
   #  info: { email: @user.email }
   #)
 

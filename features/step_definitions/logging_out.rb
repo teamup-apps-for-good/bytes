@@ -5,6 +5,11 @@ Given('I am already logged in as an user with the email of {string}') do |email|
     :google_oauth2,
     info: { email: email }
   )
+  @user = User.find_by_email(email)
+  if @user == nil
+    User.destroy_all
+    @user = User.create(name: 'newuser', uin: @uin, email: email, credits: @credits, user_type: 'recipient',date_joined: '01/01/2022')
+  end
   click_on 'Login with Google'
   
 end
