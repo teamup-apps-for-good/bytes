@@ -173,7 +173,7 @@ class UsersController < ApplicationController
     Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: num_credits})
 
     # notify user it's successful somehow
-    flash[:notice] = "CONFIRMATION Sucessfully recieved #{num_credits} credits!"
+    flash[:notice] = "CONFIRMATION Successfully recieved #{num_credits} credits!"
     redirect_to :user_receive
   end
 
