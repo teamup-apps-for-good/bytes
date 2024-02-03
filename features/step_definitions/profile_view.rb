@@ -19,7 +19,6 @@ end
 
 Given('I am logged in') do
 
-  
   user = User.create(name: 'John', uin: '3242985', email: 'john@tamu.edu', credits: '50', user_type: 'donor',
                      date_joined: '01/01/2022')
 
