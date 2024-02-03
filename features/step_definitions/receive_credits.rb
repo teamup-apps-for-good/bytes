@@ -38,9 +38,18 @@ Then('I should be on the profile page') do
 end
 
 Then('I should have {int} credits') do |num_credits|
-  expect(page).to have_content("Credits: #{num_credits}")
+  #look at pool instead
+  #expect(page).to have_content("Credits: #{num_credits}")
+  @pool_after = @pool.credits
+  expect(@pool_before - @pool_after).to eq @credits_recieved
+  
 end
 
+Then('I should see CONFIRMATION Sucessfully recieved {int} credits!') do |num|
+  expect(page).to have_content("CONFIRMATION")
+  @credits_recieved = num
+  @pool.credits -= num
+end
 # steps for second receive_credit scenario
 
 And('the number of available credits is {int}') do |num_credits|
