@@ -36,5 +36,29 @@ When('I fill out {string} with {string}') do |string, string2|
 end
 
 When('I press the {string} button') do |string|
+
   click_button string
+
+  
 end
+
+When('I press the {string} button as this user') do |string|
+
+  @pool = CreditPool.find_by(credits: 50)
+  @pool_before = @pool.credits
+  puts @pool_before
+
+  stub_request(:patch, "https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uin}/update_credits/10").
+    with(
+      headers: {
+      'Accept'=>'*/*',
+      'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'User-Agent'=>'Ruby'
+    }).
+  to_return(status: 200, body: "", headers: {})
+
+  click_button string
+
+  
+end
+
