@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe CreditPoolsController, type: :controller do
+RSpec.describe CreditPoolsController do
   before(:all) do
     User.destroy_all
     CreditPool.destroy_all
@@ -25,7 +25,8 @@ RSpec.describe CreditPoolsController, type: :controller do
     )
   end
 
-  # not sure how relevant the code for credit pools is, we're never really doing anything with them directly accessed through routes...
+  # not sure how relevant the code for credit pools is,
+  # we're never really doing anything with them directly accessed through routes...
   # a lot of this code will be cookie-cutter from the testing PA with regards to like create, update, delete, etc
 
   describe 'creates' do
