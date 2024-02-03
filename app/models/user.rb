@@ -6,17 +6,17 @@ require 'net/http'
 class User < ApplicationRecord
   validates :uin, :name, :email, :user_type, presence: true
 
-  def get_num_credits()
-    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{self.uin}")
+  def fetch_num_credits
+    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}")
     res = Net::HTTP.get(uri)
     json_res = JSON.parse(res)
-    update({credits: json_res['credits']})
+    update({ credits: json_res['credits'] })
     # puts "number of credits: #{self.credits}"
-    return json_res['credits']
+    json_res['credits']
   end
 
   def update_credits(amount)
-    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{self.uin}/update_credits/#{amount}")
+    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}/update_credits/#{amount}")
 
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = (uri.scheme == 'https')
@@ -29,8 +29,8 @@ class User < ApplicationRecord
     #   puts "response code is #{response.code}"
     # end
 
-    get_num_credits()
+    fetch_num_credits
 
-    return response
+    response
   end
 end

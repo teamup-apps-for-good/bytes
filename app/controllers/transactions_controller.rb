@@ -8,19 +8,17 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.where(uin: user_uin)
   end
 
-  def new; end
-
   def show
     id = params[:id]
     @transaction = Transaction.find(id)
   end
 
-  def create; end
+  def new; end
 
   def edit; end
+  def create; end
 
   def update; end
 
   def search; end
-
 end

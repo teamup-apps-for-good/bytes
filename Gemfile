@@ -56,11 +56,6 @@ gem 'bootsnap', require: false
 gem 'brakeman'
 gem 'bundler-audit'
 
-group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[mri windows]
-end
-
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
@@ -76,11 +71,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
-end
-
-# from pa3
-group :test do
-  gem 'capybara'
+  # from pa3
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'rails-controller-testing'
@@ -88,8 +79,10 @@ group :test do
   gem 'ZenTest'
 end
 
-# from pa3
 group :development, :test do
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'debug', platforms: %i[mri windows]
+  # from pa3
   gem 'byebug'
   gem 'launchy'
   gem 'rubocop', require: false
@@ -105,4 +98,4 @@ group :production do
   gem 'pg'
 end
 
-gem "webmock", "~> 3.19"
+gem 'webmock', '~> 3.19'

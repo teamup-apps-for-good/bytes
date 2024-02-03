@@ -8,13 +8,13 @@ Given('that I am logged in an account with {int} credits') do |int|
 
   # This stub is for handling the external api call that is made when logging in
   response = {
-    :credits => @user.credits,
-    :first_name => @user.name,
-    :email => @user.email,
-    :uin => @user.uin
+    credits: @user.credits,
+    first_name: @user.name,
+    email: @user.email,
+    uin: @user.uin
   }
-  stub_request(:get, %{https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uin}}).
-  to_return(status: 200, body: response.to_json)
+  stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uin}))
+    .to_return(status: 200, body: response.to_json)
 
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(
@@ -37,16 +37,15 @@ Then('I should be on the profile page') do
   visit '/users/profile'
 end
 
-Then('I should have {int} credits') do |num_credits|
-  #look at pool instead
-  #expect(page).to have_content("Credits: #{num_credits}")
+Then('I should have {int} credits') do |_num_credits|
+  # look at pool instead
+  # expect(page).to have_content("Credits: #{num_credits}")
   @pool_after = @pool.credits
   expect(@pool_before - @pool_after).to eq @credits_recieved
-  
 end
 
 Then('I should see CONFIRMATION Sucessfully recieved {int} credits!') do |num|
-  expect(page).to have_content("CONFIRMATION")
+  expect(page).to have_content('CONFIRMATION')
   @credits_recieved = num
   @pool.credits -= num
 end
@@ -57,7 +56,7 @@ And('the number of available credits is {int}') do |num_credits|
 end
 
 Then('I should be on the receive page') do
-  expect(current_path).to eq('/users/profile/receive')
+  expect(page).to have_current_path('/users/profile/receive', ignore_query: true)
 end
 
 And('I currently have {int} credits') do |int|

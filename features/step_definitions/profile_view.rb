@@ -23,13 +23,13 @@ Given('I am logged in') do
 
   # This stub is for handling the external api call that is made when logging in
   response = {
-    :credits => user.credits,
-    :first_name => user.name,
-    :email => user.email,
-    :uin => user.uin
+    credits: user.credits,
+    first_name: user.name,
+    email: user.email,
+    uin: user.uin
   }
-  stub_request(:get, %{https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uin}}).
-  to_return(status: 200, body: response.to_json)
+  stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uin}))
+    .to_return(status: 200, body: response.to_json)
 
   @user = user
   @id = user.id
@@ -56,5 +56,5 @@ When('I click the {string} link') do |string|
 end
 
 Then('I should be on the Transfer page') do
-  expect(current_path).to eq(user_transfer_path)
+  expect(page).to have_current_path(user_transfer_path, ignore_query: true)
 end

@@ -1,46 +1,44 @@
-
 # frozen_string_literal: true
-$user_request_limit = 10
 
+$user_request_limit = 10
 
 # controller class for Users
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-
   def index
     @users = User.all
   end
-
-  def new; end
 
   def show
     @user = User.find(session[:user_id])
   end
 
-  def create
-    begin
-      new_params = new_user_params
-      user_info = get_user_info new_params['uin']
-      if user_info.key?('error')
-        raise 'Error has occurred'
-      elsif user_info['email'] != session[:email]
-        raise 'Email does not match the UIN'
-      elsif new_params['user_type'] == 'recipient' and user_info['credits'] > 10
-        raise 'User has too many credits to create a receipent account'
-      end
-      @user = User.create!({uin: user_info['uin'], name: user_info['first_name'] + ' ' + user_info['last_name'], email: user_info['email'], user_type: new_params['user_type'], credits: 0})
-      flash[:notice] = %(#{@user.name}'s account was successfully created.)
-      session[:user_id] = @user.id
-      session.delete('email')
-      redirect_to '/users/profile'
-    rescue StandardError => error
-      flash[:notice] = error.message
-      redirect_to '/', alert: 'Login failed.'
-    end
-  end
+  def new; end
 
   def edit; end
+
+  def create
+    new_params = new_user_params
+    user_info = get_user_info new_params['uin']
+    if user_info.key?('error')
+      raise 'Error has occurred'
+    elsif user_info['email'] != session[:email]
+      raise 'Email does not match the UIN'
+    elsif (new_params['user_type'] == 'recipient') && (user_info['credits'] > 10)
+      raise 'User has too many credits to create a receipent account'
+    end
+
+    @user = User.create!({ uin: user_info['uin'], name: "#{user_info['first_name']} #{user_info['last_name']}",
+                           email: user_info['email'], user_type: new_params['user_type'], credits: 0 })
+    flash[:notice] = %(#{@user.name}'s account was successfully created.)
+    session[:user_id] = @user.id
+    session.delete('email')
+    redirect_to '/users/profile'
+  rescue StandardError => e
+    flash[:notice] = e.message
+    redirect_to '/', alert: 'Login failed.'
+  end
 
   def update; end
 
@@ -49,7 +47,7 @@ class UsersController < ApplicationController
   def transfer
     # this is the controller for the actual transfer page
     # all we really want to do is set the global uin and user so we can use it later when we make our transfer call
-    @user = User.find_by_id(session[:user_id])
+    @user = User.find_by(id: session[:user_id])
 
     # puts "params #{params}"
     # puts @user.name
@@ -73,10 +71,10 @@ class UsersController < ApplicationController
     id = session[:user_id]
     # puts "params: #{params}"
     # puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
-    @user = User.find_by_id(id)
+    @user = User.find_by(id:)
 
     # check to see if there are any errors with credit amount
-    if num_credits > @user.get_num_credits
+    if num_credits > @user.fetch_num_credits
       flash[:notice] = 'ERROR Trying to donate more credits than you have!'
       redirect_to :user_transfer
       return
@@ -92,7 +90,7 @@ class UsersController < ApplicationController
     # now, subtract credits from their account
     response = @user.update_credits(-1 * num_credits)
 
-    # handles bad update_credit api call 
+    # handles bad update_credit api call
     if response.code.to_i / 100 == 2
       # puts "Credit update successful"
     else
@@ -126,16 +124,14 @@ class UsersController < ApplicationController
 
   def do_receive
     @user = User.find_by(id: session[:user_id])
-    # NEEDS TO BE FIXED
-    # allows for decimal input for num_credits, i.e. 1.5 -> 1
     num_credits = params[:num_credits].to_i
-    user_credits = @user.get_num_credits
+    user_credits = @user.fetch_num_credits
 
-    # handles invalid number of credits 
+    # handles invalid number of credits
     if num_credits <= 0
       flash[:notice] = 'ERROR Invalid input!'
       redirect_to :user_receive
-      return
+      return -1
     end
 
     if user_credits >= $user_request_limit
@@ -161,16 +157,14 @@ class UsersController < ApplicationController
     response = @user.update_credits(num_credits)
 
     # handles bad response from update_credit api call
-    if response.code.to_i / 100 == 2
-      # puts "Credit update successful"
-    else
+    if response.code.to_i / 100 > 2
       flash[:warning] = "Error updating credits. Status code: #{response.code}"
       redirect_to :user_receive
       return -1
     end
-    
+
     @creditpool.subtract_credits(num_credits)
-    Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: num_credits})
+    Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: num_credits })
 
     # notify user it's successful somehow
     flash[:notice] = "CONFIRMATION Sucessfully recieved #{num_credits} credits!"
@@ -185,6 +179,6 @@ class UsersController < ApplicationController
 
   def get_user_info(uin)
     uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}")
-    response = JSON.parse(Net::HTTP.get(uri))
+    JSON.parse(Net::HTTP.get(uri))
   end
 end

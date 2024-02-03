@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 Given('I am a user with the email of {string}') do |email|
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(
-      :google_oauth2,
-      info: { email: email }
+    :google_oauth2,
+    info: { email: }
   )
 end
 

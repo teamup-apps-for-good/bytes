@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe PagesController, type: :controller do
+RSpec.describe PagesController do
   before(:all) do
     User.destroy_all
     User.create(uin: '1234',
@@ -26,7 +26,7 @@ RSpec.describe PagesController, type: :controller do
     end
 
     it 'while logged in' do
-      get :index, session: {user_id: User.find_by(uin: '1234').id}
+      get :index, session: { user_id: User.find_by(uin: '1234').id }
       expect(response).to redirect_to('/users/profile')
     end
   end
