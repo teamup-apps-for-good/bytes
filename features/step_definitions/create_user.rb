@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Given('a user with the email of {string}, uin of {string}, and {int} credits is in the external API') do |email, uin, credit|
+Given('there is an user with the email of {string}, uin of {string}, and {int} credits in the external API') do |email, uin, credit|
   response = {
     credits: credit,
     first_name: 'First',
