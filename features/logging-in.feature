@@ -17,3 +17,9 @@ Scenario: user logs in with TAMU email
     And I am on the login page
     And I click on the "Login with Google" button
     Then I should be logged in successfully
+
+Scenario: user logs in with non-TAMU email
+    Given I am a user with the email of "j@tam.edu"
+    And I am on the login page
+    And I click on the "Login with Google" button
+    Then I should not be logged in
