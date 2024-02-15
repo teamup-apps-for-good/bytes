@@ -10,6 +10,7 @@ Background: Users in database
     Given the following users exist:
     |   name   |   uin   |    email     |  user_type   |
     |   John   | 123456  |  j@tamu.edu  |    donor     |
+    |   Bob   | 1234567  |  b@example.edu  |    donor     |
 
 Scenario: user logs in with TAMU email
     Given I am a user with the email of "j@tamu.edu"
@@ -17,3 +18,16 @@ Scenario: user logs in with TAMU email
     And I am on the login page
     And I click on the "Login with Google" button
     Then I should be logged in successfully
+
+Scenario: user logs in with edu email
+    Given I am a user with the email of "b@example.edu"
+    Given there is an user with the email of "b@example.edu", uin of "1234567", and 10 credits in the external API
+    And I am on the login page
+    And I click on the "Login with Google" button
+    Then I should be logged in successfully
+
+Scenario: user logs in with non-edu email
+    Given I am a user with the email of "j@gmail.com"
+    And I am on the login page
+    And I click on the "Login with Google" button
+    Then I should not be logged in
