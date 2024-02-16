@@ -171,6 +171,18 @@ class UsersController < ApplicationController
     redirect_to :user_receive
   end
 
+  def update_user_type
+    @user = User.find_by(id: session[:user_id])
+    new_user_type = params[:new_user_type]
+    puts(new_user_type)
+    if (new_user_type != "recipient" and new_user_type != "donor")
+      flash[:warning] = "Error, invalid user type. User type must be 'donor' or 'recipient'"
+      return -1
+    end
+
+    @user.update({ user_type: new_user_type })
+  end
+
   private
 
   def new_user_params
