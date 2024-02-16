@@ -1,0 +1,60 @@
+.navbar {
+    background-color: #BCCA9B;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    font-family: "Protest Riot", sans-serif;
+    font-size: 25px;
+    color: #C26522;
+}
+  
+  .navbar-logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    height: 15vh;
+    width: 1vw;
+  }
+
+  .navbar-logo img {
+    max-width: 100%; /* Ensure the logo image doesn't exceed its container */
+    height: auto; /* Preserve the aspect ratio of the image */
+    object-fit: contain;
+  }
+  
+  .navbar-links {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-link {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .navbar-link a{
+    text-decoration: none;
+  }
+
+  .navbar-link a:link{
+    color: #C26522;
+  }
+
+  .navbar-link a:visited{
+    color: #C26522;
+  }
+
+  .navbar-link a:hover{
+    color: #C26522;
+  }
+
+  .navbar-link a:active{
+    color: #C26522;
+  }
