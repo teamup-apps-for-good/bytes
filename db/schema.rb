@@ -10,11 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_09_031239) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_14_001635) do
   create_table "credit_pools", force: :cascade do |t|
     t.integer "credits"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string "name"
+    t.string "domain"
+    t.string "logo"
   end
 
   create_table "transactions", force: :cascade do |t|
