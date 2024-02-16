@@ -15,8 +15,6 @@ end
 
 Given('I am on the My Transactions page') do
   visit(transactions_path)
-  # current_path = '/transactions'
-  # expect(current_path).to eq(transactions_path)
   expect(page).to have_current_path(transactions_path)
 end
 
