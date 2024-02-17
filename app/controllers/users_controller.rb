@@ -188,8 +188,7 @@ class UsersController < ApplicationController
     end
 
     @user.update({ user_type: new_user_type })
-
-    # notifies user whether type change is successful
+    
     if @user.user_type == new_user_type
       flash[:notice] = "Type successfully updated to #{new_user_type}"
     else
