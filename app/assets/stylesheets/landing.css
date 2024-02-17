@@ -14,7 +14,7 @@
     left: 0; /* Position the semicircle at the left of the container */
     right: 0; /* Position the semicircle at the right of the container */
     margin: auto; /* Center the semicircle horizontally */
-    z-index: -999;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
   }
   
   /* Responsive sizing for the semicircle */
@@ -75,7 +75,7 @@
     color: #F4EDE5;
     background-color: #E3686C;
     border-color: #E3686C;
-    border-radius: 5px
+    border-radius: 5px;
   }
   
   .login-btn:hover {
@@ -93,6 +93,8 @@
   
   .body {
     text-align: center;
+    z-index: 2;
+    position: relative;
   }
   
   h1 {

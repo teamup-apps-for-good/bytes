@@ -1,40 +1,45 @@
-<%= link_to "Logout", logout_path %>
-<h2>Howdy <%= @user.name %>!</h2>
-<div id="user-details">
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
+<%= stylesheet_link_tag "profile" %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
 
-  <p>
-    <strong>Name:</strong>
-    <%= @user.name %>
-  </p>
+<div class="outerDiv">
+  <div id="user-details">
+    <div class="titleDiv">
+      <p class="title">User Profile</p>
+    </div>
 
-  <p>
-    <strong>UIN:</strong>
-    <%= @user.uin %>
-  </p>
+    <div class="charDiv">
+      <p class="char">
+        <strong>Name:</strong>
+        <%= @user.name %>
+      </p>
+    </div>
 
-  <p>
-    <strong>Credits:</strong>
-    <%= @user.fetch_num_credits %>
-  </p>
+    <div class="charDiv">
+      <p class="char">
+        <strong>Email:</strong>
+        <%= @user.email %>
+      </p>
+    </div>
 
-  <p>
-    <strong>Type:</strong>
-    <%= @user.user_type %>
-  </p>
+    <div class="charDiv">
+      <p class="char">
+        <strong>UIN:</strong>
+        <%= @user.uin %>
+      </p>
+    </div>
 
-  <div class="row">
-    <p><%= link_to "Go to Transfer", user_transfer_path if @user.user_type == "donor"%></p>
-  </div>
+    <div class="charDiv">
+      <p class="char">
+        <strong>Credits:</strong>
+        <%= @user.fetch_num_credits %>
+      </p>
+    </div>
 
-  <div class="row">
-    <p><%= link_to "Go to Receive", user_receive_path if @user.user_type == "recipient"%></p>
-  </div>
-
-  <div class="row">
-    <p><%= link_to "Go to Transactions", transactions_path %></p>
+    <div class="charDiv">
+      <p class="char">
+        <strong>Type:</strong>
+        <%= @user.user_type %>
+      </p>
+    </div>
   </div>
 </div>

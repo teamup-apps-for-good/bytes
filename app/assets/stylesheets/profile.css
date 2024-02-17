@@ -1,0 +1,39 @@
+#user-details{
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+}
+
+.title{
+    font-family: "Protest Riot", sans-serif;
+    font-size: 50px;
+    color: #E3686C;
+    text-align: center;
+}
+
+.titleDiv{
+    text-align: center;
+}
+
+.charDiv{
+    text-align: left;
+}
+
+.char{
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 25px;
+    color: black;
+    text-align: left;
+}
+
+.outerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: fit-content;
+}

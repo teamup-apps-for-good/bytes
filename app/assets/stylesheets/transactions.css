@@ -1,40 +1,90 @@
 body {
-  background: url('background3.jpg') center center/cover no-repeat fixed;
-  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #F4EDE5;
 }
 
-.container2 {
-  margin-top: 50px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+.title{
+  font-family: "Protest Riot", sans-serif;
+  font-size: 50px;
+  color: #E3686C;
+  text-align: center;
+  margin-bottom: 5%;
 }
 
-h1 {
-  color: #007bff;
+.char{
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 25px;
+  color: black;
+  text-align: center;
 }
 
-p {
-  font-size: 18px;
-  margin-bottom: 15px;
-}
 
-table {
+.transTable {
   margin-top: 20px;
   width: 100%;
 }
 
 th, td {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 15px;
   text-align: center;
-  padding: 10px;
+  padding: 3%;
 }
 
 thead th {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #E8B1B0;
+  color: black;
+
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 20px;
+  text-align: left;
 }
 
-.btn-back {
-  margin-top: 20px;
+thead th:first-child {
+  border-radius: 5px 0 0 5px;
 }
+
+thead th:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+.actionBtn{
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #E8B1B0;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  font-family: "Quicksand", sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.actionBtn a{
+  text-decoration: none;
+}
+
+.actionBtn:hover{
+  background-color: #E3686C;
+  text-decoration: none;
+  color: black;
+}
+
+.actionBtn:focus{
+  background-color: #E3686C;
+  text-decoration: none;
+  color: black;
+}
+
