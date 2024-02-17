@@ -64,4 +64,35 @@ RSpec.describe SchoolsController do
       expect(assigns[:school]).not_to eq(School.where(name: 'Texas A&M University'))
     end
   end
+
+  describe 'school creation is successful' do
+    it 'redirects to schools path' do
+      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                  date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      get :create, params: { school: { name: 'Community College', domain: 'cc.edu', logo: 'logo.png'}}
+      expect(response).to redirect_to schools_path
+    end
+
+    it 'successfully creates a new movie' do
+      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                  date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      get :create, params: { school: { name: 'Community College', domain: 'cc.edu', logo: 'logo.png'}}
+      expect(flash[:notice]).to match(/Community College was successfully added./)
+      #School.find_by(name: 'Community College').destroy
+    end
+  end
+
+  describe 'destroys' do
+    it 'flashes notice on successful deletion' do
+      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                    date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      school = School.create(name: 'Oklahoma State University',
+                             domain: 'osu.edu',
+                             logo: 'background3.png')
+      expect { delete :destroy, params: { id: school.id } }.to change(School, :count).by(-1)
+    end
+  end
 end
