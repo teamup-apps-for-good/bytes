@@ -38,9 +38,13 @@
     <p><%= link_to "Go to Transactions", transactions_path %></p>
   </div>
 
-  <%# form_tag :user_update_type, method: :post do |form| %>
   <%= form_with url: :user_update_type, method: :post do |form| %>
-    <%= form.hidden_field id="new_user_type", value: "recipient" %>
-    <%= form.submit "Change to Recipient" %>
+    <% if @user.user_type == "donor" %>
+        <%= form.hidden_field id="new_user_type", value: "recipient" %>
+        <%= form.submit "Change to Recipient" %>
+    <% else %>  
+      <%= form.hidden_field id="new_user_type", value: "donor" %>
+      <%= form.submit "Change to Donor" %>
+    <% end %>
   <% end %>
 </div>

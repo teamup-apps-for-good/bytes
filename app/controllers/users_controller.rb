@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       raise 'Error has occurred'
     elsif user_info['email'] != session[:email]
       raise 'Email does not match the UIN'
-    elsif (new_params['user_type'] == 'recipient') && (user_info['credits'] > 10)
+    elsif (new_params['user_type'] == 'recipient') && (user_info['credits'] > $user_request_limit)
       raise 'User has too many credits to create a receipent account'
     end
 
@@ -174,13 +174,25 @@ class UsersController < ApplicationController
   def update_user_type
     @user = User.find_by(id: session[:user_id])
     new_user_type = params[:new_user_type]
-    puts(new_user_type)
-    if (new_user_type != "recipient" and new_user_type != "donor")
+
+    if new_user_type != "recipient" and new_user_type != "donor"
       flash[:warning] = "Error, invalid user type. User type must be 'donor' or 'recipient'"
       return -1
     end
 
+    if new_user_type == "recipient" and @user.credits > $user_request_limit
+      flash[:warning] = "Too many credits to be a recipient"
+      return
+    end
+
     @user.update({ user_type: new_user_type })
+
+    # notifies user whether type change is successful
+    if @user.user_type == new_user_type
+      flash[:notice] = "Type successfully updated to #{new_user_type}"
+    else
+      flash[:warning] = "Error updating user type to #{new_user_type}"
+    end
   end
 
   private
