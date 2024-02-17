@@ -58,3 +58,11 @@ end
 Then('I should be on the Transfer page') do
   expect(page).to have_current_path(user_transfer_path, ignore_query: true)
 end
+
+Then ('I should have a submit button with the text {string}') do |string|
+  expect(find('input[type="submit"]').value).to eq(string)
+end
+
+And ('I should not have a submit button with the text {string}') do |string|
+  expect(find('input[type="submit"]').value).not_to eq(string)
+end
