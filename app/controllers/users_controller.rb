@@ -177,11 +177,13 @@ class UsersController < ApplicationController
 
     if new_user_type != "recipient" and new_user_type != "donor"
       flash[:warning] = "Error, invalid user type. User type must be 'donor' or 'recipient'"
+      redirect_to :user_profile
       return -1
     end
 
     if new_user_type == "recipient" and @user.credits > $user_request_limit
       flash[:warning] = "Too many credits to be a recipient"
+      redirect_to :user_profile
       return
     end
 
@@ -193,6 +195,7 @@ class UsersController < ApplicationController
     else
       flash[:warning] = "Error updating user type to #{new_user_type}"
     end
+    redirect_to :user_profile
   end
 
   private

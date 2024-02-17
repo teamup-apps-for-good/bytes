@@ -38,13 +38,13 @@
     <p><%= link_to "Go to Transactions", transactions_path %></p>
   </div>
 
-  <%= form_with url: :user_update_type, method: :post do |form| %>
+  <%= form_with url: :user_update_type, method: :post, data: { turbo_action: "replace", turbo_frame: "user-details" } do |form| %>
     <% if @user.user_type == "donor" %>
-        <%= form.hidden_field id="new_user_type", value: "recipient" %>
-        <%= form.submit "Change to Recipient" %>
+        <%= form.hidden_field :new_user_type, value: "recipient" %>
+        <%= form.submit "Change to Recipient", data: { turbo_confirm: "Are you sure you want to change account types?" } %>
     <% else %>  
-      <%= form.hidden_field id="new_user_type", value: "donor" %>
-      <%= form.submit "Change to Donor" %>
+      <%= form.hidden_field :new_user_type, value: "donor" %>
+      <%= form.submit "Change to Donor", data: { turbo_confirm: "Are you sure you want to change account types?" }  %>
     <% end %>
   <% end %>
 </div>
