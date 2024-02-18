@@ -13,11 +13,11 @@ RSpec.describe UsersController do
     User.create({ name: 'Todd', uid: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
     User.create({ name: 'Mark', uid: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
     User.create({ name: 'Kyle', uid: '987654', email: 'kyle@tamu.edu', user_type: 'recipient' })
-    CreditPool.create(credits: 100)
+    CreditPool.create({ email_suffix: 'tamu.edu', credits: 100 })
   end
 
   let!(:user) { User.find_by(uid: '110011') }
-  let!(:creditpool) { CreditPool.all[0] }
+  let!(:creditpool) { CreditPool.find_by(email_suffix: user.email.partition('@').last) }
 
   describe 'when visiting the receive page' do
     before { session[:user_id] = user.id }
@@ -29,7 +29,7 @@ RSpec.describe UsersController do
 
     it 'correctly loads the credit pool' do
       get :receive, params: { id: user.id }
-      expect(assigns(:creditpool)).to eq(CreditPool.all[0])
+      expect(assigns(:creditpool)).to eq(CreditPool.find_by(email_suffix: user.email.partition('@').last))
     end
   end
 
