@@ -176,7 +176,7 @@ class UsersController < ApplicationController
       return -1
     end
 
-    if new_user_type == "recipient" and @user.credits > $user_request_limit
+    if new_user_type == "recipient" and @user.fetch_num_credits > $user_request_limit
       flash[:warning] = "Too many credits to be a recipient"
       redirect_to :user_profile
       return
