@@ -9,16 +9,21 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-users = [{ name: 'John', uin: '412334', email: 'j@tamu.edu', credits: 50, user_type: 'donor', date_joined: '01/01/2022' },
-         { name: 'Todd', uin: '324567', email: 't@tamu.edu', credits: 10, user_type: 'recipient',
-           date_joined: '01/01/2022' },
-         { name: 'Steve', uin: '12321', email: 'v@tamu.edu', credits: 10, user_type: 'recipient',
-           date_joined: '01/01/2022' }]
+# users = [{ name: 'John', uid: '412334', email: 'j@tamu.edu', credits: 50, user_type: 'donor', date_joined: '01/01/2022' },
+#          { name: 'Todd', uid: '324567', email: 't@tamu.edu', credits: 10, user_type: 'recipient',
+#            date_joined: '01/01/2022' },
+#          { name: 'Steve', uid: '12321', email: 'v@tamu.edu', credits: 10, user_type: 'recipient',
+#            date_joined: '01/01/2022' }]
+users = []
 User.create(users)
 
-transactions = [{ uin: '254007932', transaction_type: 'donated', time: '2024-01-09T00:52:48', amount: 3 },
-                { uin: '214003865', transaction_type: 'donated', time: '2023-11-19T00:52:48', amount: 1 },
-                { uin: '284007821', transaction_type: 'recieved', time: '2024-01-01T00:52:48', amount: 2 },
-                { uin: '231006398', transaction_type: 'donated', time: '2024-01-01T00:52:48', amount: 2 }]
+# transactions = [{ uid: '254007932', transaction_type: 'donated', time: '2024-01-09T00:52:48', amount: 3 },
+#                 { uid: '214003865', transaction_type: 'donated', time: '2023-11-19T00:52:48', amount: 1 },
+#                 { uid: '284007821', transaction_type: 'recieved', time: '2024-01-01T00:52:48', amount: 2 },
+#                 { uid: '231006398', transaction_type: 'donated', time: '2024-01-01T00:52:48', amount: 2 }]
+transactions = []
 Transaction.create(transactions)
-CreditPool.create({ credits: 0 })
+
+credit_pools = [{ school_name: 'TAMU', email_suffix: 'tamu.edu', id_name: 'UIN', credits: 0, logo_url: 'https://www.tamu.edu/_files/images/logos/primaryTAM.png'},
+                { school_name: 'UT Austin', email_suffix: 'utexas.edu', id_name: 'EID', credits: 0, logo_url: 'https://president.utexas.edu/sites/default/files/twitter_pres_emblem.png'}]
+CreditPool.create(credit_pools)
