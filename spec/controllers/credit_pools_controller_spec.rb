@@ -26,14 +26,15 @@ RSpec.describe CreditPoolsController do
   describe 'creates' do
     it 'credit pool normal' do
       session[:user_id] = @user.id
-      post :create, params: { credit_pool: { credits: 1 } }
+      post :create, params: { credit_pools: { school_name: 'TAMU', credits: 1 } }
       expect(response).to have_http_status(:redirect)
-      CreditPool.find_by(credits: 1).destroy
+      expect(flash[:notice]).to match(/TAMU's credit pool was successfully created./)
     end
 
     it 'credit pool bad' do
       session[:user_id] = @user.id
-      post :create, params: { credit_pool: { test: 1 } }
+      post :create, params: { credit_pools: { test: 1 } }
+      expect(flash[:warning]).to match(/Credit Pool Creation Failed/)
     end
   end
 
@@ -59,6 +60,12 @@ RSpec.describe CreditPoolsController do
       pool = CreditPool.find_by(school_name: 'TAMU')
       session[:user_id] = @user.id
       patch :update, params: { id: pool.id, credit_pools: { credits: nil } }
+    end
+
+    it 'able to go to the edit page' do
+      pool = CreditPool.find_by(school_name: 'TAMU')
+      get :edit, params: { id: CreditPool.find_by(school_name: 'TAMU').id }, session: {user_id: User.find_by(uid: 123456).id}
+      expect(response).to have_http_status(:success)
     end
   end
 

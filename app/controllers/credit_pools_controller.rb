@@ -37,7 +37,7 @@ class CreditPoolsController < ApplicationController
     #   end
     # end
   rescue StandardError => e
-    flash[:notice] = e.message
+    flash[:warning] = "Credit Pool Creation Failed"
     redirect_to '/', alert: 'Login failed.'
   end
 
