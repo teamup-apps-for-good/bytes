@@ -14,7 +14,6 @@ class CreditPoolsController < ApplicationController
 
   # GET /credit_pools/new
   def new
-    @credit_pool = CreditPool.new
   end
 
   # GET /credit_pools/1/edit
