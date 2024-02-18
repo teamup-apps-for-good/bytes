@@ -22,7 +22,7 @@ RSpec.configure do |config|
   config.before do
     uin_110011_response = {
       email: 'test@tamu.edu',
-      uin: '110011',
+      uid: '110011',
       first_name: 'Test',
       last_name: 'Account',
       credits: 6
@@ -32,7 +32,7 @@ RSpec.configure do |config|
 
     uin_123456_response = {
       email: 'j@tamu.edu',
-      uin: '123456',
+      uid: '123456',
       first_name: 'John',
       last_name: '',
       credits: 0
@@ -42,7 +42,7 @@ RSpec.configure do |config|
 
     uin_987654_response = {
       email: 'kyle@tamu.edu',
-      uin: '987654',
+      uid: '987654',
       first_name: 'Kyle',
       last_name: '',
       credits: 11
@@ -52,7 +52,7 @@ RSpec.configure do |config|
 
     uin_654321_response = {
       email: 'todd@tamu.edu',
-      uin: '654321',
+      uid: '654321',
       first_name: 'Todd',
       last_name: '',
       credits: 50

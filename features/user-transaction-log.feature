@@ -7,7 +7,7 @@ Feature: User Transaction Log
 Background: Transactions in database
 
   Given the following transactions exist:
-  |    uin    | transaction_type |         time         |   amount   |
+  |    uid    | transaction_type |         time         |   amount   |
   | 254007932 |    donated       | 2024-01-09T00:52:48  |      3     |
   | 214003865 |    donated       | 2023-11-19T00:52:48  |      1     |
   | 284007821 |    received      | 2024-01-01T00:52:48  |      2     |
