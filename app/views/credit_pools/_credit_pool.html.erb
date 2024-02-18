@@ -23,7 +23,7 @@
         <img src="<%= credit_pool.logo_url %>" style="max-width:600px;width:100%">
       </div>
       <div style="margin-top: 5px">
-        <%= button_to "Edit Credit Pool", edit_credit_pool_path(id: credit_pool.id), class: 'btn btn-primary' %>
+        <%= button_to "Edit Credit Pool", edit_credit_pool_path(id: credit_pool.id), method: :get,  class: 'btn btn-primary' %>
         <%= button_to "Destory Credit Pool", credit_pool, method: :delete, class: 'btn btn-danger' %>
       </div>
     </div>

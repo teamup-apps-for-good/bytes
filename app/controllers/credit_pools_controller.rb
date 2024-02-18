@@ -17,7 +17,9 @@ class CreditPoolsController < ApplicationController
   end
 
   # GET /credit_pools/1/edit
-  def edit; end
+  def edit
+    @credit_pool = CreditPool.find(params[:id])
+  end
 
   # POST /credit_pools or /credit_pools.json
   def create
