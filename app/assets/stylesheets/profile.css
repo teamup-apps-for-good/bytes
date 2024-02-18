@@ -14,6 +14,7 @@
 
 .titleDiv{
     text-align: center;
+    margin-top: 0;
 }
 
 .charDiv{
@@ -28,12 +29,84 @@
     font-size: 25px;
     color: black;
     text-align: left;
+    width: fit-content;
 }
 
 .outerDiv {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     text-align: center;
     height: fit-content;
 }
+
+.outerDetails {
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+  }
+
+  .back-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #E8B1B0;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-family: "Quicksand", sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-weight: 800;
+  }
+  
+  .back-button a{
+    text-decoration: none;
+  }
+  
+  .back-button:hover{
+    background-color: #E3686C;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .back-button:focus{
+    background-color: #E3686C;
+    text-decoration: none;
+    color: black;
+  }
+
+  .outerBack{
+    width: 100%;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+  }
+  
+
+@media screen and (max-width: 768px) {
+    .title {
+      font-size: 40px; /* Adjust font size for smaller screens */
+    }
+    
+    .char {
+      font-size: 20px; /* Adjust font size for smaller screens */
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .title {
+      font-size: 35px; /* Adjust font size for even smaller screens */
+    }
+    
+    .char {
+      font-size: 15px; /* Adjust font size for even smaller screens */
+    }
+  }

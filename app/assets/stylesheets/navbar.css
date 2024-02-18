@@ -62,3 +62,15 @@
   .navbar-link a:active{
     color: #C26522;
   }
+
+  @media screen and (max-width: 768px) {
+    .navbar {
+      font-size: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .navbar {
+      font-size: 15px;
+    }
+  }

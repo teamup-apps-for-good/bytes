@@ -28,7 +28,7 @@
     display: flex; /* Use flexbox to create a row layout */
     justify-content: center; /* Center the content horizontally within the row */
     align-items: center; /* Center the content vertically within the row */
-    margin-top: 25%;
+    margin-top: 17%;
   }
 
   .logo-col {
@@ -68,27 +68,38 @@
     max-width: 800px;
     margin: 50px auto;
   }
-  
-  .login-btn {
-    font-family: "Protest Riot", sans-serif;
-    font-size: 20px;
-    color: #F4EDE5;
-    background-color: #E3686C;
-    border-color: #E3686C;
-    border-radius: 5px;
-  }
-  
-  .login-btn:hover {
-    background-color: #C26522;
-    border-color: #C26522;
-    color: #F4EDE5;
-  }
 
-  .login-btn:focus {
-    background-color: #C26522;
-    border-color: #C26522;
-    color: #F4EDE5;
-    outline: none;
+  .login-btn{
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #E3686C;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-family: "Quicksand", sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-weight: 800;
+  }
+  
+  .login-btn a{
+    text-decoration: none;
+  }
+  
+  .login-btn:hover{
+    background-color: #E8B1B0;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .login-btn:focus{
+    background-color: #E8B1B0;
+    text-decoration: none;
+    color: black;
   }
   
   .body {
@@ -138,3 +149,14 @@
     margin-bottom: 30px;
   }
   
+  @media screen and (max-width: 768px) {
+    .title {
+      font-size: 40px;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .title {
+      font-size: 30px;
+    }
+  }
