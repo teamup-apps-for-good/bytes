@@ -11,7 +11,7 @@
   <div class="outerDiv">
     <p class="title">Transactions</p>
     <p class="char">
-      Viewing transactions for UIN: <%= User.find(session[:user_id]).uin %>
+      Viewing transactions for UIN: <%= User.find(session[:user_id]).uid %>
     </p>
 
     <table class="transTable">
@@ -27,7 +27,7 @@
       <tbody>
         <% @transactions.each do |transaction| %>
           <tr>
-            <td><%= transaction.uin %></td>
+            <td><%= transaction.uid %></td>
             <td><%= transaction.transaction_type %></td>
             <td><%= transaction.time %></td>
             <td><%= transaction.amount %></td>

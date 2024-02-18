@@ -5,8 +5,8 @@ class TransactionsController < ApplicationController
   def index
     @user = User.find(session[:user_id])
     # @transactions = Transaction.all
-    user_uin = User.find(session[:user_id]).uin
-    @transactions = Transaction.where(uin: user_uin)
+    user_uin = User.find(session[:user_id]).uid
+    @transactions = Transaction.where(uid: user_uin)
   end
 
   def show

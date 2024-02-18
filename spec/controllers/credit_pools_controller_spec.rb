@@ -8,7 +8,7 @@ RSpec.describe CreditPoolsController do
     CreditPool.destroy_all
     CreditPool.create({ credits: 1 })
 
-    user = User.create(name: 'John', uin: '123456', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+    user = User.create(name: 'John', uid: '123456', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                        date_joined: '01/01/2022')
     @user = user
     @id = user.id
@@ -16,7 +16,7 @@ RSpec.describe CreditPoolsController do
     @email = user.email
     @credits = user.credits
     @user_type = user.user_type
-    @uin = user.uin
+    @uid = user.uid
     OmniAuth.config.test_mode = true
     OmniAuth.config.add_mock(
       :google_oauth2,

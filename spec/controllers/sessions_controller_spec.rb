@@ -9,8 +9,8 @@ RSpec.describe SessionsController do
     Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
     User.destroy_all
     CreditPool.destroy_all
-    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
-    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
+    User.create({ name: 'Todd', uid: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
+    User.create({ name: 'Mark', uid: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
     CreditPool.create({ credits: 1 })
   end
 
@@ -23,7 +23,7 @@ RSpec.describe SessionsController do
 
     it 'changes session for already established user' do
       request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
-      User.create({ name: 'John', uin: '123456', email: 'j@tamu.edu', user_type: 'donor' })
+      User.create({ name: 'John', uid: '123456', email: 'j@tamu.edu', user_type: 'donor' })
       get :omniauth
       expect(session[:user_id]).to eq(User.find_by(email: 'j@tamu.edu').id)
     end
@@ -31,7 +31,7 @@ RSpec.describe SessionsController do
 
   describe 'When logging out' do
     it 'clears the session' do
-      get :logout, session: { user_id: User.find_by(uin: '654321').id }
+      get :logout, session: { user_id: User.find_by(uid: '654321').id }
       expect(response).to redirect_to '/'
     end
   end

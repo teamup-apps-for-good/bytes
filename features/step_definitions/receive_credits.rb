@@ -2,7 +2,7 @@
 
 Given('that I am logged in an account with {int} credits') do |int|
   visit root_path
-  @user = User.create(name: 'Sam', uin: '11112222', email: 's@tamu.edu', credits: int, user_type: 'recipient',
+  @user = User.create(name: 'Sam', uid: '11112222', email: 's@tamu.edu', credits: int, user_type: 'recipient',
                       date_joined: '01/01/2022')
   @user_id = @user.id
 
@@ -11,9 +11,9 @@ Given('that I am logged in an account with {int} credits') do |int|
     credits: @user.credits,
     first_name: @user.name,
     email: @user.email,
-    uin: @user.uin
+    uid: @user.uid
   }
-  stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uin}))
+  stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uid}))
     .to_return(status: 200, body: response.to_json)
 
   OmniAuth.config.test_mode = true
