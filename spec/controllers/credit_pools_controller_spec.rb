@@ -3,20 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe CreditPoolsController do
-  before(:all) do
+  before(:each) do
     User.destroy_all
     CreditPool.destroy_all
-    CreditPool.create({ credits: 1 })
+    CreditPool.create({ school_name: 'TAMU', email_suffix: 'tamu.edu', id_name: 'UIN', credits: 1, logo_url: 'https://www.tamu.edu/_files/images/logos/primaryTAM.png'})
 
     user = User.create(name: 'John', uid: '123456', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                        date_joined: '01/01/2022')
     @user = user
-    @id = user.id
-    @name = user.name
-    @email = user.email
-    @credits = user.credits
-    @user_type = user.user_type
-    @uid = user.uid
     OmniAuth.config.test_mode = true
     OmniAuth.config.add_mock(
       :google_oauth2,
@@ -38,7 +32,6 @@ RSpec.describe CreditPoolsController do
     end
 
     it 'credit pool bad' do
-      CreditPool.create({ credits: 1 })
       session[:user_id] = @user.id
       post :create, params: { credit_pool: { test: 1 } }
     end
@@ -46,7 +39,7 @@ RSpec.describe CreditPoolsController do
 
   describe 'destroys' do
     it 'destroys normally' do
-      pool = CreditPool.create({ credits: 1 })
+      pool = CreditPool.find_by(school_name: 'TAMU')
       session[:user_id] = @user.id
       delete :destroy, params: { id: pool.id }
       expect(response).to have_http_status(:redirect)
@@ -55,17 +48,17 @@ RSpec.describe CreditPoolsController do
 
   describe 'updates' do
     it 'graceful' do
-      pool = CreditPool.create({ credits: 1 })
+      pool = CreditPool.find_by(school_name: 'TAMU')
       session[:user_id] = @user.id
-      patch :update, params: { id: pool.id, credit_pool: { credits: 2 } }
+      patch :update, params: { id: pool.id, credit_pools: { credits: 2 } }
 
       expect(response).to have_http_status(:redirect)
     end
 
     it 'not graceful' do
-      pool = CreditPool.create({ credits: 1 })
+      pool = CreditPool.find_by(school_name: 'TAMU')
       session[:user_id] = @user.id
-      patch :update, params: { id: pool.id, credit_pool: { credits: nil } }
+      patch :update, params: { id: pool.id, credit_pools: { credits: nil } }
     end
   end
 
