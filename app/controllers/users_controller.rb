@@ -29,7 +29,8 @@ class UsersController < ApplicationController
       raise 'User has too many credits to create a receipent account'
     end
 
-    @user = User.create!({ uid: user_info['uid'], name: "#{user_info['first_name']} #{user_info['last_name']}",
+    # neeeds to change this after updating the external api, just the uin part
+    @user = User.create!({ uid: user_info['uin'], name: "#{user_info['first_name']} #{user_info['last_name']}",
                            email: user_info['email'], user_type: new_params['user_type'], credits: 0 })
     flash[:notice] = %(#{@user.name}'s account was successfully created.)
     session[:user_id] = @user.id
@@ -51,10 +52,7 @@ class UsersController < ApplicationController
 
     # puts "params #{params}"
     # puts @user.name
-
-    raise StandardError, "There are multiple pools... there shouldn't be" if CreditPool.all.length > 1
-
-    @creditpool = CreditPool.all[0]
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
     # puts "credit pool: #{@creditpool}"
   end
 
@@ -103,9 +101,8 @@ class UsersController < ApplicationController
     Transaction.create({ uid: @user.uid, transaction_type: 'donor', time: '', amount: num_credits })
 
     # send the number of transfered credits to the pool TODO: DRY above in page_load (session maybe?)
-    raise StandardError, "There are multiple pools... there shouldn't be" if CreditPool.all.length > 1
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
 
-    @creditpool = CreditPool.all[0]
     @creditpool.add_credits(num_credits)
 
     # notify user it's successful somehow
@@ -117,9 +114,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: session[:user_id])
     @uid = @user.uid
 
-    raise StandardError, "There are multiple pools... there shouldn't be" if CreditPool.all.length > 1
-
-    @creditpool = CreditPool.all[0]
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
   end
 
   def do_receive

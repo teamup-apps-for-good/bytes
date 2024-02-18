@@ -10,8 +10,6 @@ class User < ApplicationRecord
     uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uid}")
     res = Net::HTTP.get(uri)
     json_res = JSON.parse(res)
-    update({ credits: json_res['credits'] })
-    # puts "number of credits: #{self.credits}"
     json_res['credits']
   end
 
