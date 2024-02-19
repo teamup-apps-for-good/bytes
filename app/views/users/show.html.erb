@@ -1,50 +1,49 @@
-<%= link_to "Logout", logout_path %>
-<h2>Howdy <%= @user.name %>!</h2>
-<div id="user-details">
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
+<%= stylesheet_link_tag "profile" %>
+<div class='container1'>
+  <h2>Howdy <%= @user.name %>!</h2>
+  <div id="user-details">
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
 
-  <p>
-    <strong>Name:</strong>
-    <%= @user.name %>
-  </p>
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
 
-  <p>
-    <strong>UIN:</strong>
-    <%= @user.uin %>
-  </p>
+    <p>
+      <strong>UIN:</strong>
+      <%= @user.uin %>
+    </p>
 
-  <p>
-    <strong>Credits:</strong>
-    <%= @user.fetch_num_credits %>
-  </p>
+    <p>
+      <strong>Credits:</strong>
+      <%= @user.fetch_num_credits %>
+    </p>
 
-  <p>
-    <strong>Type:</strong>
-    <%= @user.user_type %>
-  </p>
+    <p>
+      <strong>Type:</strong>
+      <%= @user.user_type %>
+    </p>
 
-  <div class="row">
-    <p><%= link_to "Go to Transfer", user_transfer_path if @user.user_type == "donor"%></p>
-  </div>
+    <p><%= link_to "Go to Transfer", user_transfer_path, class: 'btn btn-primary' if @user.user_type == "donor" %></p>
 
-  <div class="row">
-    <p><%= link_to "Go to Receive", user_receive_path if @user.user_type == "recipient"%></p>
-  </div>
+    <p><%= link_to "Go to Receive", user_receive_path, class: 'btn btn-primary' if @user.user_type == "recipient"%></p>
 
-  <div class="row">
-    <p><%= link_to "Go to Transactions", transactions_path %></p>
-  </div>
+    <p><%= link_to "Go to Transactions", transactions_path, class: 'btn btn-primary' %></p>
 
-  <%= form_with url: :user_update_type, method: :post, data: { turbo_action: "replace", turbo_frame: "user-details" } do |form| %>
-    <% if @user.user_type == "donor" %>
-        <%= form.hidden_field :new_user_type, value: "recipient" %>
-        <%= form.submit "Change to Recipient", data: { turbo_confirm: "Are you sure you want to change account types?" } %>
-    <% else %>  
-      <%= form.hidden_field :new_user_type, value: "donor" %>
-      <%= form.submit "Change to Donor", data: { turbo_confirm: "Are you sure you want to change account types?" }  %>
+
+    <%= form_with url: :user_update_type, method: :post, data: { turbo_action: "replace", turbo_frame: "user-details" } do |form| %>
+      <% if @user.user_type == "donor" %>
+          <%= form.hidden_field :new_user_type, value: "recipient" %>
+          <%= form.submit "Change to Recipient", data: { turbo_confirm: "Are you sure you want to change account types?" }, class: 'btn btn-primary' %>
+      <% else %>  
+        <%= form.hidden_field :new_user_type, value: "donor" %>
+        <%= form.submit "Change to Donor", data: { turbo_confirm: "Are you sure you want to change account types?" }, class: 'btn btn-primary'  %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+  <br>
+  <%= link_to "Logout", logout_path, class: 'btn btn-secondary' %>
 </div>

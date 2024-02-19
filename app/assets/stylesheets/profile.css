@@ -1,0 +1,25 @@
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    background-color: rgb(246, 246, 246);
+}
+
+.container1 {
+    background-color: white;
+    padding: 40px 20px 50px 40px;
+    width: 80vw;
+    margin-top: 10vh;
+    border-radius: 2vw
+}
+
+h2 {
+    padding-bottom: 5px;
+    border-bottom: 1px solid gray;
+    color: #007bff;
+    font-size: 32px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    width: 180px;
+}
