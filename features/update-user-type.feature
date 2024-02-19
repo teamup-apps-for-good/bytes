@@ -13,8 +13,8 @@ Background:
         |   Jim    | 124124  |  ji@tamu.edu |    donor     |
 
         Given the following credit pools exist:
-        |   credits   |
-        |   15   |
+        |   credits   |   email_suffix   |   id_name   |   school_name   |
+        |      15     |     tamu.edu     |     UIN     |      TAMU       |
 
 Scenario: donor student should see a "Change to Recipient" button on their profile page
     Given there is an user with the email of "j@tamu.edu", uid of "123456", and 5 credits in the external API

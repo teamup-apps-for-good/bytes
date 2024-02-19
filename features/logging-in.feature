@@ -8,9 +8,14 @@ Feature: logging in
 Background: Users in database
 
     Given the following users exist:
-    |   name   |   uid   |    email     |  user_type   |
-    |   John   | 123456  |  j@tamu.edu  |    donor     |
-    |   Bob   | 1234567  |  b@example.edu  |    donor     |
+    |   name   |   uid   |     email     |  user_type   |
+    |   John   | 123456  |   j@tamu.edu  |    donor     |
+    |   Bob    | 1234567 | b@example.edu |    donor     |
+    
+    Given the following credit pools exist:
+    |   credits   |   email_suffix   |   id_name   |   school_name   |
+    |      0      |     tamu.edu     |     UIN     |      TAMU       |
+    |      0      |    exmaple.edu   |     EXP     |      EXP        |
 
 Scenario: user logs in with TAMU email
     Given I am a user with the email of "j@tamu.edu"
