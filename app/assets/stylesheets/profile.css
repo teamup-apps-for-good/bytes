@@ -89,6 +89,39 @@
     justify-content: left;
     text-align: left;
   }
+
+  .actionBtn{
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #E8B1B0;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-family: "Quicksand", sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    margin-top: 5%;
+  }
+  
+  .actionBtn a{
+    text-decoration: none;
+  }
+  
+  .actionBtn:hover{
+    background-color: #E3686C;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .actionBtn:focus{
+    background-color: #E3686C;
+    text-decoration: none;
+    color: black;
+  }
   
 
 @media screen and (max-width: 768px) {
