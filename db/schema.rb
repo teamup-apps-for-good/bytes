@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_18_035420) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_19_092702) do
   create_table "credit_pools", force: :cascade do |t|
     t.integer "credits"
     t.datetime "created_at", null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_035420) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "credit_pool_id"
     t.index ["id"], name: "index_transactions_on_id", unique: true
   end
 

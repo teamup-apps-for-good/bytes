@@ -1,31 +1,15 @@
-<div class="accordion-item" id="<%= dom_id credit_pool %>">
-  <h2 class="accordion-header" id="<%= credit_pool.school_name + 'Accordion' %>">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= credit_pool.school_name.split(/ /).join('_') %>" aria-expanded="false" aria-controls="<%= credit_pool.school_name.split(/ /).join('_') %>"> 
-      <%= credit_pool.school_name %>
-    </button>
-  </h2>
-  <div id="<%= credit_pool.school_name.split(/ /).join('_') %>" class="accordion-collapse collapse" aria-labelledby="<%= credit_pool.school_name + 'Accordion' %>" data-bs-parent="#credit_pools">
-    <div class="accordion-body">
-      <p>
-        <strong>Credits:</strong>
-        <%= credit_pool.credits %>
-      </p>
-      <p>
-        <strong>Email Suffix:</strong>
-        <%= credit_pool.email_suffix %>
-      </p>
-      <p>
-        <strong>ID Alias:</strong>
-        <%= credit_pool.id_name %>
-      </p>
-      <p><strong>Logo:</strong></p>
-      <div>
-        <img src="<%= credit_pool.logo_url %>" style="max-width:600px;width:100%">
-      </div>
-      <div style="margin-top: 5px">
-        <%= button_to "Edit Credit Pool", edit_credit_pool_path(id: credit_pool.id), method: :get,  class: 'btn btn-primary' %>
-        <%= button_to "Destory Credit Pool", credit_pool, method: :delete, class: 'btn btn-danger' %>
-      </div>
+<div class="card text-white bg-dark m-2 p-0" style="width: 18rem; height: 30rem" id="<%= dom_id credit_pool %>">
+  <div  class="card-body">
+    <h5 class="card-title"><%= credit_pool.school_name %></h5>
+    <p class="card-text">
+      <strong>Credits:</strong>
+      <%= credit_pool.credits %>
+    </p>
+    <div class="mb-1">
+      <%= link_to "Details", credit_pool_path(credit_pool), class: 'btn btn-outline-light mb-1' %>
+      <%# <%= button_to "Edit Credit Pool", edit_credit_pool_path(id: credit_pool.id), method: :get, class: 'btn btn-outline-light mb-1' %>
+      <%# <%= button_to "Destory Credit Pool", credit_pool, method: :delete, class: 'btn btn-outline-danger mb-1' %>
     </div>
   </div>
+  <img class="card-img-bottom" src="<%= credit_pool.logo_url %>">
 </div>

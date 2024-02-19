@@ -97,11 +97,11 @@ class UsersController < ApplicationController
       return -1
     end
 
-    # create a transaction object
-    Transaction.create({ uid: @user.uid, transaction_type: 'donor', time: '', amount: num_credits })
-
     # send the number of transfered credits to the pool TODO: DRY above in page_load (session maybe?)
     @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+    
+    # create a transaction object
+    Transaction.create({ uid: @user.uid, transaction_type: 'donated', amount: num_credits, credit_pool_id: @creditpool.id })
 
     @creditpool.add_credits(num_credits)
 
@@ -135,7 +135,7 @@ class UsersController < ApplicationController
       return -1
     end
 
-    @creditpool = CreditPool.all[0]
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
     # handles there not being enough credits for the request
     if num_credits > @creditpool.credits
       flash[:warning] = "Not enough credits available, only #{@creditpool.credits} credits currently in pool"
@@ -159,7 +159,7 @@ class UsersController < ApplicationController
     end
 
     @creditpool.subtract_credits(num_credits)
-    Transaction.create({ uid: @user.uid, transaction_type: 'received', time: '', amount: num_credits })
+    Transaction.create({ uid: @user.uid, transaction_type: 'received', amount: num_credits, credit_pool_id: @creditpool.id })
 
     # notify user it's successful somehow
     flash[:notice] = "CONFIRMATION Sucessfully recieved #{num_credits} credits!"

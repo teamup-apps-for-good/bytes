@@ -7,10 +7,15 @@ class CreditPoolsController < ApplicationController
   # GET /credit_pools or /credit_pools.json
   def index
     @credit_pools = CreditPool.all
+    @types = ["donated", "received"]
+    @credit_pool = CreditPool.find_by(school_name: 'TAMU')
   end
 
   # GET /credit_pools/1 or /credit_pools/1.json
-  def show; end
+  def show
+    @credit_pool = CreditPool.find(params[:id])  
+    @types = ["donated", "received"]
+  end
 
   # GET /credit_pools/new
   def new

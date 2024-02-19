@@ -1,6 +1,29 @@
+<h1>
+  <strong>School Name:</strong>
+  <%= @credit_pool.school_name %>
+</h1>
+<p>
+  <strong>Credits:</strong>
+  <%= @credit_pool.credits %>
+</p>
+<p>
+  <strong>Email Suffix:</strong>
+  <%= @credit_pool.email_suffix %>
+</p>
+<p>
+  <strong>ID Alias:</strong>
+  <%= @credit_pool.id_name %>
+</p>
+<p><strong>Logo:</strong></p>
 <div>
-  <%= link_to "Edit this credit pool", edit_credit_pool_path(@credit_pool) %> |
-  <%= link_to "Back to credit pools", credit_pools_path %>
-
-  <%= button_to "Destroy this credit pool", @credit_pool, method: :delete %>
+  <img src="<%= @credit_pool.logo_url %>" style="max-width:100px;width:100%">
 </div>
+<%= line_chart @types.map { |type|
+    {name: type, data: Transaction.where(transaction_type: type, credit_pool_id: @credit_pool.id).group_by_day(:created_at).sum(:amount)}
+    }, id: "#{@credit_pool.school_name}Chart", discrete: true, xTitle: "Date", yTitle: "Amount"
+%>
+<div class="mt-2" style="display:flex">
+  <%= button_to "Edit Credit Pool", edit_credit_pool_path(id: @credit_pool.id), method: :get,  class: 'btn btn-primary' %>
+  <%= button_to "Destory Credit Pool", @credit_pool, method: :delete, class: 'btn btn-danger ml-1' %>
+</div>
+<%= link_to "Back to credit pools", credit_pools_path, class: 'btn btn-primary mt-2' %>

@@ -13,6 +13,9 @@ gem 'omniauth-rails_csrf_protection'
 # gem "bootstrap"
 # gem "sassc-rails"
 
+gem 'chartkick', '~> 5.0', '>= 5.0.5'
+gem "groupdate"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.2'
 

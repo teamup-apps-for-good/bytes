@@ -29,7 +29,7 @@
           <tr>
             <td><%= transaction.uid %></td>
             <td><%= transaction.transaction_type %></td>
-            <td><%= transaction.time %></td>
+            <td><%= transaction.created_at %></td>
             <td><%= transaction.amount %></td>
             <td>
               <%= link_to "View transaction", transaction_path(transaction), class: 'actionBtn' %>

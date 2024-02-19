@@ -1,9 +1,11 @@
 <h1>Credit pools</h1>
 
-<div class="accordion" id="credit_pools">
-  <% @credit_pools.each do |credit_pool| %>
-    <%= render credit_pool %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <% @credit_pools.each do |credit_pool| %>
+      <%= render credit_pool %>
+    <% end %>
+  </div>
 </div>
 
 <div style="margin-top: 5px">
