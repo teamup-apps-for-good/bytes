@@ -14,16 +14,16 @@ Given('the following credit pools exist:') do |table|
   end
 end
 
-Given('API allows for {int} credit update for user with uin of {string}') do |credit, uin|
+Given('API allows for {int} credit update for user with uid of {string}') do |credit, uid|
   response = {
     message: 'Credits updated successfully'
   }
-  stub_request(:patch, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}/update_credits/#{credit}))
+  stub_request(:patch, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uid}/update_credits/#{credit}))
     .to_return(status: 200, body: response.to_json)
 end
 
-Given('API does not allows for {int} credit update for user with uin of {string}') do |credit, uin|
-  stub_request(:patch, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}/update_credits/#{credit}))
+Given('API does not allows for {int} credit update for user with uid of {string}') do |credit, uid|
+  stub_request(:patch, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uid}/update_credits/#{credit}))
     .to_return(status: 400, body: '')
 end
 
@@ -44,7 +44,7 @@ When('I press the {string} button as this user') do |string|
   @pool_before = @pool.credits
   puts @pool_before
 
-  stub_request(:patch, "https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uin}/update_credits/10")
+  stub_request(:patch, "https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uid}/update_credits/10")
     .with(
       headers: {
         'Accept' => '*/*',

@@ -1,9 +1,14 @@
-<% if flash[:notice] %>
-  <div class="alert alert-info" role="alert" id="notice">
-    <%= flash[:notice] %>
-  </div>
-<% elsif flash[:warning] %>
-  <div class="alert alert-danger" role="alert" id="warning">
-    <%= flash[:warning] %>
-  </div>
-<% end %>
+<%= stylesheet_link_tag "flash.css" %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
+
+<div class="outerDiv">
+  <% if flash[:notice] %>
+    <div class="alert alert-info" role="alert" id="notice">
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:warning] %>
+    <div class="alert alert-danger" role="alert" id="warning">
+      <%= flash[:warning] %>
+    </div>
+  <% end %>
+</div>

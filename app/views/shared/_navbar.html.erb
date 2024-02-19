@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag "navbar" %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap", media: 'all' %>
+
+<nav class="navbar">
+  <div class="navbar-links">
+    <div class="navbar-link">
+        <%= link_to "Profile", user_profile_path %> 
+    </div>
+    <div class="navbar-link">
+        <% if @user.user_type == "donor" %>
+        <%= link_to "Transfer Credits", user_transfer_path %>
+        <% else %>
+        <%= link_to "Transfer Credits", user_receive_path %>
+        <% end %>
+    </div>
+    <div class="navbar-logo">
+        <%= image_tag asset_path('bytes-transparent.png'), alt: 'School logo goes here', class: 'img-fluid' %>
+    </div>
+    <div class="navbar-link">
+        <%= link_to "Transactions", transactions_path %>
+    </div>
+    <div class="navbar-link">
+        <%= link_to "Log Out", logout_path %>
+    </div>
+  </div>
+</nav>

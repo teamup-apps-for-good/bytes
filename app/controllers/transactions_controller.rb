@@ -3,14 +3,18 @@
 # controller class for Transactions
 class TransactionsController < ApplicationController
   def index
+    @user = User.find(session[:user_id])
     # @transactions = Transaction.all
-    user_uin = User.find(session[:user_id]).uin
-    @transactions = Transaction.where(uin: user_uin)
+    @transactions = Transaction.where(uid: @user.uid).order(:created_at).reverse
+    pool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+    @id_name = pool.presence ? pool.id_name : 'ID'
   end
 
   def show
-    id = params[:id]
-    @transaction = Transaction.find(id)
+    @transaction = Transaction.find(params[:id])
+    @user = User.find(session[:user_id])
+    pool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+    @id_name = pool.presence ? pool.id_name : 'ID'
   end
 
   def new; end

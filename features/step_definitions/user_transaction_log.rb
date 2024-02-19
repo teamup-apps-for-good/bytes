@@ -7,10 +7,10 @@ Given(/the following transactions exist/) do |transactions_table|
 end
 
 Given('I have made or received a donation') do
-  user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+  user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                      date_joined: '01/01/2022')
 
-  Transaction.exists?(uin: user.uin)
+  Transaction.exists?(uid: user.uid)
 end
 
 Given('I am on the My Transactions page') do
@@ -19,17 +19,17 @@ Given('I am on the My Transactions page') do
 end
 
 Then('I should see my donations') do
-  user = User.create(name: 'Billy', uin: '214003865', email: 'b@tamu.edu', credits: '43', user_type: 'donor',
+  user = User.create(name: 'Billy', uid: '214003865', email: 'b@tamu.edu', credits: '43', user_type: 'donor',
                      date_joined: '01/10/2022')
 
-  Transaction.exists?(uin: user.uin)
+  Transaction.exists?(uid: user.uid)
 end
 
 Then('I should see my received donations') do
-  user = User.create(name: 'James', uin: '284007821', email: 'james@tamu.edu', credits: '15', user_type: 'recipent',
+  user = User.create(name: 'James', uid: '284007821', email: 'james@tamu.edu', credits: '15', user_type: 'recipent',
                      date_joined: '01/01/2023')
 
-  Transaction.exists?(uin: user.uin)
+  Transaction.exists?(uid: user.uid)
 end
 
 Given('I press {string}') do |button|
@@ -37,7 +37,7 @@ Given('I press {string}') do |button|
 end
 
 Then('I should be on the users page') do
-  User.create(name: 'James', uin: '284007821', email: 'james@tamu.edu', credits: '15', user_type: 'recipent',
+  User.create(name: 'James', uid: '284007821', email: 'james@tamu.edu', credits: '15', user_type: 'recipent',
               date_joined: '01/01/2023')
   expect(page).to have_current_path('/users/profile')
 end

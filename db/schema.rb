@@ -10,11 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_14_001635) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_19_092702) do
   create_table "credit_pools", force: :cascade do |t|
     t.integer "credits"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "school_name"
+    t.string "email_suffix"
+    t.string "logo_url"
+    t.string "id_name"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -24,17 +28,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_001635) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string "uin"
+    t.string "uid"
     t.string "transaction_type"
     t.datetime "time"
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "credit_pool_id"
     t.index ["id"], name: "index_transactions_on_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "uin"
+    t.string "uid"
     t.string "name"
     t.string "email"
     t.integer "credits"
@@ -42,9 +47,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_001635) do
     t.date "date_joined"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "uid"
-    t.string "provider"
-    t.index ["uin"], name: "index_users_on_uin", unique: true
+    t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
 end

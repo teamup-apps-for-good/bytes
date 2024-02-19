@@ -8,33 +8,33 @@ RSpec.describe UsersController do
   before do
     User.destroy_all
     CreditPool.destroy_all
-    User.create({ name: 'Test', uin: '110011', email: 'test@tamu.edu', user_type: 'donor' })
-    User.create({ name: 'John', uin: '123456', email: 'j@tamu.edu', user_type: 'donor' })
-    User.create({ name: 'Todd', uin: '654321', email: 'todd@tamu.edu', user_type: 'recipient' })
-    User.create({ name: 'Mark', uin: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
-    User.create({ name: 'Kyle', uin: '987654', email: 'kyle@tamu.edu', user_type: 'recipient' })
-    CreditPool.create(credits: 100)
+    User.create({ name: 'Test', uid: '110011', email: 'test@tamu.edu', user_type: 'donor' })
+    User.create({ name: 'John', uid: '123456', email: 'j@tamu.edu', user_type: 'donor' })
+    User.create({ name: 'Todd', uid: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
+    User.create({ name: 'Mark', uid: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
+    User.create({ name: 'Kyle', uid: '987654', email: 'kyle@tamu.edu', user_type: 'recipient' })
+    CreditPool.create({ email_suffix: 'tamu.edu', credits: 100, id_name: 'UIN' })
   end
 
-  let!(:user) { User.find_by(uin: '110011') }
-  let!(:creditpool) { CreditPool.all[0] }
+  let!(:user) { User.find_by(uid: '110011') }
+  let!(:creditpool) { CreditPool.find_by(email_suffix: user.email.partition('@').last) }
 
   describe 'when visiting the receive page' do
     before { session[:user_id] = user.id }
 
     it 'loads the page with the correct user' do
       get :receive, params: { id: user.id }
-      expect(assigns(:user)).to eq(User.find_by(uin: user.uin))
+      expect(assigns(:user)).to eq(User.find_by(uid: user.uid))
     end
 
     it 'correctly loads the credit pool' do
       get :receive, params: { id: user.id }
-      expect(assigns(:creditpool)).to eq(CreditPool.all[0])
+      expect(assigns(:creditpool)).to eq(CreditPool.find_by(email_suffix: user.email.partition('@').last))
     end
   end
 
   describe 'when requesting credits to receive' do
-    before { session[:user_id] = User.find_by(uin: '110011').id }
+    before { session[:user_id] = User.find_by(uid: '110011').id }
 
     it 'warns the user if they ask for more credits than there are available' do
       get :do_receive, params: { num_credits: 200 }
@@ -68,7 +68,7 @@ RSpec.describe UsersController do
 
     it 'creates an instance of a Transaction to represent the exchange' do
       get :do_receive, params: { num_credits: 5 }
-      expect(Transaction.where(uin: user.uin, transaction_type: 'received', amount: 5)).to exist
+      expect(Transaction.where(uid: user.uid, transaction_type: 'received', amount: 5)).to exist
     end
 
     it 'trys to receive a negative number' do
@@ -94,7 +94,7 @@ RSpec.describe UsersController do
   end
 
   describe 'when requesting credits when you have too many already' do
-    before { session[:user_id] = User.find_by(uin: '987654').id }
+    before { session[:user_id] = User.find_by(uid: '987654').id }
 
     it 'does not allow user to make request if they have more credits than the request limit' do
       get :do_receive, params: { num_credits: 5 }
@@ -109,34 +109,34 @@ RSpec.describe UsersController do
 
   describe 'account creation' do
     it 'successfully creates an account' do
-      User.find_by(uin: '110011').destroy
-      post :create, params: { user: { uin: '110011', user_type: 'donor' } },
+      User.find_by(uid: '110011').destroy
+      post :create, params: { user: { uid: '110011', user_type: 'donor' } },
                     session: { email: 'test@tamu.edu' }
       expect(flash[:notice]).to match(/Test Account's account was successfully created./)
       expect(response).to redirect_to '/users/profile'
     end
 
     it 'able to view account profile' do
-      get :show, session: { user_id: User.find_by(uin: '123456').id }
+      get :show, session: { user_id: User.find_by(uid: '123456').id }
       expect(response).to have_http_status(:success)
     end
 
     it 'fails to creates an account due to incorrect UIN' do
-      post :create, params: { user: { uin: '-1', user_type: 'donor' } },
+      post :create, params: { user: { uid: '-1', user_type: 'donor' } },
                     session: { email: 'test@tamu.edu' }
       expect(response).to redirect_to '/'
       expect(flash[:notice]).to match(/Error has occurred/)
     end
 
     it 'fails to creates an account due to too many credits as recipient' do
-      post :create, params: { user: { uin: '654321', user_type: 'recipient' } },
+      post :create, params: { user: { uid: '654321', user_type: 'recipient' } },
                     session: { email: 'todd@tamu.edu' }
       expect(response).to redirect_to '/'
       expect(flash[:notice]).to match(/User has too many credits to create a receipent account/)
     end
 
     it 'fails to creates an account due to UIN and email mismatch' do
-      post :create, params: { user: { uin: '123456', user_type: 'donor' } },
+      post :create, params: { user: { uid: '123456', user_type: 'donor' } },
                     session: { email: 'test@tamu.edu' }
       expect(response).to redirect_to '/'
       expect(flash[:notice]).to match(/Email does not match the UIN/)
@@ -149,7 +149,7 @@ RSpec.describe UsersController do
   end
 
   describe 'transfer' do
-    before { session[:user_id] = User.find_by(uin: '110011').id }
+    before { session[:user_id] = User.find_by(uid: '110011').id }
 
     it 'accesses transfer page successfully' do
       get :transfer, params: { id: user.id }
@@ -201,6 +201,57 @@ RSpec.describe UsersController do
     it 'renders the index template' do
       get :index
       expect(response).to render_template('index')
+    end
+  end
+
+  describe 'update user type' do
+    before {session[:user_id] = user.id}
+    before {user.fetch_num_credits}
+    
+    it 'successfully changes user from donor to recipient' do
+      post :update_user_type, params: {new_user_type: 'recipient'}
+      user.reload
+      expect(user.user_type).to eq('recipient')
+    end
+
+    it 'successfully changes user from recipient to donor' do
+      recipient_user = User.find_by(uid: '987654')
+      session[:user_id] = recipient_user.id
+      recipient_user.fetch_num_credits
+      post :update_user_type, params: {new_user_type: 'donor'}
+      recipient_user.reload
+      expect(recipient_user.user_type).to eq('donor')
+    end
+    
+    it 'notifies user that they have changed to recipient' do
+      post :update_user_type, params: {new_user_type: 'recipient'}
+      expect(flash[:notice]).to eq('Type successfully updated to recipient')
+    end
+
+    it 'notifies user that they have changed to donor' do
+      recipient_user = User.find_by(uid: '987654')
+      session[:user_id] = recipient_user.id
+      recipient_user.fetch_num_credits
+      post :update_user_type, params: {new_user_type: 'donor'}
+      expect(flash[:notice]).to eq('Type successfully updated to donor')
+    end
+
+    it 'redirects back to the profile page' do
+      post :update_user_type, params: {new_user_type: 'recipient'}
+      expect(response).to redirect_to :user_profile
+    end
+
+    it 'gives an error message when the usertype given is not donor or recipient' do
+      post :update_user_type, params: {new_user_type: 'chef'}
+      expect(flash[:warning]).to eq("Error, invalid user type. User type must be 'donor' or 'recipient'")
+    end
+
+    it 'does not allow users that are over the maximum number of credits to be recipients' do
+      many_creds_user = User.find_by(uid: '654321')
+      session[:user_id] = many_creds_user.id
+      many_creds_user.fetch_num_credits
+      post :update_user_type, params: {new_user_type: 'recipient'}
+      expect(flash[:warning]).to eq("Too many credits to be a recipient")
     end
   end
 end

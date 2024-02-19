@@ -20,3 +20,7 @@ Then('I should failed to log in with {string}') do |string|
   expect(page).to have_current_path(root_path)
   expect(page).to have_content(string)
 end
+
+Then('I should not be logged in') do
+  expect(page).to have_current_path("/users/new")
+end

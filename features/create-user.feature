@@ -12,10 +12,14 @@ Feature: create user
 Background: Users in database
 
     Given the following users exist:
-    |   name   |   uin   |    email     |  user_type   |
+    |   name   |   uid   |    email     |  user_type   |
+    
+    Given the following credit pools exist:
+    |   credits   |   email_suffix   |   id_name   |   school_name   |
+    |      0      |     tamu.edu     |     UIN     |      TAMU       |
 
 Scenario: new user logs in with TAMU email
-    Given there is an user with the email of "new@tamu.edu", uin of "123456", and 10 credits in the external API
+    Given there is an user with the email of "new@tamu.edu", uid of "123456", and 10 credits in the external API
     Given I am a user with the email of "new@tamu.edu"
     And I am on the login page
     And I click on the "Login with Google" button
@@ -24,7 +28,7 @@ Scenario: new user logs in with TAMU email
     And I should see a field for 'User Type'
 
 Scenario: new donor creates account
-    Given there is an user with the email of "new@tamu.edu", uin of "123456", and 10 credits in the external API
+    Given there is an user with the email of "new@tamu.edu", uid of "123456", and 10 credits in the external API
     Given I am a user with the email of "new@tamu.edu"
     And I am on the login page
     And I click on the "Login with Google" button
@@ -35,7 +39,7 @@ Scenario: new donor creates account
     Then I should be logged in successfully
 
 Scenario: new recipient creates account with 10 or less credits
-    Given there is an user with the email of "new@tamu.edu", uin of "123456", and 10 credits in the external API
+    Given there is an user with the email of "new@tamu.edu", uid of "123456", and 10 credits in the external API
     Given I am a user with the email of "new@tamu.edu"
     And I am on the login page
     And I click on the "Login with Google" button
@@ -46,7 +50,7 @@ Scenario: new recipient creates account with 10 or less credits
     Then I should be logged in successfully
 
 Scenario: new recipient creates account with more than 10 credits
-    Given there is an user with the email of "new@tamu.edu", uin of "123456", and 11 credits in the external API
+    Given there is an user with the email of "new@tamu.edu", uid of "123456", and 11 credits in the external API
     Given I am a user with the email of "new@tamu.edu"
     And I am on the login page
     And I click on the "Login with Google" button
