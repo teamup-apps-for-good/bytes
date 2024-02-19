@@ -1,7 +1,13 @@
-<div id="<%= dom_id credit_pool %>">
-  <p>
-    <strong>Credits:</strong>
-    <%= credit_pool.credits %>
-  </p>
-
+<div class="card text-white bg-dark m-2 p-0" style="width: 18rem; height: 30rem" id="<%= dom_id credit_pool %>">
+  <div  class="card-body">
+    <h5 class="card-title"><%= credit_pool.school_name %></h5>
+    <p class="card-text">
+      <strong>Credits:</strong>
+      <%= credit_pool.credits %>
+    </p>
+    <div class="mb-1">
+      <%= link_to "Details", credit_pool_path(credit_pool), class: 'btn btn-outline-light mb-1' %>
+    </div>
+  </div>
+  <img class="card-img-bottom" src="<%= credit_pool.logo_url %>">
 </div>

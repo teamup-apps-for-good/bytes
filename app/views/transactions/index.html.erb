@@ -11,25 +11,25 @@
   <div class="outerDiv">
     <p class="title">Transactions</p>
     <p class="char">
-      Viewing transactions for UIN: <%= User.find(session[:user_id]).uin %>
+      Viewing transactions for <%= @id_name %>: <%= User.find(session[:user_id]).uid %>
     </p>
 
     <table class="transTable">
       <thead class="thead-dark">
         <tr>
-          <th>UIN</th>
-          <th>Type</th>
-          <th>Time</th>
-          <th>Amount</th>
-          <th>Action</th>
+          <th class="text-center"><%= @id_name %></th>
+          <th class="text-center">Type</th>
+          <th class="text-center">Time</th>
+          <th class="text-center">Amount</th>
+          <th class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
         <% @transactions.each do |transaction| %>
           <tr>
-            <td><%= transaction.uin %></td>
+            <td><%= transaction.uid %></td>
             <td><%= transaction.transaction_type %></td>
-            <td><%= transaction.time %></td>
+            <td><%= transaction.created_at %></td>
             <td><%= transaction.amount %></td>
             <td>
               <%= link_to "View transaction", transaction_path(transaction), class: 'actionBtn' %>

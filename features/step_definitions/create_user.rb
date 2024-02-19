@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-Given('there is an user with the email of {string}, uin of {string}, and {int} credits in the external API') do |email, uin, credit|
+Given('there is an user with the email of {string}, uid of {string}, and {int} credits in the external API') do |email, uid, credit|
+  # needs to change this after updating the external api, just the uin part
   response = {
     credits: credit,
     first_name: 'First',
     last_name: 'Last',
     email:,
-    uin:
+    uin: uid
   }
-  stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}))
+  stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uid}))
     .to_return(status: 200, body: response.to_json)
 end
 

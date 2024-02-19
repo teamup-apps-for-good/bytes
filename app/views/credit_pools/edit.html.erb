@@ -1,10 +1,18 @@
-<h1>Editing credit pool</h1>
+<h1>Edit <%= @credit_pool.school_name %> Credit Pool</h1>
 
-<%= render "form", credit_pool: @credit_pool %>
+<%= form_with url: @credit_pool, method: :patch do |f| %>
+  <%= label :credit_pools, :school_name, 'School Name', :class => 'col-form-label' %>
+  <%= text_field :credit_pools, :school_name, value: @credit_pool.school_name, :class => 'form-control' %>
+  <%= label :credit_pools, :credits, 'Credits', :class => 'col-form-label'  %>
+  <%= number_field :credit_pools, :credits, value: @credit_pool.credits, :class => 'form-control' %>
+  <%= label :credit_pools, :email_suffix, 'Email Suffix', :class => 'col-form-label'  %>
+  <%= text_field :credit_pools, :email_suffix, value: @credit_pool.email_suffix, :class => 'form-control' %>
+  <%= label :credit_pools, :id_name, 'ID Alias', :class => 'col-form-label'  %>
+  <%= text_field :credit_pools, :id_name, value: @credit_pool.id_name, :class => 'form-control' %>
+  <%= label :credit_pools, :logo_url, 'URL to Logo', :class => 'col-form-label'  %>
+  <%= text_field :credit_pools, :logo_url, value: @credit_pool.logo_url, :class => 'form-control' %>
 
-<br>
-
-<div>
-  <%= link_to "Show this credit pool", @credit_pool %> |
-  <%= link_to "Back to credit pools", credit_pools_path %>
-</div>
+  <br/>
+  <%= submit_tag 'Save Changes', :class => 'btn btn-primary' %>
+  <%= link_to 'Cancel', credit_pool_path(@credit_pool), :class => 'btn btn-secondary' %>
+<% end %>

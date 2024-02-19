@@ -3,20 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe CreditPoolsController do
-  before(:all) do
+  before(:each) do
     User.destroy_all
     CreditPool.destroy_all
-    CreditPool.create({ credits: 1 })
+    CreditPool.create({ school_name: 'TAMU', email_suffix: 'tamu.edu', id_name: 'UIN', credits: 1, logo_url: 'https://www.tamu.edu/_files/images/logos/primaryTAM.png'})
 
-    user = User.create(name: 'John', uin: '123456', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+    user = User.create(name: 'John', uid: '123456', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                        date_joined: '01/01/2022')
     @user = user
-    @id = user.id
-    @name = user.name
-    @email = user.email
-    @credits = user.credits
-    @user_type = user.user_type
-    @uin = user.uin
     OmniAuth.config.test_mode = true
     OmniAuth.config.add_mock(
       :google_oauth2,
@@ -32,21 +26,21 @@ RSpec.describe CreditPoolsController do
   describe 'creates' do
     it 'credit pool normal' do
       session[:user_id] = @user.id
-      post :create, params: { credit_pool: { credits: 1 } }
+      post :create, params: { credit_pools: { school_name: 'TAMU', credits: 1 } }
       expect(response).to have_http_status(:redirect)
-      CreditPool.find_by(credits: 1).destroy
+      expect(flash[:notice]).to match(/TAMU's credit pool was successfully created./)
     end
 
     it 'credit pool bad' do
-      CreditPool.create({ credits: 1 })
       session[:user_id] = @user.id
-      post :create, params: { credit_pool: { test: 1 } }
+      post :create, params: { credit_pools: { test: 1 } }
+      expect(flash[:warning]).to match(/Credit Pool Creation Failed/)
     end
   end
 
   describe 'destroys' do
     it 'destroys normally' do
-      pool = CreditPool.create({ credits: 1 })
+      pool = CreditPool.find_by(school_name: 'TAMU')
       session[:user_id] = @user.id
       delete :destroy, params: { id: pool.id }
       expect(response).to have_http_status(:redirect)
@@ -55,17 +49,23 @@ RSpec.describe CreditPoolsController do
 
   describe 'updates' do
     it 'graceful' do
-      pool = CreditPool.create({ credits: 1 })
+      pool = CreditPool.find_by(school_name: 'TAMU')
       session[:user_id] = @user.id
-      patch :update, params: { id: pool.id, credit_pool: { credits: 2 } }
+      patch :update, params: { id: pool.id, credit_pools: { credits: 2 } }
 
       expect(response).to have_http_status(:redirect)
     end
 
     it 'not graceful' do
-      pool = CreditPool.create({ credits: 1 })
+      pool = CreditPool.find_by(school_name: 'TAMU')
       session[:user_id] = @user.id
-      patch :update, params: { id: pool.id, credit_pool: { credits: nil } }
+      patch :update, params: { id: pool.id, credit_pools: { credits: nil } }
+    end
+
+    it 'able to go to the edit page' do
+      pool = CreditPool.find_by(school_name: 'TAMU')
+      get :edit, params: { id: CreditPool.find_by(school_name: 'TAMU').id }, session: {user_id: User.find_by(uid: 123456).id}
+      expect(response).to have_http_status(:success)
     end
   end
 

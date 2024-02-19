@@ -12,24 +12,32 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(session[:user_id])
+    pool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+    @id_name = pool.presence ? pool.id_name : 'ID'
   end
 
-  def new; end
+  def new
+    pool = CreditPool.find_by(email_suffix: session[:email].partition('@').last)
+    @id_name = pool.presence ? pool.id_name : 'ID'
+  end
 
   def edit; end
 
   def create
     new_params = new_user_params
-    user_info = get_user_info new_params['uin']
+    user_info = get_user_info new_params['uid']
     if user_info.key?('error')
       raise 'Error has occurred'
     elsif user_info['email'] != session[:email]
-      raise 'Email does not match the UIN'
+      pool = CreditPool.find_by(email_suffix: session[:email].partition('@').last)
+      id_name = pool.presence ? pool.id_name : 'ID'
+      raise "Email does not match the #{id_name}"
     elsif (new_params['user_type'] == 'recipient') && (user_info['credits'] > $user_request_limit)
       raise 'User has too many credits to create a receipent account'
     end
 
-    @user = User.create!({ uin: user_info['uin'], name: "#{user_info['first_name']} #{user_info['last_name']}",
+    # needs to change this after updating the external api, just the uin part
+    @user = User.create!({ uid: user_info['uin'], name: "#{user_info['first_name']} #{user_info['last_name']}",
                            email: user_info['email'], user_type: new_params['user_type'], credits: 0 })
     flash[:notice] = %(#{@user.name}'s account was successfully created.)
     session[:user_id] = @user.id
@@ -46,15 +54,12 @@ class UsersController < ApplicationController
 
   def transfer
     # this is the controller for the actual transfer page
-    # all we really want to do is set the global uin and user so we can use it later when we make our transfer call
+    # all we really want to do is set the global uid and user so we can use it later when we make our transfer call
     @user = User.find_by(id: session[:user_id])
 
     # puts "params #{params}"
     # puts @user.name
-
-    raise StandardError, "There are multiple pools... there shouldn't be" if CreditPool.all.length > 1
-
-    @creditpool = CreditPool.all[0]
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
     # puts "credit pool: #{@creditpool}"
   end
 
@@ -70,7 +75,7 @@ class UsersController < ApplicationController
     num_credits = params[:credits].to_i
     id = session[:user_id]
     # puts "params: #{params}"
-    # puts "uin #{params[:id]} is sending #{params[:credits]} credits to the pool"
+    # puts "uid #{params[:id]} is sending #{params[:credits]} credits to the pool"
     @user = User.find_by(id:)
 
     # check to see if there are any errors with credit amount
@@ -99,13 +104,12 @@ class UsersController < ApplicationController
       return -1
     end
 
-    # create a transaction object
-    Transaction.create({ uin: @user.uin, transaction_type: 'donor', time: '', amount: num_credits })
-
     # send the number of transfered credits to the pool TODO: DRY above in page_load (session maybe?)
-    raise StandardError, "There are multiple pools... there shouldn't be" if CreditPool.all.length > 1
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+    
+    # create a transaction object
+    Transaction.create({ uid: @user.uid, transaction_type: 'donated', amount: num_credits, credit_pool_id: @creditpool.id })
 
-    @creditpool = CreditPool.all[0]
     @creditpool.add_credits(num_credits)
 
     # notify user it's successful somehow
@@ -115,11 +119,9 @@ class UsersController < ApplicationController
 
   def receive
     @user = User.find_by(id: session[:user_id])
-    @uin = @user.uin
+    @uid = @user.uid
 
-    raise StandardError, "There are multiple pools... there shouldn't be" if CreditPool.all.length > 1
-
-    @creditpool = CreditPool.all[0]
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
   end
 
   def do_receive
@@ -140,7 +142,7 @@ class UsersController < ApplicationController
       return -1
     end
 
-    @creditpool = CreditPool.all[0]
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
     # handles there not being enough credits for the request
     if num_credits > @creditpool.credits
       flash[:warning] = "Not enough credits available, only #{@creditpool.credits} credits currently in pool"
@@ -164,7 +166,7 @@ class UsersController < ApplicationController
     end
 
     @creditpool.subtract_credits(num_credits)
-    Transaction.create({ uin: @user.uin, transaction_type: 'received', time: '', amount: num_credits })
+    Transaction.create({ uid: @user.uid, transaction_type: 'received', amount: num_credits, credit_pool_id: @creditpool.id })
 
     # notify user it's successful somehow
     flash[:notice] = "CONFIRMATION Sucessfully recieved #{num_credits} credits!"
@@ -181,7 +183,7 @@ class UsersController < ApplicationController
       return -1
     end
 
-    if new_user_type == "recipient" and @user.credits > $user_request_limit
+    if new_user_type == "recipient" and @user.fetch_num_credits > $user_request_limit
       flash[:warning] = "Too many credits to be a recipient"
       redirect_to :user_profile
       return
@@ -200,11 +202,11 @@ class UsersController < ApplicationController
   private
 
   def new_user_params
-    params.require(:user).permit(:uin, :user_type)
+    params.require(:user).permit(:uid, :user_type)
   end
 
-  def get_user_info(uin)
-    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uin}")
+  def get_user_info(uid)
+    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uid}")
     JSON.parse(Net::HTTP.get(uri))
   end
 end

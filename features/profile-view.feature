@@ -10,8 +10,8 @@ Feature: profile view
 
 Background: Users in database
     Given the following credit pools exist:
-    |   credits   |
-    |   0   |
+    |   credits   |   email_suffix   |   id_name   |   school_name   |
+    |      0      |     tamu.edu     |     UIN     |      TAMU       |
 
 Scenario: student logs in
     Given I am on the login page
@@ -22,11 +22,11 @@ Scenario: student logs in
     And I should see my "UIN"
     And I should see my "Type"
     And I should see my "Credits"
-    And I should see "Go to Transfer"
+    And I should see "Transfer Credits"
 
 Scenario: student goes to transfer
     Given I am on the login page
     And I am logged in
     When I go to the profile page
-    And I click the "Go to Transfer" link
+    And I click the "Transfer Credits" link
     Then I should be on the Transfer page

@@ -11,7 +11,7 @@
     <div class="creditDiv">
         <form action="/users/profile/transfer/transfer_donor_credits" method='post'>
             <label for='credit-amount'>Enter a credit amount: </label>
-            <input id='credit-amount' class="margin-input" name="credits"/>
+            <input type="number" step="1" min="1" id='credit-amount' class="margin-input" name="credits"/>
             <input name="credit-submission" type="submit" class="submit" value="Send Credits" />
         </form>
     </div>

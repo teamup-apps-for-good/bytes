@@ -5,14 +5,14 @@ require 'rails_helper'
 RSpec.describe PagesController do
   before(:all) do
     User.destroy_all
-    User.create(uin: '1234',
+    User.create(uid: '1234',
                 name: 'John Smith',
                 email: 'JS@tamu.edu',
                 credits: 50,
                 user_type: 'recipient',
                 date_joined: 1977 - 0o2 - 23)
     User.create(name: 'John',
-                uin: '123456',
+                uid: '123456',
                 email: 'j@tamu.edu',
                 credits: 50,
                 user_type: 'donor',
@@ -26,7 +26,7 @@ RSpec.describe PagesController do
     end
 
     it 'while logged in' do
-      get :index, session: { user_id: User.find_by(uin: '1234').id }
+      get :index, session: { user_id: User.find_by(uid: '1234').id }
       expect(response).to redirect_to('/users/profile')
     end
   end

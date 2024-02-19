@@ -12,8 +12,8 @@
     <div class="outerDetails">
       <div class="charDiv">
         <p class="char">
-          UIN:
-          <%= @transaction.uin %>
+          <%= @id_name %>:
+          <%= @transaction.uid %>
         </p>
       </div>
 
@@ -27,7 +27,7 @@
       <div class="charDiv">
         <p class="char">
           Time:
-          <%= @transaction.time %>
+          <%= @transaction.created_at %>
         </p>
       </div>
 

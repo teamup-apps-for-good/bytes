@@ -6,8 +6,8 @@ Feature: receive meal credits
 
 Background: Credits in database
   Given the following credit pools exist:
-  |   credits   |
-  |   50        |
+  |   credits   |   email_suffix   |   id_name   |   school_name   |
+  |      50      |     tamu.edu     |     UIN     |      TAMU       |
 
 Scenario: requesting for credits when there are enough available
   Given that I am logged in an account with 9 credits
