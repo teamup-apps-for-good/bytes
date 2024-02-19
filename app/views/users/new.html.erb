@@ -1,7 +1,7 @@
 <h2>Create New User</h2>
 
 <%= form_with url: '/users', method: :post do |f| %>
-  <%= label :user, :uid, 'UIN', :class => 'col-form-label' %>
+  <%= label :user, :uid, @id_name, :class => 'col-form-label' %>
   <%= text_field :user, :uid, :class => 'form-control' %>
   <%= label :user, :user_type, 'User Type*', :class => 'col-form-label'  %>
   <%= select :user, :user_type, ['donor', 'recipient'], {}, :class => 'form-control' %>

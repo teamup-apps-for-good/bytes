@@ -6,6 +6,7 @@ RSpec.describe TransactionsController do
   before(:all) do
     Transaction.destroy_all
     User.destroy_all
+    CreditPool.destroy_all
 
     Transaction.create(uid: '254007932',
                        transaction_type: 'donated',
@@ -26,6 +27,8 @@ RSpec.describe TransactionsController do
                        transaction_type: 'donated',
                        time: '2024-01-01T00:52:48',
                        amount: 2)
+                       
+    CreditPool.create({ school_name: 'TAMU', email_suffix: 'tamu.edu', id_name: 'UIN', credits: 1})
   end
 
   describe 'when viewing a profile a user can see their transactions' do

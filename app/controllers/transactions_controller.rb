@@ -5,14 +5,14 @@ class TransactionsController < ApplicationController
   def index
     @user = User.find(session[:user_id])
     # @transactions = Transaction.all
-    user_uin = User.find(session[:user_id]).uid
-    @transactions = Transaction.where(uid: user_uin)
+    @transactions = Transaction.where(uid: @user.uid).order(:created_at).reverse
+    @id_name = CreditPool.find_by(email_suffix: @user.email.partition('@').last).id_name
   end
 
   def show
+    @transaction = Transaction.find(params[:id])
     @user = User.find(session[:user_id])
-    id = params[:id]
-    @transaction = Transaction.find(id)
+    @id_name = CreditPool.find_by(email_suffix: @user.email.partition('@').last).id_name
   end
 
   def new; end

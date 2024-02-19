@@ -13,7 +13,7 @@ RSpec.describe UsersController do
     User.create({ name: 'Todd', uid: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
     User.create({ name: 'Mark', uid: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
     User.create({ name: 'Kyle', uid: '987654', email: 'kyle@tamu.edu', user_type: 'recipient' })
-    CreditPool.create({ email_suffix: 'tamu.edu', credits: 100 })
+    CreditPool.create({ email_suffix: 'tamu.edu', credits: 100, id_name: 'UIN' })
   end
 
   let!(:user) { User.find_by(uid: '110011') }

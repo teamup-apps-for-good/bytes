@@ -12,9 +12,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(session[:user_id])
+    @id_name = CreditPool.find_by(email_suffix: @user.email.partition('@').last).id_name
   end
 
-  def new; end
+  def new
+    @id_name = CreditPool.find_by(email_suffix: session[:email].partition('@').last).id_name
+  end
 
   def edit; end
 
@@ -24,7 +27,8 @@ class UsersController < ApplicationController
     if user_info.key?('error')
       raise 'Error has occurred'
     elsif user_info['email'] != session[:email]
-      raise 'Email does not match the UIN'
+      id_name = CreditPool.find_by(email_suffix: session[:email].partition('@').last).id_name
+      raise "Email does not match the #{id_name}"
     elsif (new_params['user_type'] == 'recipient') && (user_info['credits'] > $user_request_limit)
       raise 'User has too many credits to create a receipent account'
     end

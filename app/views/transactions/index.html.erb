@@ -11,17 +11,17 @@
   <div class="outerDiv">
     <p class="title">Transactions</p>
     <p class="char">
-      Viewing transactions for UIN: <%= User.find(session[:user_id]).uid %>
+      Viewing transactions for <%= @id_name %>: <%= User.find(session[:user_id]).uid %>
     </p>
 
     <table class="transTable">
       <thead class="thead-dark">
         <tr>
-          <th>UIN</th>
-          <th>Type</th>
-          <th>Time</th>
-          <th>Amount</th>
-          <th>Action</th>
+          <th class="text-center"><%= @id_name %></th>
+          <th class="text-center">Type</th>
+          <th class="text-center">Time</th>
+          <th class="text-center">Amount</th>
+          <th class="text-center">Action</th>
         </tr>
       </thead>
       <tbody>
