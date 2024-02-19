@@ -1,0 +1,14 @@
+<h2>Create New School</h2>
+
+<%= form_with url: '/schools', method: :post do |f| %>
+  <%= label :school, :name, 'Name', :class => 'col-form-label' %>
+  <%= text_field :school, :name, :class => 'form-control' %>
+  <%= label :school, :domain, 'Domain', :class => 'col-form-label' %>
+  <%= text_field :school, :domain, :class => 'form-control' %>
+  <%= label :school, :logo, 'Logo', :class => 'col-form-label'  %>
+  <%= text_field :school, :logo, :class => 'form-control' %>
+
+  <br/>
+  <%= submit_tag 'Create School', :class => 'btn btn-primary' %>
+  <%= link_to 'Cancel', root_path, :class => 'btn btn-secondary' %>
+<% end %>

@@ -31,6 +31,9 @@ transactions = [{ uid: '123456785', transaction_type: 'donated', amount: 5, cred
                 { uid: '123456785', transaction_type: 'received', amount: 5, credit_pool_id: 1, created_at: '2024-02-18' }]
 Transaction.create(transactions)
 
+schools = [{name: 'Texas A&M University', domain: 'tamu.edu', logo: 'tamu-logo-words.png'}]
+School.create(schools)
+
 credit_pools = [{ school_name: 'TAMU', email_suffix: 'tamu.edu', id_name: 'UIN', credits: 0, logo_url: 'https://www.tamu.edu/_files/images/athletics/LoneStar.png'},
                 { school_name: 'UT Austin', email_suffix: 'utexas.edu', id_name: 'EID', credits: 0, logo_url: 'https://president.utexas.edu/sites/default/files/twitter_pres_emblem.png'}]
 CreditPool.create(credit_pools)

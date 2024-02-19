@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Schools</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container2">
+    <h1>Schools</h1>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Domain</th>
+          <th>Logo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @schools.each do |school| %>
+          <tr>
+            <td><%= school.name %></td>
+            <td><%= school.domain %></td>
+            <td><%= school.logo %></td>
+            <td>
+              <%= link_to "View", school_path(school) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'New', new_school_path, :class => 'btn btn-primary' %>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
