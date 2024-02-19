@@ -1,19 +1,18 @@
 <%= stylesheet_link_tag "transfer" %>
-<div class='global container'>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
+
+<div class='outerDiv'>
     <div class='heading'>
-        <h1>User transfer page!!</h1>
-        <h3>Here, you can donate meal credits into the pool</h3>
-        <h5>Number of credits in your account: <%=@user.fetch_num_credits%></h3>
-        <h5>Total number of credits in the pool: <%=@creditpool.credits%></h3>
+        <p class="title">Transfer Credits</p>
+        <p class="char">Donate meal credits to the pool today!</p>
+        <p class="char-center">User Credits: <%=@user.fetch_num_credits%></p>
+        <p class="char-center">Pool Credits: <%=@creditpool.credits%></p>
     </div>
-    <div class="main-container">
+    <div class="creditDiv">
         <form action="/users/profile/transfer/transfer_donor_credits" method='post'>
-            <label for='credit-amount'>Enter a credit amount</label>
-            <input id='credit-amount' name="credits"/>
-            <input name="credit-submission" type="submit" class="btn btn-primary" value="Send Credits" />
+            <label for='credit-amount'>Enter a credit amount: </label>
+            <input id='credit-amount' class="margin-input" name="credits"/>
+            <input name="credit-submission" type="submit" class="submit" value="Send Credits" />
         </form>
-    </div>
-    <div class="row">
-        <p><%= link_to "Go back", '/users/profile', class: 'btn btn-secondary'%></p>
     </div>
 </div>

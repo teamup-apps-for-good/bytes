@@ -1,30 +1,63 @@
-.global {
-  padding: 20px;
-  background: url('background2.jpg') center center/cover no-repeat;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  color: #000;
+.char{
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 25px;
+  color: black;
+  text-align: left;
 }
 
-.heading {
-  margin-bottom: 20px;
+.char-center{
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 25px;
+  color: black;
+  text-align: center;
 }
 
-.heading h1 {
-  color: #007bff;
+.title{
+  font-family: "Protest Riot", sans-serif;
+  font-size: 50px;
+  color: #E3686C;
+  text-align: center;
+  margin-bottom: 5%;
 }
 
-.main-container {
-  margin-bottom: 20px;
+.outerDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  height: fit-content;
 }
+
+.heading{
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+  margin-bottom: 5%;
+}
+
 
 form {
   max-width: 400px;
   margin: 0 auto;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  color: black;
+  font-size: 15px;
 }
 
 label {
-  font-weight: bold;
+  font-size: 25px;
 }
 
 #credit-amount {
@@ -35,20 +68,59 @@ label {
   border-radius: 5px;
 }
 
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
+.submit{
+  background-color: #E8B1B0;
+  border-color: #E8B1B0;
+  border-radius: 5px;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  color: black;
+  font-size: 15px;
 }
 
-.btn-secondary {
-  background-color: #6c757d;
-  border-color: #6c757d;
+.margin-input{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  color: black;
+  font-size: 15px;
 }
 
-.btn-primary:hover,
-.btn-secondary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+.submit{
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #E8B1B0;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  font-family: "Quicksand", sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.submit a{
+  text-decoration: none;
+}
+
+.submit:hover{
+  background-color: #E3686C;
+  text-decoration: none;
+  color: black;
+}
+
+.submit:focus{
+  background-color: #E3686C;
+  text-decoration: none;
+  color: black;
 }
 
 .row {
@@ -59,3 +131,48 @@ p {
   margin-bottom: 0;
 }
 
+@media screen and (max-width: 768px) {
+  .char,
+  .char-center {
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+
+  .title {
+    font-size: 40px; /* Adjust font size for smaller screens */
+  }
+
+  label {
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+
+  .submit {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .margin-input {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .char,
+  .char-center {
+    font-size: 15px; /* Adjust font size for even smaller screens */
+  }
+
+  .title {
+    font-size: 30px; /* Adjust font size for even smaller screens */
+  }
+
+  label {
+    font-size: 15px; /* Adjust font size for even smaller screens */
+  }
+
+  .submit {
+    font-size: 12px; /* Adjust font size for even smaller screens */
+  }
+
+  .margin-input {
+    font-size: 12px; /* Adjust font size for even smaller screens */
+  }
+}

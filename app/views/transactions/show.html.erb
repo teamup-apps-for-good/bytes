@@ -1,23 +1,42 @@
-<h1>Transaction Details</h1>
-<ul id="details">
-  <li>
-    UIN:
-    <%= @transaction.uin %>
-  </li>
-  <li>
-    Type:
-    <%= @transaction.transaction_type %>
-  </li>
-  <li>
-    Time:
-    <%= @transaction.time %>
-  </li>
-  <li>
-    Amount:
-    <%= @transaction.amount %>
-  </li>
-</ul>
+<%= stylesheet_link_tag "profile" %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
 
-<div class="row">
-  <%= link_to 'Back to transactions', transactions_path, :class => 'btn btn-primary col-2' %>
+<div class="outerDiv">
+  <div class="outerBack">
+    <a href="<%= transactions_path %>" class="back-button">&lt;</a>
+  </div>
+  <div id="user-details">
+    <div class="titleDiv">
+      <p class="title">Transaction Details</p>
+    </div>
+    <div class="outerDetails">
+      <div class="charDiv">
+        <p class="char">
+          UIN:
+          <%= @transaction.uin %>
+        </p>
+      </div>
+
+      <div class="charDiv">
+        <p class="char">
+          Type:
+          <%= @transaction.transaction_type %>
+        </p>
+      </div>
+
+      <div class="charDiv">
+        <p class="char">
+          Time:
+          <%= @transaction.time %>
+        </p>
+      </div>
+
+      <div class="charDiv">
+        <p class="char">
+          Amount:
+          <%= @transaction.amount %>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

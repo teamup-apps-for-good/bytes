@@ -1,11 +1,61 @@
-body {
-    background-image: url('background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  font-family: 'Arial', sans-serif;
-  margin: 0;
+  body {
+    background-color: #F4EDE5;
+    margin: 0;
+    align-items: center;
   }
+
+  .semicircle {
+    height: 80vh; /* Set the height of the semicircle to half of the viewport height */
+    width: 100%; /* Set the width to 100% to cover the entire width of the viewport */
+    border-radius: 0 0 50% 50%; /* Set the border radius to create a semicircle shape */
+    background-color: #BCCA9B; /* Set the background color of the semicircle to transparent */
+    position: absolute; /* Position the semicircle absolutely within the container */
+    top: 0; /* Position the semicircle at the top of the container */
+    left: 0; /* Position the semicircle at the left of the container */
+    right: 0; /* Position the semicircle at the right of the container */
+    margin: auto; /* Center the semicircle horizontally */
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive sizing for the semicircle */
+  @media (max-width: 768px) {
+    .semicircle {
+      height: 65vh;
+    }
+  }
+
+  .titleDiv {
+    display: flex; /* Use flexbox to create a row layout */
+    justify-content: center; /* Center the content horizontally within the row */
+    align-items: center; /* Center the content vertically within the row */
+    margin-top: 17%;
+  }
+
+  .logo-col {
+    margin-bottom: 10px; /* Add some spacing between the logo and the title */
+    text-align: right;
+  }
+
+  .logo-col img {
+    max-width: 100%; /* Ensure the logo image doesn't exceed its container */
+    height: auto; /* Preserve the aspect ratio of the image */
+  }
+
+  .title{
+    font-family: "Protest Riot", sans-serif;
+    font-size: 50px;
+    color: #C26522;
+  }
+
+  .title-col {
+    text-align: left; /* Center the title on smaller screens */
+    margin-left: 5%;
+  }
+
+  .school{
+    margin-top: 10%;
+  }
+  
   
   .banner {
     background-color: #500000;
@@ -18,19 +68,44 @@ body {
     max-width: 800px;
     margin: 50px auto;
   }
-  
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+
+  .login-btn{
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #E3686C;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-family: "Quicksand", sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-weight: 800;
   }
   
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+  .login-btn a{
+    text-decoration: none;
+  }
+  
+  .login-btn:hover{
+    background-color: #E8B1B0;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .login-btn:focus{
+    background-color: #E8B1B0;
+    text-decoration: none;
+    color: black;
   }
   
   .body {
     text-align: center;
+    z-index: 2;
+    position: relative;
   }
   
   h1 {
@@ -74,3 +149,14 @@ body {
     margin-bottom: 30px;
   }
   
+  @media screen and (max-width: 768px) {
+    .title {
+      font-size: 40px;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .title {
+      font-size: 30px;
+    }
+  }

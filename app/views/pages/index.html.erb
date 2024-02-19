@@ -1,21 +1,24 @@
 <%= stylesheet_link_tag "landing" %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
 
 <div class="container">
+  <div class="semicircle"></div>
   <div class="body">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
+    <div class="titleDiv">
+      <div class="logo-col">
         <%= image_tag asset_path('bytes-transparent.png'), alt: 'School logo goes here', class: 'img-fluid', width: '230', height: 'auto' %>
       </div>
+      <div class="title-col">
+        <p class="title">A Meal Sharing App</p>
+      </div>
     </div>
-
-    <h2>A meal sharing app</h2>
     
     <div class="login">
-      <%= button_to "Login with Google", "/auth/google_oauth2", class: 'btn btn-primary', data: {turbo: "false"} %>
+      <%= button_to "Login with Google", "/auth/google_oauth2", class: 'login-btn', data: {turbo: "false"} %>
     </div>
 
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-6 school">
         <%= image_tag asset_path('tamu-logo-words.png'), alt: 'School logo goes here', class: 'img-fluid', width: '350', height: 'auto' %>
       </div>
     </div>
