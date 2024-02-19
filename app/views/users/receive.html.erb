@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Request Meal Credits</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <%= stylesheet_link_tag "receive" %>
-</head>
-<body>
+<%= stylesheet_link_tag "transfer" %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
 
-  <div class="container2">
-    <h1>Request Meal Credits</h1>
-    <h3>You currently have <%= @user.fetch_num_credits %> credits</h3>
-    <h3>Number of credits available in pool: <%= @creditpool.credits %></h3>
-
-    <%= form_tag :user_do_receive, method: :post do %>
-      <%= label_tag :num_credits, "Number of Credits: " %>
-      <%= number_field_tag :num_credits %>
-      <%= submit_tag "Request", class: 'btn btn-request' %>
-    <% end %>
-
-    <div class="row btn-back">
-      <%= link_to "Go back", '/users/profile', class: 'btn btn-primary col-md-2' %>
+<div class='outerDiv'>
+    <div class='heading'>
+        <p class="title">Request Credits</p>
+        <p class="char">Request meal credits from the donated pool!</p>
+        <p class="char-center">User Credits: <%=@user.fetch_num_credits%></p>
+        <p class="char-center">Pool Credits: <%=@creditpool.credits%></p>
     </div>
-  </div>
-</body>
-</html>
+    <div class="creditDiv">
+        <form action="/users/profile/do_receive" method='post'>
+            <label for='credit-amount'>Enter a credit amount: </label>
+            <input id='credit-amount' class="margin-input" name="num_credits"/>
+            <input name="credit-submission" type="submit" class="submit" value="Request" />
+        </form>
+    </div>
+</div>
