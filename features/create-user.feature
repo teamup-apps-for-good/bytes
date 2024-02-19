@@ -13,6 +13,10 @@ Background: Users in database
 
     Given the following users exist:
     |   name   |   uid   |    email     |  user_type   |
+    
+    Given the following credit pools exist:
+    |   credits   |   email_suffix   |   id_name   |   school_name   |
+    |      0      |     tamu.edu     |     UIN     |      TAMU       |
 
 Scenario: new user logs in with TAMU email
     Given there is an user with the email of "new@tamu.edu", uid of "123456", and 10 credits in the external API

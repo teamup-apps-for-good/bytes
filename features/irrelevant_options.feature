@@ -6,7 +6,7 @@ Scenario: Recipient profile doesn't have the option to donate credits
     Given I am on the login page
     And I am a "recipient" profile
     When I go to the profile page
-    Then I should see "Go to Receive"
+    Then I should see "Transfer Credits"
     And I should not see "Go to Transfer"
 
 Scenario: Donor profile doesn't have the option to receive credits
@@ -15,5 +15,5 @@ Scenario: Donor profile doesn't have the option to receive credits
     Given I am on the login page
     And I am a "donor" profile
     When I go to the profile page
-    Then I should see "Go to Transfer"
+    Then I should see "Transfer Credits"
     And I should not see "Go to Receive"

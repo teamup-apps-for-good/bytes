@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       raise 'User has too many credits to create a receipent account'
     end
 
-    # neeeds to change this after updating the external api, just the uin part
+    # needs to change this after updating the external api, just the uin part
     @user = User.create!({ uid: user_info['uin'], name: "#{user_info['first_name']} #{user_info['last_name']}",
                            email: user_info['email'], user_type: new_params['user_type'], credits: 0 })
     flash[:notice] = %(#{@user.name}'s account was successfully created.)

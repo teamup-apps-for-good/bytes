@@ -13,8 +13,8 @@ Background: Users in database
     |   Jim    | 124124  |  ji@tamu.edu |    donor     |
 
     Given the following credit pools exist:
-    |   credits   |
-    |   0   |
+    |   credits   |   email_suffix   |   id_name   |   school_name   |
+    |      0      |     tamu.edu     |     UIN     |      TAMU       |
     
 
 Scenario: donor student sends credits to pool
