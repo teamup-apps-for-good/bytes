@@ -15,6 +15,12 @@
 #          { name: 'Steve', uid: '12321', email: 'v@tamu.edu', credits: 10, user_type: 'recipient',
 #            date_joined: '01/01/2022' }]
 users = []
+# users = [{ name: 'John', uid: '412334', email: 'j@tamu.edu', credits: 50, user_type: 'donor', date_joined: '01/01/2022' },
+#          { name: 'Todd', uid: '324567', email: 't@tamu.edu', credits: 10, user_type: 'recipient',
+#            date_joined: '01/01/2022' },
+#          { name: 'Steve', uid: '12321', email: 'v@tamu.edu', credits: 10, user_type: 'recipient',
+#            date_joined: '01/01/2022' }]
+users = []
 User.create(users)
 
 # transactions = [{ uid: '254007932', transaction_type: 'donated', time: '2024-01-09T00:52:48', amount: 3 },
