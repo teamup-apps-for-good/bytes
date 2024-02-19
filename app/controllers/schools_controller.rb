@@ -13,7 +13,7 @@ class SchoolsController < ApplicationController
 
   #post
   def create
-    @school = School.new(school_params)
+    @school = School.create!(school_params)
     flash[:notice] = "#{@school.name} was successfully added."
     redirect_to schools_path
   end

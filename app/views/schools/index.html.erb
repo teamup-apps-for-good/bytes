@@ -22,10 +22,14 @@
             <td><%= school.name %></td>
             <td><%= school.domain %></td>
             <td><%= school.logo %></td>
+            <td>
+              <%= link_to "View", school_path(school) %>
+            </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <%= link_to 'New', new_school_path, :class => 'btn btn-primary' %>
   </div>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>

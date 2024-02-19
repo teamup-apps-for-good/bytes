@@ -21,5 +21,21 @@ Scenario: Can see all schools
 Scenario: Can see a single school
   Given I am on the login page
   And I am logged in
-  And I am on the school page for tamu
+  And I am on the school page for "Texas A&M University"
   Then I should see "Texas A&M University"
+
+Scenario: Deleteing a school
+  Given I am on the login page
+  And I am logged in
+  And I am on the school page for "Texas A&M University"
+  Then I press the "Delete" button
+  Then I should see "Texas A&M University deleted."
+
+Scenario: Adding a new school
+  Given I am on the login page
+  And I am logged in
+  And I am on the new school page
+  When I fill in the form with valid school information
+  Then I press the "Create School" button
+  Then I should see "Test was successfully added."
+  And I should be redirected to the schools index page

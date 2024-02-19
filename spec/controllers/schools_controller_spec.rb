@@ -95,4 +95,14 @@ RSpec.describe SchoolsController do
       expect { delete :destroy, params: { id: school.id } }.to change(School, :count).by(-1)
     end
   end
+
+  describe 'new' do
+    it 'renders the new template' do
+      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                    date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      get :new
+      expect(response).to render_template :new
+    end
+  end
 end
