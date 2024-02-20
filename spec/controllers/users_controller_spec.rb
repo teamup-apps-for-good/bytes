@@ -5,6 +5,7 @@ $user_request_limit = 10
 require 'rails_helper'
 
 RSpec.describe UsersController do
+  include SchoolHelper
   before do
     User.destroy_all
     CreditPool.destroy_all
@@ -13,6 +14,7 @@ RSpec.describe UsersController do
     User.create({ name: 'Todd', uid: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
     User.create({ name: 'Mark', uid: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
     User.create({ name: 'Kyle', uid: '987654', email: 'kyle@tamu.edu', user_type: 'recipient' })
+    User.create({ name: 'Bobb', uid: '223484', email: 'kyle@nottamu.edu', user_type: 'recipient' })
     CreditPool.create({ email_suffix: 'tamu.edu', credits: 100, id_name: 'UIN' })
   end
 
@@ -121,6 +123,8 @@ RSpec.describe UsersController do
       expect(response).to have_http_status(:success)
     end
 
+
+
     it 'fails to creates an account due to incorrect UIN' do
       post :create, params: { user: { uid: '-1', user_type: 'donor' } },
                     session: { email: 'test@tamu.edu' }
@@ -145,6 +149,20 @@ RSpec.describe UsersController do
     it 'fails to access profile without being logged in' do
       get :show, params: { id: 0 }, session: {}
       expect(response).to have_http_status(:redirect)
+    end
+  end
+
+  describe 'user school is fetched' do
+    it 'returns the logo of the corresponding school' do
+      get :show, session: { user_id: User.find_by(uid: '123456').id }
+      expect(assigns[:user_school].logo).to eq('tamu-logo-words.png')
+    end
+
+    context 'when user email domain does not match any school domain' do
+      it 'returns nil' do
+        get :show, session: { user_id: User.find_by(uid: '223484').id }
+        expect(assigns[:user_school]).to be_nil
+      end
     end
   end
 
@@ -207,7 +225,7 @@ RSpec.describe UsersController do
   describe 'update user type' do
     before {session[:user_id] = user.id}
     before {user.fetch_num_credits}
-    
+
     it 'successfully changes user from donor to recipient' do
       post :update_user_type, params: {new_user_type: 'recipient'}
       user.reload
@@ -222,7 +240,7 @@ RSpec.describe UsersController do
       recipient_user.reload
       expect(recipient_user.user_type).to eq('donor')
     end
-    
+
     it 'notifies user that they have changed to recipient' do
       post :update_user_type, params: {new_user_type: 'recipient'}
       expect(flash[:notice]).to eq('Type successfully updated to recipient')

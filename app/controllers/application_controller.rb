@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
     # question: what happens if session has user_id but DB does not?
     # ^ it will throw an error and you're stuck. to fix do this -> session.delete(:user_id)
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    # if session[:user_id] && User.exists?(session[:user_id])
+    #   @current_user ||= User.find(session[:user_id])
+    # else
+    #   session.delete(:user_id)
+    #   @current_user = nil
+    # end
   end
 
   def logged_in?

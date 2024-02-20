@@ -38,6 +38,7 @@ Given('I am logged in') do
   @credits = user.credits
   @user_type = user.user_type
   @uid = user.uid
+  @user_school = School.find_by(domain: @user.email.split('@').last)
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(
     :google_oauth2,
@@ -65,4 +66,8 @@ end
 
 And ('I should not have a submit button with the text {string}') do |string|
   expect(find('input[type="submit"]').value).not_to eq(string)
+end
+
+Then('I should see the school logo displayed') do
+  expect(page).to have_css('.school-logo')
 end

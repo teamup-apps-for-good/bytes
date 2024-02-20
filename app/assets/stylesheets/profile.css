@@ -122,6 +122,11 @@
     text-decoration: none;
     color: black;
   }
+
+  .school-logo {
+    width: 300px;
+    height: auto;
+  }
   
 
 @media screen and (max-width: 768px) {

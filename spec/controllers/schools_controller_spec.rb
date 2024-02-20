@@ -74,7 +74,7 @@ RSpec.describe SchoolsController do
       expect(response).to redirect_to schools_path
     end
 
-    it 'successfully creates a new movie' do
+    it 'successfully creates a new school' do
       user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                   date_joined: '01/01/2022')
       session[:user_id] = user.id
