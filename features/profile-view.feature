@@ -30,3 +30,9 @@ Scenario: student goes to transfer
     When I go to the profile page
     And I click the "Transfer Credits" link
     Then I should be on the Transfer page
+
+Scenario: can see the correct logo
+    Given I am on the login page
+    And I am logged in
+    When I go to the profile page
+    Then I should see the school logo displayed

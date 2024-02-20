@@ -52,4 +52,8 @@
       <%= form.submit "Change to Donor", class: "actionBtn", data: { turbo_confirm: "Are you sure you want to change account types?" }  %>
     <% end %>
   <% end %>
+
+  <% if @user_school.present? %>
+    <%= image_tag @user_school.logo, class: "school-logo" %>
+  <% end %>
 </div>

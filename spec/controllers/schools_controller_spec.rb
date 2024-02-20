@@ -22,7 +22,7 @@ RSpec.describe SchoolsController do
 
   describe 'when requesting all schools the data is returned' do
     it 'returns all schools' do
-      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                   date_joined: '01/01/2022')
       session[:user_id] = user.id
 
@@ -31,7 +31,7 @@ RSpec.describe SchoolsController do
     end
 
     it 'renders the index template' do
-      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                   date_joined: '01/01/2022')
       session[:user_id] = user.id
 
@@ -42,7 +42,7 @@ RSpec.describe SchoolsController do
 
   describe 'when logging in the user can see the correct data for their school' do
     it 'returns the correct school' do
-      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                   date_joined: '01/01/2022')
       session[:user_id] = user.id
       school = School.create(name: 'Oklahoma State University',
@@ -53,7 +53,7 @@ RSpec.describe SchoolsController do
     end
 
     it 'does not return an unexpected school' do
-      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                   date_joined: '01/01/2022')
       session[:user_id] = user.id
       school = School.create(name: 'Oklahoma State University',
@@ -67,15 +67,15 @@ RSpec.describe SchoolsController do
 
   describe 'school creation is successful' do
     it 'redirects to schools path' do
-      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                   date_joined: '01/01/2022')
       session[:user_id] = user.id
       get :create, params: { school: { name: 'Community College', domain: 'cc.edu', logo: 'logo.png'}}
       expect(response).to redirect_to schools_path
     end
 
-    it 'successfully creates a new movie' do
-      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+    it 'successfully creates a new school' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                   date_joined: '01/01/2022')
       session[:user_id] = user.id
       get :create, params: { school: { name: 'Community College', domain: 'cc.edu', logo: 'logo.png'}}
@@ -86,7 +86,7 @@ RSpec.describe SchoolsController do
 
   describe 'destroys' do
     it 'flashes notice on successful deletion' do
-      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                     date_joined: '01/01/2022')
       session[:user_id] = user.id
       school = School.create(name: 'Oklahoma State University',
@@ -98,7 +98,7 @@ RSpec.describe SchoolsController do
 
   describe 'new' do
     it 'renders the new template' do
-      user = User.create(name: 'John', uin: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                     date_joined: '01/01/2022')
       session[:user_id] = user.id
       get :new

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
     pool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
     @id_name = pool.presence ? pool.id_name : 'ID'
+    @user_school = School.find_by(domain: @user.email.split('@').last)
   end
 
   def new
@@ -106,7 +107,7 @@ class UsersController < ApplicationController
 
     # send the number of transfered credits to the pool TODO: DRY above in page_load (session maybe?)
     @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
-    
+
     # create a transaction object
     Transaction.create({ uid: @user.uid, transaction_type: 'donated', amount: num_credits, credit_pool_id: @creditpool.id })
 
@@ -190,7 +191,7 @@ class UsersController < ApplicationController
     end
 
     @user.update({ user_type: new_user_type })
-    
+
     if @user.user_type == new_user_type
       flash[:notice] = "Type successfully updated to #{new_user_type}"
     else

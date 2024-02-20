@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   # route to add to the credit pool
   post 'transaction/add_to_pool', to: 'credit_pools#add_to_pool'
 
+
   # oauth stuff
   get '/logout', to: 'sessions#logout', as: 'logout'
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
