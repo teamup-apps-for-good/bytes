@@ -52,7 +52,7 @@ end
 # steps for second receive_credit scenario
 
 And('the number of available credits is {int}') do |num_credits|
-  expect(page).to have_content("Number of credits available in pool: #{num_credits}")
+  expect(page).to have_content("Pool Credits: #{num_credits}")
 end
 
 Then('I should be on the receive page') do
@@ -60,5 +60,5 @@ Then('I should be on the receive page') do
 end
 
 And('I currently have {int} credits') do |int|
-  expect(page).to have_content("You currently have #{int} credits")
+  expect(page).to have_content("User Credits: #{int}")
 end
