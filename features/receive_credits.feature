@@ -12,7 +12,7 @@ Background: Credits in database
 Scenario: requesting for credits when there are enough available
   Given that I am logged in an account with 9 credits
   When  I go to the "receive" page
-  And   I fill in "Number of Credits" with "10"
+  And   I fill in "Enter a credit amount:" with "10"
   And   I press the "Request" button as this user
   Then  I should see CONFIRMATION Sucessfully recieved 10 credits!
   And   I should be on the profile page
@@ -23,7 +23,7 @@ Scenario: requesting more credits then there are available
   When  I go to the "receive" page
   And   the number of available credits is 50
   And   I currently have 9 credits
-  When  I fill in "Number of Credits" with "80"
+  When  I fill in "Enter a credit amount:" with "80"
   And   I press the "Request" button
   Then  I should see "Not enough credits available"
   And   I should be on the receive page
