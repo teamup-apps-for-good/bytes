@@ -15,6 +15,7 @@
     
     <div class="login">
       <%= button_to "Login with Google", "/auth/google_oauth2", class: 'login-btn', data: {turbo: "false"} %>
+      <p class="metric-text"><%=@metric_string%></p>
     </div>
 
     <div class="row justify-content-center">

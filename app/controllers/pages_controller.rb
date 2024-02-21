@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     metrics = [method(:num_meals_available),method(:num_schools_joined),method(:num_users_signedup),method(:num_meals)]
 
     #random index to pick one
-    index = rand(0...metrics.length-1)
+    index = rand(0...metrics.length)
     
     #do the function corresponding to that metric
     metrics[index].call
@@ -101,7 +101,7 @@ class PagesController < ApplicationController
     when 1
       #look through transactions for the same week
       for transaction in all_transactions do
-        if transaction_type == transaction.transaction_type && today.year == transaction.created_at.year && today.cweek == transaction.created_at.cweek
+        if transaction_type == transaction.transaction_type && today.year == transaction.created_at.year && (today - 7.days >= transaction.created_at)
           res +=1
         end
       end
@@ -121,7 +121,7 @@ class PagesController < ApplicationController
       end
     end
 
-    @metric_string = "Over #{res} meals #{transaction_type} #{time_string}"
+    @metric_string = "Over #{res} meals #{transaction_type} #{time_string}!"
 
   end
 
