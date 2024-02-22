@@ -30,4 +30,8 @@ RSpec.describe PagesController do
       expect(response).to redirect_to('/users/profile')
     end
   end
+
+  describe 'index-helpers' do
+
+  end
 end
