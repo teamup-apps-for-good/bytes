@@ -16,7 +16,7 @@ class PagesController < ApplicationController
     
     #do the function corresponding to that metric
     metrics[index].call
-    puts @metric_string
+    #puts @metric_string
 
     return unless logged_in?
 
@@ -26,7 +26,7 @@ class PagesController < ApplicationController
 
   def num_meals_available
     #get the number of meals available across all credit pools
-    puts "meals avail"
+    #puts "meals avail"
     all_pools = CreditPool.all()
     total_credits = 0
     for pool in all_pools do
@@ -38,7 +38,7 @@ class PagesController < ApplicationController
 
   def num_schools_joined
     #get the number of credit pools that exist
-    puts "schools joined"
+    #puts "schools joined"
     all_pools = CreditPool.all()
     num_schools = all_pools.length
 
@@ -48,7 +48,7 @@ class PagesController < ApplicationController
   def num_users_signedup
 
     #choose whether to display donor or receiver and do the count for whichever
-    puts "users signedup"
+    #puts "users signedup"
     all_users = User.all()
     user_type_index = rand(0..1)
     user_count = 0
@@ -72,7 +72,7 @@ class PagesController < ApplicationController
   end
 
   def num_meals
-    puts "meals donated"
+    #puts "meals donated"
     
     all_transactions = Transaction.all()
 
