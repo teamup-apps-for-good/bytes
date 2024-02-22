@@ -29,5 +29,14 @@ RSpec.describe PagesController do
       get :index, session: { user_id: User.find_by(uid: '1234').id }
       expect(response).to redirect_to('/users/profile')
     end
+
+    it "sees metric-strings" do
+      30.times do #needs to be a better way, but for now will get good coverage with enough runs
+        get :index
+        expect(response).to have_http_status(:success)
+        # Add expectations for the output of each random function
+        expect(assigns(:metric_string)).not_to be_nil
+      end
+    end
   end
 end

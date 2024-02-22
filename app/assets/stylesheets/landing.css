@@ -46,6 +46,12 @@
     font-size: 50px;
     color: #C26522;
   }
+  .metric-text{
+    font-family: "Protest Riot", sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+    color: #C26522;
+  }
 
   .title-col {
     text-align: left; /* Center the title on smaller screens */
