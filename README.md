@@ -4,7 +4,7 @@ Bytes - Meal Plan sharing for those in need
 
 # How to get started for development
 
-After clonging, all gems needed should already be in the gem file. You need to run bundle install to install all dependencies, then rails db:create to start a new database.
+After cloning, all gems needed should already be in the gem file. You need to run bundle install to install all dependencies, then rails db:create to start a new database.
 
 # How to run tests
 
