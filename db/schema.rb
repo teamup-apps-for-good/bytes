@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_19_092702) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_083045) do
   create_table "credit_pools", force: :cascade do |t|
     t.integer "credits"
     t.datetime "created_at", null: false
@@ -19,6 +19,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_092702) do
     t.string "email_suffix"
     t.string "logo_url"
     t.string "id_name"
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "date"
+    t.string "location"
+    t.boolean "recurring"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_meetings_on_user_id"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -50,4 +60,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_092702) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
+  add_foreign_key "meetings", "users"
 end
