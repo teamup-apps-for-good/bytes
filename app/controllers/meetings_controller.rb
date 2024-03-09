@@ -3,6 +3,7 @@ class MeetingsController < ApplicationController
 
   def index
     @meetings = Meeting.all
+    @user = User.find(session[:user_id])
   end
 
   def new
