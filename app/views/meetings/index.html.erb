@@ -1,0 +1,19 @@
+<h1>Meetings</h1>
+<table>
+  <tr>
+    <th>UID</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Recurring</th>
+  </tr>
+  <% @meetings.each do |meeting| %>
+    <tr>
+      <td><%= meeting.uid %></td>
+      <td><%= meeting.date %></td>
+      <td><%= meeting.time %></td>
+      <td><%= meeting.location %></td>
+      <td><%= meeting.recurring ? 'Yes' : 'No' %></td>
+    </tr>
+  <% end %>
+</table>

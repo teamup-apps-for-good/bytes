@@ -1,0 +1,22 @@
+<h1>Schedule a Meeting</h1>
+<%= form_for @meeting do |f| %>
+  <div>
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+  </div>
+  <div>
+    <%= f.label :time %>
+    <%= f.time_field :time %>
+  </div>
+  <div>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+  <div>
+    <%= f.label :recurring %>
+    <%= f.check_box :recurring %>
+  </div>
+  <div>
+    <%= f.submit 'Schedule Meeting' %>
+  </div>
+<% end %>
