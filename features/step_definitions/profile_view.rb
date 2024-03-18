@@ -69,5 +69,6 @@ And ('I should not have a submit button with the text {string}') do |string|
 end
 
 Then('I should see the school logo displayed') do
+  puts page.html
   expect(page).to have_css('.school-logo')
 end

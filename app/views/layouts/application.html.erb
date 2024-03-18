@@ -14,7 +14,7 @@
 
   <body>
     <div class="app-div">
-      <% if controller.controller_name == 'users' or controller.controller_name == 'transactions' and controller.action_name != 'new' %>
+      <% if controller.controller_name == 'users' or controller.controller_name == "meetings" or controller.controller_name == 'transactions' and controller.action_name != 'new' %>
         <%= render 'shared/navbar' %>
       <% end %>
       <%= render 'layouts/flash' %>

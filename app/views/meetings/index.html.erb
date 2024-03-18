@@ -1,19 +1,42 @@
-<h1>Meetings</h1>
-<table>
-  <tr>
-    <th>UID</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th>Location</th>
-    <th>Recurring</th>
-  </tr>
-  <% @meetings.each do |meeting| %>
-    <tr>
-      <td><%= meeting.uid %></td>
-      <td><%= meeting.date %></td>
-      <td><%= meeting.time %></td>
-      <td><%= meeting.location %></td>
-      <td><%= meeting.recurring ? 'Yes' : 'No' %></td>
-    </tr>
-  <% end %>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Transactions</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <%= stylesheet_link_tag "transactions" %>
+  <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
+</head>
+<body>
+  <div class="outerDiv">
+    <p class="title">Meetings</p>
+    <p class="char">
+      Viewing Meetings
+    </p>
+    <%= link_to 'Schedule a Meeting', new_meeting_path %>
+
+    <table class="transTable">
+      <thead class="thead-dark">
+        <tr>
+          <th class="text-center">Posted by</th>
+          <th class="text-center">Time</th>
+          <th class="text-center">Date</th>
+          <th class="text-center">Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @meetings.each do |meeting| %>
+          <tr class='meeting-item'>
+            <td><%= meeting.uid %></td>
+            <td><%= meeting.time %></td>
+            <td><%= meeting.date %></td>
+            <td><%= meeting.location %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

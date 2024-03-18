@@ -53,6 +53,10 @@
     <% end %>
   <% end %>
 
+  <div class="actionBtn">
+      <%= link_to "Log Out", logout_path %>
+  </div>
+
   <% if @user_school.present? %>
     <%= image_tag @user_school.logo, class: "school-logo" %>
   <% end %>
