@@ -15,6 +15,8 @@ class UsersController < ApplicationController
     pool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
     @id_name = pool.presence ? pool.id_name : 'ID'
     @user_school = School.find_by(domain: @user.email.split('@').last)
+    puts "USER SCHOOL"
+    puts School.count
   end
 
   def new

@@ -13,6 +13,7 @@
     <p class="char">
       Viewing Meetings
     </p>
+    <%= link_to 'Schedule a Meeting', new_meeting_path %>
 
     <table class="transTable">
       <thead class="thead-dark">
@@ -25,7 +26,7 @@
       </thead>
       <tbody>
         <% @meetings.each do |meeting| %>
-          <tr>
+          <tr class='meeting-item'>
             <td><%= meeting.uid %></td>
             <td><%= meeting.time %></td>
             <td><%= meeting.date %></td>

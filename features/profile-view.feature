@@ -13,6 +13,12 @@ Background: Users in database
     |   credits   |   email_suffix   |   id_name   |   school_name   |
     |      0      |     tamu.edu     |     UIN     |      TAMU       |
 
+    Given the following schools exist:
+    |     name              |    domain   |      logo             |
+    | Texas A&M University  |  tamu.edu   |  tamu-logo-words.png  |
+    | University of Houston |  uh.edu     |  background.png       |
+    | Rice University       |  ru.edu     |  background2.png      |  
+
 Scenario: student logs in
     Given I am on the login page
     And I am logged in
