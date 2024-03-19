@@ -2,6 +2,17 @@ Given('I am on the new meeting page') do
   visit new_meeting_path
 end
 
+Given('I am on the meetings page') do
+  visit meetings_path
+end
+
+Given('I have successfully scheduled a meeting') do
+  fill_in 'meeting[date]', with: '2024-03-11'
+  fill_in 'meeting[time]', with: '12:00 PM'
+  fill_in 'meeting[location]', with: 'Conference Room'
+  click_button "Schedule Meeting"
+end
+
 When('I fill in the meeting form with valid details') do
   fill_in 'meeting[date]', with: '2024-03-11'
   fill_in 'meeting[time]', with: '12:00 PM'

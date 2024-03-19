@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :pages
   resources :transactions
   resources :schools
-  resources :meetings, only: [:index, :new, :create]
+  resources :meetings, only: [:index, :new, :create, :destroy]
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -4,6 +4,7 @@ class MeetingsController < ApplicationController
   def index
     @meetings = Meeting.all
     @user = User.find(session[:user_id])
+    @current_uid = current_user.uid
   end
 
   def new
@@ -16,6 +17,22 @@ class MeetingsController < ApplicationController
       redirect_to meetings_path, notice: 'Meeting scheduled successfully.'
     else
       render :new
+    end
+  end
+
+  def destroy
+    @current_uid = current_user.uid
+    @meeting = Meeting.find_by(id: params[:id])
+    puts "MEETING: " + @meeting.to_s
+    if @meeting
+      if @meeting.destroy
+        redirect_to meetings_path, notice: 'Meeting deleted successfully.'
+      else
+        redirect_to meetings_path, notice: 'Error: Meeting not deleted.'
+      end
+    else
+      puts "DOESNT GO THROUGH"
+      redirect_to meetings_path, notice: 'Error: Meeting not found.'
     end
   end
 

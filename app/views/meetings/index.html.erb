@@ -22,6 +22,7 @@
           <th class="text-center">Time</th>
           <th class="text-center">Date</th>
           <th class="text-center">Location</th>
+          <th class="text-center">Cancel</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +32,7 @@
             <td><%= meeting.time %></td>
             <td><%= meeting.date %></td>
             <td><%= meeting.location %></td>
+            <td><% if meeting.uid == @current_uid %><%= button_to 'Cancel', "/meetings/#{meeting.id}", method: :delete %><% end %></td>
           </tr>
         <% end %>
       </tbody>
