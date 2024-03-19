@@ -24,6 +24,30 @@ RSpec.describe MeetingsController, type: :controller do
     end
   end
 
+  describe 'DELETE destroy' do
+    it 'destroys the requested meeting' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor', date_joined: '01/01/2022')
+      meeting = Meeting.create(date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', uid: user.id)
+  
+      session[:user_id] = user.id
+      puts "MEETING ID: " + meeting.id.to_s
+      delete :destroy, params: {id: meeting.id}
+      expect(Meeting.count).to eq(0)
+    end
+  
+    it 'redirects to the meetings index' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor', date_joined: '01/01/2022')
+      meeting = Meeting.create(date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', uid: user.id)
+  
+      session[:user_id] = user.id
+  
+      delete :destroy, params: { id: meeting.id }
+  
+      expect(response).to redirect_to(meetings_path)
+    end
+  end
+
+
   describe 'POST create' do
     context 'with valid parameters' do
       it 'creates a new meeting' do
