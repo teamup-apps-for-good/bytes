@@ -11,7 +11,7 @@
   <div class="outerDiv">
     <p class="title">Meetings</p>
     <p class="char">
-      Viewing Meetings
+      Public Meetings
     </p>
     <%= link_to 'Schedule a Meeting', new_meeting_path %>
 
@@ -23,6 +23,9 @@
           <th class="text-center">Date</th>
           <th class="text-center">Location</th>
           <th class="text-center">Cancel</th>
+          <% if @user.user_type == "donor" %>
+            <th class="text-center">Accept</th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -33,6 +36,45 @@
             <td><%= meeting.date %></td>
             <td><%= meeting.location %></td>
             <td><% if meeting.uid == @current_uid %><%= button_to 'Cancel', "/meetings/#{meeting.id}", method: :delete %><% end %></td>
+            <% if @user.user_type == "donor" %>
+              <td><%= button_to "Accept", accept_meeting_path(id: meeting.id)%></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <p class="char">
+      Your Meetings
+    </p>
+
+    <table class="transTable">
+      <thead class="thead-dark">
+        <tr>
+          <th class="text-center">Posted by</th>
+          <th class="text-center">Accepted By</th>
+          <th class="text-center">Time</th>
+          <th class="text-center">Date</th>
+          <th class="text-center">Location</th>
+          <th class="text-center">Cancel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user_meetings.each do |meeting| %>
+          <tr class='meeting-item'>
+            <td><%= meeting.uid %></td>
+            <td><%= meeting.accepted_uid %></td>
+            <td><%= meeting.time %></td>
+            <td><%= meeting.date %></td>
+            <td><%= meeting.location %></td>
+            <td>
+              <% if meeting.uid == @current_uid %>
+                <%= button_to 'Cancel', "/meetings/#{meeting.id}", method: :delete %>
+              <% end %>
+              <% if meeting.accepted_uid == @current_uid %>
+              <%= button_to 'Cancel', unaccept_meeting_path(id: meeting.id) %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

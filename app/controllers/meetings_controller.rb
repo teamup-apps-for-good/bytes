@@ -2,9 +2,10 @@ class MeetingsController < ApplicationController
   before_action :set_uid, only: [:new, :create]
 
   def index
-    @meetings = Meeting.all
+    @meetings = Meeting.where(accepted: false)
     @user = User.find(session[:user_id])
     @current_uid = current_user.uid
+    @user_meetings = Meeting.where(accepted: true).where("uid = ? OR accepted_uid = ?", @current_uid, @current_uid)
   end
 
   def new
@@ -12,10 +13,17 @@ class MeetingsController < ApplicationController
   end
 
   def create
-    @meeting = Meeting.new(meeting_params.merge(uid: @current_uid))
+    @user = User.find(session[:user_id])
+    @current_uid = current_user.uid
+    @meeting = Meeting.new(meeting_params.merge(uid: @current_uid, accepted: false))
+
     if @meeting.save
+      puts "MEETING SCHEDULED"
       redirect_to meetings_path, notice: 'Meeting scheduled successfully.'
     else
+      logger.error "NOT SCHEDULED: #{@meeting}"
+      logger.error "Validation errors: #{@meeting.errors.full_messages}"
+
       render :new
     end
   end
@@ -36,6 +44,24 @@ class MeetingsController < ApplicationController
     end
   end
 
+  def accept_meeting
+    @current_uid = current_user.uid
+    @meeting = Meeting.find_by(id: params[:id])
+    if @meeting
+      @meeting.update(accepted: true, accepted_uid: @current_uid)
+      redirect_to meetings_path, notice: 'Meeting accepted.'
+    end
+  end
+
+  def unaccept_meeting
+    @current_uid = current_user.uid
+    @meeting = Meeting.find_by(id: params[:id])
+    if @meeting
+      @meeting.update(accepted: false, accepted_uid: nil)
+      redirect_to meetings_path, notice: 'Meeting unaccepted.'
+    end
+  end
+
   private
 
   def set_uid
@@ -44,6 +70,6 @@ class MeetingsController < ApplicationController
   end
 
   def meeting_params
-    params.require(:meeting).permit(:date, :time, :location, :recurring)
+    params.require(:meeting).permit(:date, :time, :location, :recurring, :accepted)
   end
 end

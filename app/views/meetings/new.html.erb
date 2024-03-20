@@ -16,6 +16,7 @@
     <%= f.label :recurring %>
     <%= f.check_box :recurring %>
   </div>
+  <%= f.hidden_field :accepted, value: false %>
   <div>
     <%= f.submit 'Schedule Meeting' %>
   </div>
