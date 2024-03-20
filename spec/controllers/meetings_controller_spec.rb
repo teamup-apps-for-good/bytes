@@ -46,6 +46,135 @@ RSpec.describe MeetingsController, type: :controller do
       expect(response).to redirect_to(meetings_path)
     end
   end
+  
+  describe 'POST accept_meeting' do
+    it 'accepts the meeting' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '7', user_type: 'recipient',
+                  date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      meeting = Meeting.create(uid: '123456789', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: false, accepted_uid: nil)
+      post :accept_meeting, params: { id: meeting.id }
+      expect(Meeting.where(accepted: true).count).to eq(1)
+    end
+    it 'redirects to the meetings index' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '7', user_type: 'recipient',
+                  date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      meeting = Meeting.create(uid: '123456789', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: false, accepted_uid: nil)
+      post :accept_meeting, params: { id: meeting.id }
+      expect(response).to redirect_to(meetings_path)
+    end
+  end
+
+  describe 'POST unaccept_meeting' do
+    it 'unaccepts the meeting' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '7', user_type: 'recipient',
+                  date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      meeting = Meeting.create(uid: '123456789', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '254007932')
+      post :unaccept_meeting, params: { id: meeting.id }
+      expect(Meeting.where(accepted: true).count).to eq(0)
+    end
+    it 'redirects to the meetings index' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '7', user_type: 'recipient',
+                  date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      meeting = Meeting.create(uid: '123456789', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '254007932')
+      post :unaccept_meeting, params: { id: meeting.id }
+      expect(response).to redirect_to(meetings_path)
+    end
+  end
+
+  describe '#get_next_week(id)' do
+    it 'returns the date of a week after a given meeting' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '7', user_type: 'recipient',
+      date_joined: '01/01/2022')
+      session[:user_id] = user.id
+      meeting = Meeting.create(uid: '123456789', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '254007932', recurring: true)
+      expected_date_string = (meeting.date + 7.days)
+      expect(controller.get_next_week(meeting.id)).to eq(expected_date_string)
+    end
+  end
+
+  describe 'POST donor_cancel' do
+    context 'recurring meeting' do
+      it 'resets accepted' do
+        user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                  date_joined: '01/01/2022')
+        session[:user_id] = user.id
+        meeting = Meeting.create(uid: '254007932', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '123456789', recurring: true)
+        post :donor_cancel, params: {id: meeting.id}
+        expect(Meeting.find_by(id: meeting.id).accepted).to eq(false)
+        expect(Meeting.find_by(id: meeting.id).accepted_uid).to eq(nil)
+      end
+      it 'redirects to meeting index' do
+        user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                  date_joined: '01/01/2022')
+        session[:user_id] = user.id
+        meeting = Meeting.create(uid: '254007932', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '123456789', recurring: true)
+        post :donor_cancel, params: {id: meeting.id}
+        expect(response).to redirect_to(meetings_path)
+      end
+    end
+    context 'non-recurring meeting' do
+      it 'destroys the meeting' do
+        user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                  date_joined: '01/01/2022')
+        session[:user_id] = user.id
+        meeting = Meeting.create(uid: '254007932', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '123456789', recurring: false)
+        post :complete_transaction, params: {id: meeting.id}
+        expect(Meeting.count).to eq(0)
+      end
+      it 'redirects to meetings index' do
+        user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                  date_joined: '01/01/2022')
+        session[:user_id] = user.id
+        meeting = Meeting.create(uid: '254007932', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '123456789', recurring: false)
+        post :complete_transaction, params: {id: meeting.id}
+        expect(response).to redirect_to(meetings_path)
+      end
+    end
+  end
+
+  describe 'POST complete_transaction' do
+    context 'recurring meeting' do
+      it 'resets accepted' do
+        user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '7', user_type: 'recipient',
+                  date_joined: '01/01/2022')
+        session[:user_id] = user.id
+        meeting = Meeting.create(uid: '123456789', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '254007932', recurring: true)
+        post :complete_transaction, params: {id: meeting.id}
+        expect(Meeting.find_by(id: meeting.id).accepted).to eq(false)
+        expect(Meeting.find_by(id: meeting.id).accepted_uid).to eq(nil)
+      end
+      it 'redirects to meeting index' do
+        user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '7', user_type: 'recipient',
+                  date_joined: '01/01/2022')
+        session[:user_id] = user.id
+        meeting = Meeting.create(uid: '123456789', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '254007932', recurring: true)
+        post :complete_transaction, params: {id: meeting.id}
+        expect(response).to redirect_to(meetings_path)
+      end
+    end
+    context 'non-recurring meeting' do
+      it 'destroys the meeting' do
+        user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '7', user_type: 'recipient',
+                  date_joined: '01/01/2022')
+        session[:user_id] = user.id
+        meeting = Meeting.create(uid: '123456789', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '254007932')
+        post :complete_transaction, params: {id: meeting.id}
+        expect(Meeting.count).to eq(0)
+      end
+      it 'redirects to meetings index' do
+        user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '7', user_type: 'recipient',
+                  date_joined: '01/01/2022')
+        session[:user_id] = user.id
+        meeting = Meeting.create(uid: '123456789', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '254007932')
+        post :complete_transaction, params: {id: meeting.id}
+        expect(response).to redirect_to(meetings_path)
+      end
+    end
+  end
 
 
   describe 'POST create' do

@@ -53,4 +53,8 @@ Rails.application.routes.draw do
   get '/users/new', to: 'users#new', as: 'new-user'
   post '/users', to: 'users#create', as: 'create-user'
   get '/users', to: 'users#index', as: 'user-list'
+  post '/meetings/:id/accept', to: 'meetings#accept_meeting', as: 'accept-meeting'
+  post '/meetings/:id/unaccept', to: 'meetings#unaccept_meeting', as: 'unaccept-meeting'
+  post '/meetings/:id/complete', to: 'meetings#complete_transaction', as: 'complete-meeting'
+  post '/meetings/:id/donor_cancel', to: 'meetings#donor_cancel', as: 'donor-cancel'
 end

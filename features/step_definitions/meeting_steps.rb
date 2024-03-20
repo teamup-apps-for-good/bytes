@@ -13,6 +13,33 @@ Given('I have successfully scheduled a meeting') do
   click_button "Schedule Meeting"
 end
 
+Given('I have successfully scheduled a recurring meeting') do
+  fill_in 'meeting[date]', with: '2024-03-11'
+  fill_in 'meeting[time]', with: '12:00 PM'
+  fill_in 'meeting[location]', with: 'Conference Room'
+  checkbox = find("#newRecurring")
+  checkbox.click
+  click_button "Schedule Meeting"
+end
+
+Given('there is a meeting listed') do
+  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: false, accepted_uid: nil)
+end
+
+Given('I have an accepted meeting listed') do
+  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '123456789')
+end
+
+Given('I as a recipient have an accepted meeting listed') do
+  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '11112222')
+end
+
+
+
+Given('I have an accepted recurring meeting listed') do
+  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '123456789', recurring: true)
+end
+
 When('I fill in the meeting form with valid details') do
   fill_in 'meeting[date]', with: '2024-03-11'
   fill_in 'meeting[time]', with: '12:00 PM'
@@ -36,14 +63,28 @@ end
 
 Then('I should see the new meeting in the meetings list') do
   visit meetings_path
-  expect(page).to have_content('2024-03-11')
-  expect(page).to have_content('12:00:00 UTC')
+  expect(page).to have_content('03/11/2024')
+  expect(page).to have_content('12:00 PM')
   expect(page).to have_content('Conference Room')
 end
 
 Then('I should not see the meeting in the meetings list') do
   visit meetings_path
-  expect(page).to have_no_content('2024-03-11')
-  expect(page).to have_no_content('12:00:00 UTC')
+  expect(page).to have_no_content('03/11/2024')
+  expect(page).to have_no_content('12:00 PM')
   expect(page).to have_no_content('Conference Room')
+end
+
+Then('I should see the meeting in my meetings') do
+  table = find("#yourMeetingsTable")
+  expect(table).to have_content('03/11/2024')
+  expect(table).to have_content('12:00 PM')
+  expect(table).to have_content('Conference Room')
+end
+
+Then('I should see the meeting listed publicly') do
+  table = find("#publicMeetingsTable")
+  expect(table).to have_content('03/11/2024')
+  expect(table).to have_content('12:00 PM')
+  expect(table).to have_content('Conference Room')
 end
