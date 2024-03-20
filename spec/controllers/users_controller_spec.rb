@@ -272,4 +272,25 @@ RSpec.describe UsersController do
       expect(flash[:warning]).to eq("Too many credits to be a recipient")
     end
   end
+
+  describe 'GET new' do
+    context 'when CreditPool is found' do
+      it 'assigns @id_name' do
+        credit_pool = CreditPool.create({ email_suffix: 'example.edu', credits: 1000, id_name: 'ID' })
+        session[:email] = 'test@example.com'
+        get :new
+
+        expect(assigns(:id_name)).to eq(credit_pool.id_name)
+      end
+    end
+
+    context 'when CreditPool is not found' do
+      it 'assigns default value to @id_name' do
+        session[:email] = 'test@example.com'
+        get :new
+
+        expect(assigns(:id_name)).to eq('ID')
+      end
+    end
+  end
 end

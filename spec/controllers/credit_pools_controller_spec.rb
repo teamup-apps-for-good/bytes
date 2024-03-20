@@ -84,4 +84,13 @@ RSpec.describe CreditPoolsController do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe 'show' do
+    it 'assigns the requested credit_pool to @credit_pool' do
+      session[:user_id] = @user.id
+      pool = CreditPool.find_by(school_name: 'TAMU')
+      get :show, params: { id: pool.id }
+      expect(assigns(:credit_pool)).to eq(pool)
+    end
+  end
 end
