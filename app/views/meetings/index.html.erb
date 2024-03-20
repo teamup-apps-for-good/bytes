@@ -14,81 +14,99 @@
       Public Meetings
     </p>
     <% if @user.user_type == "donor" %>
-      <%= link_to 'Schedule a Meeting', new_meeting_path %>
+      <div style="margin: 50px 0;">
+        <%= link_to 'Schedule a Meeting', new_meeting_path, class: 'actionBtn' %>
+      </div>
     <% end %>
 
-    <table class="transTable" id="publicMeetingsTable">
-      <thead class="thead-dark">
-        <tr>
-          <th class="text-center">Posted by</th>
-          <th class="text-center">Time</th>
-          <th class="text-center">Date</th>
-          <th class="text-center">Location</th>
-          <th class="text-center">Cancel</th>
-          <% if @user.user_type == "recipient" %>
-            <th class="text-center">Accept</th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% @meetings.each do |meeting| %>
-          <tr class='meeting-item'>
-            <td><%= meeting.uid %></td>
-            <td><%= meeting.time.strftime("%I:%M %p") %></td>
-            <td>
-                <%= meeting.date.strftime("%a %m/%d/%Y") %>
-            </td>
-            <td><%= meeting.location %></td>
-            <td><% if meeting.uid == @current_uid %><%= button_to 'Cancel', "/meetings/#{meeting.id}", method: :delete %><% end %></td>
+    <div style="margin: 30px 0;">
+      <table class="transTable" id="publicMeetingsTable">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center">Posted by</th>
+            <th class="text-center">Time</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Location</th>
+            <th class="text-center">Cancel</th>
             <% if @user.user_type == "recipient" %>
-              <td><%= button_to "Accept", accept_meeting_path(id: meeting.id)%></td>
+              <th class="text-center">Accept</th>
             <% end %>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% if @meetings.present? %>
+            <% @meetings.each do |meeting| %>
+              <tr class='meeting-item'>
+                <td><%= meeting.uid %></td>
+                <td><%= meeting.time.strftime("%I:%M %p") %></td>
+                <td>
+                    <%= meeting.date.strftime("%a %m/%d/%Y") %>
+                </td>
+                <td><%= meeting.location %></td>
+                <td><% if meeting.uid == @current_uid %><%= button_to 'Cancel', "/meetings/#{meeting.id}", method: :delete, class: 'actionBtn' %><% end %></td>
+                <% if @user.user_type == "recipient" %>
+                  <td><%= button_to "Accept", accept_meeting_path(id: meeting.id), class: 'actionBtn' %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="7">No public meetings.</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
     <p class="char">
       Your Meetings
     </p>
 
-    <table class="transTable" id="yourMeetingsTable">
-      <thead class="thead-dark">
-        <tr>
-          <th class="text-center">Posted by</th>
-          <th class="text-center">Accepted By</th>
-          <th class="text-center">Time</th>
-          <th class="text-center">Date</th>
-          <th class="text-center">Location</th>
-          <th class="text-center">Cancel</th>
-          <th class="text-center">Complete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @user_meetings.each do |meeting| %>
-          <tr class='meeting-item'>
-            <td><%= meeting.uid %></td>
-            <td><%= meeting.accepted_uid %></td>
-            <td><%= meeting.time.strftime("%I:%M %p") %></td>
-            <td><%= meeting.date.strftime("%a %m/%d/%Y") %></td>
-            <td><%= meeting.location %></td>
-            <td>
-              <% if meeting.uid == @current_uid %>
-                <%# donor button %>
-                <%= button_to 'Cancel', donor_cancel_path(meeting.id) %>
-              <% end %>
-              <% if meeting.accepted_uid == @current_uid %>
-                <%# recipient button %>
-                <%= button_to 'Cancel', unaccept_meeting_path(id: meeting.id) %>
-              <% end %>
-            </td>
-            <td>
-              <%= button_to "done", complete_meeting_path(id: meeting.id) %>
-            </td>
+    <div style="margin: 20px 0;">
+      <table class="transTable" id="yourMeetingsTable">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center">Posted by</th>
+            <th class="text-center">Accepted By</th>
+            <th class="text-center">Time</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Location</th>
+            <th class="text-center">Cancel</th>
+            <th class="text-center">Complete</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% if @user_meetings.present? %>
+            <% @user_meetings.each do |meeting| %>
+              <tr class='meeting-item'>
+                <td><%= meeting.uid %></td>
+                <td><%= meeting.accepted_uid %></td>
+                <td><%= meeting.time.strftime("%I:%M %p") %></td>
+                <td><%= meeting.date.strftime("%a %m/%d/%Y") %></td>
+                <td><%= meeting.location %></td>
+                <td>
+                  <% if meeting.uid == @current_uid && @user.user_type == 'donor' %>
+                    <%# donor button %>
+                    <%= button_to 'Cancel', donor_cancel_path(meeting.id), class: 'actionBtn' %>
+                  <% end %>
+                  <% if meeting.accepted_uid == @current_uid && @user.user_type == 'recipient' %>
+                    <%# recipient button %>
+                    <%= button_to 'Cancel', unaccept_meeting_path(id: meeting.id), class: 'actionBtn' %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= button_to "Done", complete_meeting_path(id: meeting.id), class: 'actionBtn' %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="7">No meetings scheduled.</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
