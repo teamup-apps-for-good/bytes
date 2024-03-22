@@ -19,8 +19,6 @@ Background: Users in database
     Given the following meetings exist:
     |   uid    |     date       | time   | location | recurring |
     | 123456   | 01/01/2024     | 9:00pm | Sbisa    | false     |
-    | 324567   | 01/02/2024     | 7:00pm | Zack     | false     |
-    | 124124   | 01/03/2024     | 1:00pm | Hullabaloo | true     |
 
     Given the following schools exist:
     |     name              |    domain   |      logo             |
@@ -46,3 +44,16 @@ Scenario: If meetings don't exist, I should not see any on the meeting page
     And I am on the meeting page
     And There are no existing meetings
     Then I should not see any meetings on the page
+
+Scenario: Meeting accept
+    Given that I am logged in an account with 9 credits
+    And I am on the meeting page
+    And I accept a meeting
+    Then I should see it under My Meetings
+
+Scenario: Meeting resolve
+    Given that I am logged in an account with 9 credits
+    And I am on the meeting page
+    And I accept a meeting
+    And I resolve the meeting
+    Then I should see no meetings under My Meetings

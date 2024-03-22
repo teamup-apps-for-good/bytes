@@ -26,3 +26,19 @@ And('There are no existing meetings') do
     Meeting.destroy_all
     visit("/meetings")
 end
+
+And('I accept a meeting') do
+    click_button "Accept"
+  end
+  
+Then('I should see it under My Meetings') do
+    expect(page).to have_css('.meeting-item')
+end
+  
+And('I resolve the meeting') do
+    click_button "Done"
+end
+  
+Then('I should see no meetings under My Meetings') do
+    expect(page).not_to have_css('.meeting-item')
+end
