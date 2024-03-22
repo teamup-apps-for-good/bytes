@@ -19,7 +19,6 @@ require 'webmock/rspec'
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.exclude_pattern = 'app/channels/*' 
   config.before do
     # needs to change after external api update
     uin_110011_response = {
