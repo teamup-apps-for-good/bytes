@@ -30,7 +30,7 @@ RSpec.describe MeetingsController, type: :controller do
       meeting = Meeting.create(date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', uid: user.id)
 
       session[:user_id] = user.id
-      puts "MEETING ID: " + meeting.id.to_s
+      #puts "MEETING ID: " + meeting.id.to_s
       delete :destroy, params: {id: meeting.id}
       expect(Meeting.count).to eq(0)
     end
