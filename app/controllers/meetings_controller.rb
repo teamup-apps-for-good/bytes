@@ -29,6 +29,25 @@ class MeetingsController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(session[:user_id])
+    @current_uid = current_user.uid
+    @meeting = Meeting.find_by(id: params[:id])
+  end
+
+  def update
+    @meeting = Meeting.find_by(id: params[:id])
+    respond_to do |format|
+      if @meeting.update(meeting_params)
+        format.html { redirect_to '/meetings', notice: "Your meeting was successfully updated." }
+        format.json { render :show, status: :ok, location: @meeting }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @meeting.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def destroy
     @current_uid = current_user.uid
     @meeting = Meeting.find_by(id: params[:id])

@@ -1,0 +1,23 @@
+<h1>Edit a Meeting</h1>
+<%= form_with url: @meeting, method: :patch do |f| %>
+  <div>
+    <%= label :meeting, :date, 'Date' %>
+    <%= date_field :meeting, :date, value: @meeting.date %>
+  </div>
+  <div>
+    <%= label :meeting, :time, 'Time' %>
+    <%= time_field :meeting, :time, value: @meeting.time %>
+  </div>
+  <div>
+  <%= label :meeting, :location, 'Location' %>
+  <%= text_field :meeting, :location, value: @meeting.location %>
+  </div>
+  <div>
+  <%= label :meeting, :recurring, 'Recurring' %>
+  <%= check_box :meeting, :recurring, value: @meeting.recurring %>
+  </div>
+  <%= f.hidden_field :accepted, value: false %>
+  <div>
+    <%= f.submit 'Confirm Changes' %>
+  </div>
+<% end %>

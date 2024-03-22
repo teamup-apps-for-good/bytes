@@ -27,10 +27,7 @@
             <th class="text-center">Time</th>
             <th class="text-center">Date</th>
             <th class="text-center">Location</th>
-            <th class="text-center">Cancel</th>
-            <% if @user.user_type == "recipient" %>
-              <th class="text-center">Accept</th>
-            <% end %>
+            <th class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -43,7 +40,12 @@
                     <%= meeting.date.strftime("%a %m/%d/%Y") %>
                 </td>
                 <td><%= meeting.location %></td>
-                <td><% if meeting.uid == @current_uid %><%= button_to 'Cancel', "/meetings/#{meeting.id}", method: :delete, class: 'actionBtn' %><% end %></td>
+                <% if meeting.uid == @current_uid %>
+                  <td>
+                    <%= button_to 'Edit', "/meetings/#{meeting.id}/edit", method: :get, class: 'actionBtn' %>
+                    <%= button_to 'Cancel', "/meetings/#{meeting.id}", method: :delete, class: 'actionBtn' %>
+                  </td>
+                <% end %>
                 <% if @user.user_type == "recipient" %>
                   <td><%= button_to "Accept", accept_meeting_path(id: meeting.id), class: 'actionBtn' %></td>
                 <% end %>

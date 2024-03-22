@@ -48,6 +48,37 @@ Given('I am logged in') do
   click_on 'Login with Google'
 end
 
+Given('I log in with a different uid') do
+  user = User.create(name: 'John', uid: '3242986', email: 'john@tamu.edu', credits: '50', user_type: 'donor',
+                     date_joined: '01/01/2022')
+
+  # This stub is for handling the external api call that is made when logging in
+  response = {
+    credits: user.credits,
+    first_name: user.name,
+    email: user.email,
+    uid: user.uid
+  }
+  stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uid}))
+    .to_return(status: 200, body: response.to_json)
+
+  @user = user
+  @id = user.id
+  @name = user.name
+  @email = user.email
+  @credits = user.credits
+  @user_type = user.user_type
+  @uid = user.uid
+  @user_school = School.find_by(domain: @user.email.split('@').last)
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(
+    :google_oauth2,
+    uid: user.id,
+    info: { email: user.email }
+  )
+  click_on 'Login with Google'
+end
+
 When('I go to the profile page') do
   visit('/users/profile')
 end

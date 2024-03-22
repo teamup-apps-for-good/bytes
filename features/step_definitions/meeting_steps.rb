@@ -61,6 +61,13 @@ When('I fill in the meeting form without location') do
   fill_in 'meeting[time]', with: '12:00 PM'
 end
 
+When('I edit a meeting\'s info') do
+  fill_in 'meeting[date]', with: '2024-03-12'
+  fill_in 'meeting[time]', with: '12:30 PM'
+  fill_in 'meeting[location]', with: 'Conference Room 2'
+  click_button 'Confirm Changes'
+end
+
 Then('I should see the new meeting in the meetings list') do
   visit meetings_path
   expect(page).to have_content('03/11/2024')
@@ -87,4 +94,26 @@ Then('I should see the meeting listed publicly') do
   expect(table).to have_content('03/11/2024')
   expect(table).to have_content('12:00 PM')
   expect(table).to have_content('Conference Room')
+end
+
+Then('I should see the {string} button') do |string|
+  table = find("#publicMeetingsTable")
+  expect(table).to have_content(string)
+end
+
+Then('I should see the fields are autofilled with my meeting\'s info') do
+  expect(page).to have_field('meeting_date', with: '2024-03-11')
+  expect(page).to have_field('meeting_time', with: '12:00:00.000')
+  expect(page).to have_field('meeting_location', with: 'Conference Room')
+end
+
+Then('the meeting should have the updated information') do
+  table = find("#publicMeetingsTable")
+  expect(table).to have_content('03/12/2024')
+  expect(table).to have_content('12:30 PM')
+  expect(table).to have_content('Conference Room 2')
+end
+
+Then('I should not see the {string} button') do |string|
+  expect(page).to have_no_content('Edit')
 end

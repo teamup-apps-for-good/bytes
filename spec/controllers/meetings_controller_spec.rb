@@ -24,6 +24,17 @@ RSpec.describe MeetingsController, type: :controller do
     end
   end
 
+  describe 'GET edit' do
+    it 'renders the edit template' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                  date_joined: '01/01/2022')
+      meeting = Meeting.create(date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', uid: user.id)
+      session[:user_id] = user.id
+      get :edit, params: {id: meeting.id}
+      expect(response).to render_template('edit')
+    end
+  end
+
   describe 'DELETE destroy' do
     it 'destroys the requested meeting' do
       user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor', date_joined: '01/01/2022')
@@ -253,6 +264,17 @@ RSpec.describe MeetingsController, type: :controller do
             post :create, params: { meeting: { date: '2024-03-11', location: 'Conference Room' } }
             expect(response).to have_http_status(200)
         end
+    end
+  end
+
+  describe 'PATCH update' do
+    it 'redirects to index' do
+      user = User.create(name: 'John', uid: '254007932', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
+                  date_joined: '01/01/2022')
+      meeting = Meeting.create(date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', uid: user.id)
+      session[:user_id] = user.id
+      patch :update, params: {id: meeting.id, meeting: {date: '2024-03-12', time: '12:30 PM', location: 'Conference Room 2', recurring: false, accepted: false} }
+      expect(response).to have_http_status(:redirect)
     end
   end
 end
