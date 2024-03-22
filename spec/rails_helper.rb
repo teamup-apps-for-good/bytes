@@ -4,6 +4,12 @@
 require 'spec_helper'
 require 'simplecov'
 SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_filter 'app/channels'
+  add_filter 'app/jobs'
+  add_filter 'app/mailers'
+  add_filter 'app/helpers'
+end
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
