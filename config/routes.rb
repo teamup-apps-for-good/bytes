@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :pages
   resources :transactions
   resources :schools
-  resources :meetings, only: [:index, :new, :create, :destroy]
+  resources :meetings, only: [:index, :new, :create, :destroy, :edit, :update]
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -57,4 +57,5 @@ Rails.application.routes.draw do
   post '/meetings/:id/unaccept', to: 'meetings#unaccept_meeting', as: 'unaccept-meeting'
   post '/meetings/:id/complete', to: 'meetings#complete_transaction', as: 'complete-meeting'
   post '/meetings/:id/donor_cancel', to: 'meetings#donor_cancel', as: 'donor-cancel'
+
 end
