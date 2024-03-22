@@ -11,7 +11,6 @@ end
 Then('I should see a valid metric displayed on screen') do
     
     element = find('.metric-text')
-    puts element
     expect(element.text).not_to be_empty
 end
   

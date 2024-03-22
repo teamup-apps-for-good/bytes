@@ -19,7 +19,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(meeting_params.merge(uid: @current_uid, accepted: false))
 
     if @meeting.save
-      puts "MEETING SCHEDULED"
+
       redirect_to meetings_path, notice: 'Meeting scheduled successfully.'
     else
       logger.error "NOT SCHEDULED: #{@meeting}"
@@ -32,7 +32,6 @@ class MeetingsController < ApplicationController
   def destroy
     @current_uid = current_user.uid
     @meeting = Meeting.find_by(id: params[:id])
-    puts "MEETING: " + @meeting.to_s
     if @meeting
       if @meeting.destroy
         redirect_to meetings_path, notice: 'Meeting deleted successfully.'
@@ -40,7 +39,6 @@ class MeetingsController < ApplicationController
         redirect_to meetings_path, notice: 'Error: Meeting not deleted.'
       end
     else
-      puts "DOESNT GO THROUGH"
       redirect_to meetings_path, notice: 'Error: Meeting not found.'
     end
   end

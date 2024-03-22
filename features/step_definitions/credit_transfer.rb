@@ -42,7 +42,6 @@ end
 When('I press the {string} button as this user') do |string|
   @pool = CreditPool.find_by(credits: 50)
   @pool_before = @pool.credits
-  puts @pool_before
 
   stub_request(:patch, "https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uid}/update_credits/10")
     .with(
