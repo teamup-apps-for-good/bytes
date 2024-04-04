@@ -57,7 +57,7 @@
       <%= link_to "Log Out", logout_path %>
   </div>
 
-  <% if @user_school.present? %>
-    <%= image_tag @user_school.logo, class: "school-logo" %>
+  <% if @user_school.present? && @user_school.logo_url.present? %>
+    <%= image_tag @user_school.logo_url, class: "school-logo" %>
   <% end %>
 </div>
