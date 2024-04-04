@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_19_214112) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_04_185744) do
   create_table "credit_pools", force: :cascade do |t|
     t.integer "credits"
     t.datetime "created_at", null: false
@@ -31,12 +31,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_214112) do
     t.datetime "updated_at", null: false
     t.boolean "accepted", default: false
     t.string "accepted_uid"
-  end
-
-  create_table "schools", force: :cascade do |t|
-    t.string "name"
-    t.string "domain"
-    t.string "logo"
   end
 
   create_table "transactions", force: :cascade do |t|

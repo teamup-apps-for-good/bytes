@@ -153,9 +153,9 @@ RSpec.describe UsersController do
   end
 
   describe 'user school is fetched' do
-    it 'returns the logo of the corresponding school' do
+    it 'returns the corresponding school' do
       get :show, session: { user_id: User.find_by(uid: '123456').id }
-      expect(assigns[:user_school].logo).to eq('tamu-logo-words.png')
+      expect(assigns[:user_school].email_suffix).to eq('tamu.edu')
     end
 
     context 'when user email domain does not match any school domain' do

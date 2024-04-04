@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
     pool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
     @id_name = pool.presence ? pool.id_name : 'ID'
-    @user_school = School.find_by(domain: @user.email.split('@').last)
+    @user_school = pool
   end
 
   def new
@@ -121,8 +121,9 @@ class UsersController < ApplicationController
   def receive
     @user = User.find_by(id: session[:user_id])
     @uid = @user.uid
-
+    puts "CREDIT POOL: " + @user.email.partition('@').last
     @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+    puts "ACTUAL: " + CreditPool.all.length.to_s
   end
 
   def do_receive

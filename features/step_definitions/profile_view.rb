@@ -38,7 +38,7 @@ Given('I am logged in') do
   @credits = user.credits
   @user_type = user.user_type
   @uid = user.uid
-  @user_school = School.find_by(domain: @user.email.split('@').last)
+  @user_school = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(
     :google_oauth2,
@@ -69,7 +69,7 @@ Given('I log in with a different uid') do
   @credits = user.credits
   @user_type = user.user_type
   @uid = user.uid
-  @user_school = School.find_by(domain: @user.email.split('@').last)
+  @user_school =  CreditPool.find_by(email_suffix: @user.email.partition('@').last)
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(
     :google_oauth2,
