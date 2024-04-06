@@ -17,11 +17,12 @@ Background: Users in database
     |      0      |     tamu.edu     |     UIN     |      TAMU       |
     |      0      |    exmaple.edu   |     EXP     |      EXP        |
 
+
 Scenario: user logs in with TAMU email
     Given I am a user with the email of "j@tamu.edu"
     Given there is an user with the email of "j@tamu.edu", uid of "123456", and 10 credits in the external API
     And I am on the login page
-    And I click on the "Login with Google" button
+    When I click on the "Login with Google" button
     Then I should be logged in successfully
 
 Scenario: user logs in with edu email

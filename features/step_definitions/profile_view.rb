@@ -31,6 +31,18 @@ Given('I am logged in') do
   stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uid}))
     .to_return(status: 200, body: response.to_json)
 
+    stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{user.email}/validate_admin").
+      with(
+        headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
+          'User-Agent'=>'Ruby'
+        }
+      ).
+      to_return(status: 200, body: {valid: false}.to_json, headers: {})
+
+
   @user = user
   @id = user.id
   @name = user.name
@@ -61,6 +73,18 @@ Given('I log in with a different uid') do
   }
   stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uid}))
     .to_return(status: 200, body: response.to_json)
+
+    stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{user.email}/validate_admin").
+    with(
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
+        'User-Agent'=>'Ruby'
+      }
+    ).
+    to_return(status: 200, body: "false", headers: {})
+
 
   @user = user
   @id = user.id

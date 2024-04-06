@@ -16,6 +16,18 @@ Given('that I am logged in an account with {int} credits') do |int|
   stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{@user.uid}))
     .to_return(status: 200, body: response.to_json)
 
+    stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{@user.email}/validate_admin").
+    with(
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
+        'User-Agent'=>'Ruby'
+      }
+    ).
+    to_return(status: 200, body: "false", headers: {})
+
+
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(
     :google_oauth2,

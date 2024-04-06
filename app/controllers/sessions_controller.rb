@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
     auth = request.env['omniauth.auth']
     begin
       @user = User.find_by(email: auth['info']['email'])
+      @user.set_admin
       set_session if @user.valid?
     rescue StandardError
       session[:email] = auth['info']['email']

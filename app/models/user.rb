@@ -5,6 +5,7 @@ require 'net/http'
 # Class that represents a user of the app
 class User < ApplicationRecord
   validates :uid, :name, :email, :user_type, presence: true
+  attribute :admin, :boolean, default: false
 
   def fetch_num_credits
     uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{uid}")
@@ -30,5 +31,16 @@ class User < ApplicationRecord
     fetch_num_credits
 
     response
+  end
+
+  def set_admin
+    uri = URI("https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{email}/validate_admin")
+    res = Net::HTTP.get(uri)
+    json_res = JSON.parse(res)
+    if json_res == true
+      update(admin: true)
+    else 
+      update(admin: false)
+    end
   end
 end

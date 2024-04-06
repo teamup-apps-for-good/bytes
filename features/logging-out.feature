@@ -12,6 +12,5 @@ Background: Users in database
 Scenario: user logs out successfully
     Given there is an user with the email of "j@tamu.edu", uid of "123456", and 10 credits in the external API
     Given I am already logged in as an user with the email of "j@tamu.edu"
-    And I am on the profile page
     When the user presses "Log Out"
     Then I should be logged out successfully
