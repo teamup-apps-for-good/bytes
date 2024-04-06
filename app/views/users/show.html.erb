@@ -4,7 +4,7 @@
 <div class="outerDiv">
   <div id="user-details">
     <div class="titleDiv">
-      <p class="title">User Profile</p>
+      <p class="title"><% if @user.admin %>Administrator<% else %>User<% end %> Profile</p>
     </div>
 
     <div class="charDiv">

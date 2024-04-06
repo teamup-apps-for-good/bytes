@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_04_185744) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_06_201908) do
   create_table "credit_pools", force: :cascade do |t|
     t.integer "credits"
     t.datetime "created_at", null: false
@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_185744) do
     t.date "date_joined"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin"
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 

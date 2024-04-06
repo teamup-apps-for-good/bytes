@@ -7,7 +7,17 @@ Given('I am already logged in as an user with the email of {string}') do |email|
     :google_oauth2,
     info: { email: }
   )
+  stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{email}/validate_admin").
+        with(
+          headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
+          'User-Agent'=>'Ruby'
+          }).
+        to_return(status: 200, body: "false", headers: {})
   click_on 'Login with Google'
+  visit user_profile_path
 end
 
 And('I am on the profile page') do

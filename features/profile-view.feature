@@ -10,14 +10,8 @@ Feature: profile view
 
 Background: Users in database
     Given the following credit pools exist:
-    |   credits   |   email_suffix   |   id_name   |   school_name   |
-    |      0      |     tamu.edu     |     UIN     |      TAMU       |
-
-    Given the following schools exist:
-    |     name              |    domain   |      logo             |
-    | Texas A&M University  |  tamu.edu   |  tamu-logo-words.png  |
-    | University of Houston |  uh.edu     |  background.png       |
-    | Rice University       |  ru.edu     |  background2.png      |  
+    |   credits   |   email_suffix   |   id_name   |   school_name   | logo_url                                                  |
+    |      0      |     tamu.edu     |     UIN     |      TAMU       | https://www.tamu.edu/_files/images/athletics/LoneStar.png |
 
 Scenario: student logs in
     Given I am on the login page
