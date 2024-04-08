@@ -5,9 +5,73 @@ $user_request_limit = 10
 # controller class for Users
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
+  # before_action :require_admin, only: [:admin_home]
 
   def index
     @users = User.all
+  end
+
+  # admin specific controller methods
+
+  def admin_home
+    @user = User.find(session[:user_id])
+    pool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+    @id_name = pool.presence ? pool.id_name : 'ID'
+    @user_school = pool
+  end
+
+  def admin_add_to_pool
+    # check to make value is an integer
+    unless params[:credits].to_i.to_s == params[:credits]
+      flash[:warning] = 'ERROR Invalid input!'
+      redirect_to :admin_home
+      return
+    end
+
+    num_credits = params[:credits].to_i
+    @user = User.find(session[:user_id])
+
+    if num_credits.zero? || num_credits.negative?
+      flash[:warning] = 'ERROR Invalid input!'
+      redirect_to :admin_home
+      return
+    end
+
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+    @creditpool.add_credits(num_credits)
+
+    flash[:notice] = "CONFIRMATION Sucessfully added #{num_credits} credits to the pool!"
+    redirect_to :admin_home
+  end
+
+  def admin_subtract_from_pool
+    # check to make value is an integer
+    unless params[:credits].to_i.to_s == params[:credits]
+      flash[:warning] = 'ERROR Invalid input!'
+      redirect_to :admin_home
+      return
+    end
+
+    num_credits = params[:credits].to_i
+    @user = User.find(session[:user_id])
+
+    if num_credits.zero? || num_credits.negative?
+      flash[:warning] = 'ERROR Invalid input!'
+      redirect_to :admin_home
+      return
+    end
+
+    @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+
+    if num_credits > @creditpool.credits
+      flash[:warning] = "Can't subtract more credits than there are available, only #{@creditpool.credits} credits currently in pool"
+      redirect_to :admin_home
+      return
+    end
+
+    @creditpool.subtract_credits(num_credits)
+    flash[:notice] = "CONFIRMATION Sucessfully subtracted #{num_credits} credits to the pool!"
+    redirect_to :admin_home
   end
 
   def show

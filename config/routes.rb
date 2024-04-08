@@ -41,6 +41,11 @@ Rails.application.routes.draw do
   # route to add to the credit pool
   post 'transaction/add_to_pool', to: 'credit_pools#add_to_pool'
 
+  # admin routes
+  get '/admin/home', to: 'users#admin_home', as: 'admin-home'
+  post '/admin/add_to_pool', to: 'users#admin_add_to_pool'
+  post 'admin/subtract_from_pool', to: 'users#admin_subtract_from_pool'
+
 
   # oauth stuff
   get '/logout', to: 'sessions#logout', as: 'logout'
