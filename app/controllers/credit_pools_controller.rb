@@ -15,6 +15,7 @@ class CreditPoolsController < ApplicationController
   def show
     @credit_pool = CreditPool.find(params[:id])  
     @types = ["donated", "received"]
+    @user = User.find(session[:user_id])
   end
 
   # GET /credit_pools/new
