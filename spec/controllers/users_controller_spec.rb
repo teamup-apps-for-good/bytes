@@ -11,6 +11,7 @@ RSpec.describe UsersController do
     CreditPool.destroy_all
     User.create({ name: 'Test', uid: '110011', email: 'test@tamu.edu', user_type: 'donor' })
     User.create({ name: 'John', uid: '123456', email: 'j@tamu.edu', user_type: 'donor' })
+    User.create({ name: 'Admin', uid: '123477', email: 'admin@tamu.edu', user_type: 'donor' })
     User.create({ name: 'Todd', uid: '654321', email: 'todd@tamu.edu', user_type: 'donor' })
     User.create({ name: 'Mark', uid: '324156', email: 'mark@tamu.edu', user_type: 'recipient' })
     User.create({ name: 'Kyle', uid: '987654', email: 'kyle@tamu.edu', user_type: 'recipient' })
@@ -290,6 +291,127 @@ RSpec.describe UsersController do
         get :new
 
         expect(assigns(:id_name)).to eq('ID')
+      end
+    end
+  end
+
+  describe 'Admin user specific methods' do
+    before { session[:user_id] = User.find_by(uid: '123477').id }
+    before { User.find_by(uid: '123477').set_admin }
+
+    describe 'admin_home' do
+      it 'allows an admin user onto the admin dashboard' do
+        get :admin_home
+        expect(response).to render_template('admin_home')
+      end
+
+      it 'redirects a non-admin user to the root page' do
+        session[:user_id] = User.find_by(uid: '123456').id
+        get :admin_home
+        expect(response).to redirect_to '/'
+      end
+    end
+
+    describe 'admin_add_to_pool' do
+      it 'properly increases credit pool' do 
+        post :admin_add_to_pool, params: {credits: 10}
+        expect(creditpool.reload.credits).to eq(110)
+      end
+
+      it 'properly redirects to admin dashboard' do 
+        post :admin_add_to_pool, params: {credits: 10}
+        expect(response).to redirect_to :admin_home
+      end
+
+      it 'gives a confirmation on successful increase of credits in pool' do 
+        post :admin_add_to_pool, params: {credits: 10}
+        expect(flash[:notice]).to eq("CONFIRMATION Successfully added 10 credits to the pool!")
+      end
+
+      it "doesn't allow non-number credit input" do
+        post :admin_add_to_pool, params: {credits: 'not a number'}
+        expect(flash[:warning]).to eq('ERROR Invalid input!')
+      end
+
+      it "doesn't allow non-integer credit input" do
+        post :admin_add_to_pool, params: {credits: 2.9393}
+        expect(flash[:warning]).to eq('ERROR Invalid input!')
+      end
+
+      it "doesn't allow negative credit input" do
+        post :admin_add_to_pool, params: {credits: -5}
+        expect(flash[:warning]).to eq('ERROR Invalid input!')
+      end
+
+      it "doesn't allow 0 credits as input" do
+        post :admin_add_to_pool, params: {credits: 0}
+        expect(flash[:warning]).to eq('ERROR Invalid input!')
+      end
+
+      it "doesn't allow non-admin user to decrease credit pool using this method" do
+        session[:user_id] = User.find_by(uid: '123456').id
+        post :admin_add_to_pool, params: {credits: 10}
+        expect(creditpool.reload.credits).to eq(100)
+      end
+
+      it 'redirects a non-admin user trying to call this method' do
+        session[:user_id] = User.find_by(uid: '123456').id
+        post :admin_add_to_pool, params: {credits: 10}
+        expect(response).to redirect_to '/'
+      end
+    end
+
+    describe 'admin_subtract_from_pool' do
+      it 'properly decreases credit pool' do 
+        post :admin_subtract_from_pool, params: {credits: 10}
+        expect(creditpool.reload.credits).to eq(90)
+      end
+
+      it 'properly redirects to admin dashboard' do 
+        post :admin_subtract_from_pool, params: {credits: 10}
+        expect(response).to redirect_to :admin_home
+      end
+
+      it 'gives a confirmation on successful increase of credits in pool' do 
+        post :admin_subtract_from_pool, params: {credits: 10}
+        expect(flash[:notice]).to eq("CONFIRMATION Successfully subtracted 10 credits from the pool!")
+      end
+
+      it "doesn't allow admin to subtract more credits than there are available" do
+        post :admin_subtract_from_pool, params: {credits: 200}
+        expect(flash[:warning]).to eq("Can't subtract more credits than there are available, only 100 credits currently in pool")
+      end
+
+      it "doesn't allow non-number credit input" do
+        post :admin_subtract_from_pool, params: {credits: 'not a number'}
+        expect(flash[:warning]).to eq('ERROR Invalid input!')
+      end
+
+      it "doesn't allow non-integer credit input" do
+        post :admin_subtract_from_pool, params: {credits: 3.4485}
+        expect(flash[:warning]).to eq('ERROR Invalid input!')
+      end
+
+      it "doesn't allow negative credit input" do
+        post :admin_subtract_from_pool, params: {credits: -5}
+        expect(flash[:warning]).to eq('ERROR Invalid input!')
+      end
+
+      it "doesn't allow 0 credits as input" do
+        post :admin_subtract_from_pool, params: {credits: 0}
+        expect(flash[:warning]).to eq('ERROR Invalid input!')
+      end
+
+      it "doesn't allow non-admin user to decrease credit pool using this method" do
+        session[:user_id] = User.find_by(uid: '123456').id
+        post :admin_subtract_from_pool, params: {credits: 10}
+        expect(creditpool.reload.credits).to eq(100)
+      end
+
+      it 'redirects a non-admin user trying to call this method' do
+        session[:user_id] = User.find_by(uid: '123456').id
+        post :admin_subtract_from_pool, params: {credits: 10}
+        expect(response).to redirect_to '/'
       end
     end
   end
