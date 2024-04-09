@@ -41,6 +41,16 @@ RSpec.configure do |config|
     stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/123456')
       .to_return(status: 200, body: uin_123456_response.to_json)
 
+    uin_123477_response = {
+      email: 'admin@tamu.edu',
+      uin: '123456',
+      first_name: 'Admin',
+      last_name: '',
+      credits: 10
+    }
+    stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/123477')
+      .to_return(status: 200, body: uin_123477_response.to_json)
+
     uin_987654_response = {
       email: 'kyle@tamu.edu',
       uin: '987654',
@@ -80,6 +90,16 @@ RSpec.configure do |config|
 
     stub_request(:patch, 'https://tamu-dining-62fbd726fd19.herokuapp.com/users/110011/update_credits/1')
       .to_return(status: 400, body: '')
+    
+    stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/admin@tamu.edu/validate_admin").
+        with(
+          headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
+        'User-Agent'=>'Ruby'
+          }).
+        to_return(status: 200, body: "true", headers: {})
   end
 
   # rspec-expectations config goes here. You can use an alternate

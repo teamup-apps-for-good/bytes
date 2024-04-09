@@ -26,4 +26,8 @@
   <%= button_to "Edit Credit Pool", edit_credit_pool_path(id: @credit_pool.id), method: :get,  class: 'btn btn-primary' %>
   <%= button_to "Destory Credit Pool", @credit_pool, method: :delete, class: 'btn btn-danger ml-1' %>
 </div>
+
 <%= link_to "Back to credit pools", credit_pools_path, class: 'btn btn-primary mt-2' %>
+<% if @user.admin %>
+  <%= link_to "Back to Admin Dashboard", admin_home_path, class: 'btn btn-primary mt-2' %>
+<% end %>

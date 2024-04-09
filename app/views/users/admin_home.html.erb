@@ -1,0 +1,59 @@
+<%= stylesheet_link_tag "profile" %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
+
+<div class="outerDiv">
+  <div id="user-details">
+    <div class="titleDiv">
+      <p class="title">Admin Dashboard</p>
+    </div>
+
+    <div class="charDiv">
+      <p class="char">
+        <strong>Name:</strong>
+        <%= @user.name %>
+      </p>
+    </div>
+
+    <div class="charDiv">
+      <p class="char">
+        <strong>Email:</strong>
+        <%= @user.email %>
+      </p>
+    </div>
+
+    <div class="charDiv">
+      <p class="char">
+        <strong>School:</strong>
+        <%= @user_school.school_name %>
+      </p>
+    </div>
+
+    <div class="charDiv">
+      <p class="char">
+        <strong>Credits in Pool:</strong>
+        <%= @user_school.credits %>
+      </p>
+    </div>
+
+
+    <form method='post'>
+        <label for='credit-amount' class='char'>Update Credits in Pool: </label>
+        <input type="number" step="1" min="1" id='credit-amount' class="margin-input" name="credits"/>
+        <input name="credit-pool-add" type="submit" class="submit" value="Add Credits" formaction="/admin/add_to_pool"/>
+        <input name="credit-pool-subtract" type="submit" class="submit" value="Subtract Credits" formaction="/admin/subtract_from_pool"/>
+    </form>
+
+    <div class="actionBtn">
+      <%= link_to "View Credit Pool", "/credit_pools/%d" % [@user_school.id] %>
+    </div>
+
+  <div class="actionBtn">
+      <%= link_to "Log Out", logout_path %>
+  </div>
+
+    <br>
+
+  <% if @user_school.present? && @user_school.logo_url.present? %>
+    <%= image_tag @user_school.logo_url, class: "school-logo" %>
+  <% end %>
+</div>
