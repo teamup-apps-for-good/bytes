@@ -41,7 +41,7 @@ Given('I am logged in as an admin') do
   click_on 'Login with Google'
 end
 
-And('I am on the admin page') do
+When('I visit the admin page') do
     visit admin_home_path
 end
 
@@ -51,4 +51,9 @@ end
 
 Then('the school should have {int} credits in the pool') do |credits|
     expect(page).to have_content("Credits in Pool: #{credits}")
+end
+
+Then("I should be on my school's credit pool page") do
+  @creditpool = CreditPool.find_by(email_suffix: "tamu.edu")
+  expect(page).to have_current_path("/credit_pools/#{@creditpool.id}")
 end
