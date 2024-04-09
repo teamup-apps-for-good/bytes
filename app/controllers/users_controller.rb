@@ -5,13 +5,19 @@ $user_request_limit = 10
 # controller class for Users
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
-  # before_action :require_admin, only: [:admin_home]
+  before_action :authenticate_admin, only: [:admin_home, :admin_add_to_pool, :admin_subtract_from_pool]
 
-  def index
-    @users = User.all
+  # ----------- admin specific controller methods ---------------
+
+  def authenticate_admin
+    @user = User.find(session[:user_id])
+    puts(@user)
+    puts(@user.admin)
+    if !@user || !@user.admin
+      flash[:notice] = "You are not authorized to access this page."
+      redirect_to root_path
+    end
   end
-
-  # admin specific controller methods
 
   def admin_home
     @user = User.find(session[:user_id])
@@ -40,7 +46,7 @@ class UsersController < ApplicationController
     @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
     @creditpool.add_credits(num_credits)
 
-    flash[:notice] = "CONFIRMATION Sucessfully added #{num_credits} credits to the pool!"
+    flash[:notice] = "CONFIRMATION Successfully added #{num_credits} credits to the pool!"
     redirect_to :admin_home
   end
 
@@ -70,8 +76,14 @@ class UsersController < ApplicationController
     end
 
     @creditpool.subtract_credits(num_credits)
-    flash[:notice] = "CONFIRMATION Sucessfully subtracted #{num_credits} credits to the pool!"
+    flash[:notice] = "CONFIRMATION Successfully subtracted #{num_credits} credits from the pool!"
     redirect_to :admin_home
+  end
+
+  # ----------- end of admin controller methods ---------------
+
+  def index
+    @users = User.all
   end
 
   def show

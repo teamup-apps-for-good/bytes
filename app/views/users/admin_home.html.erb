@@ -23,13 +23,6 @@
 
     <div class="charDiv">
       <p class="char">
-        <strong><%= @id_name %>:</strong>
-        <%= @user.uid %>
-      </p>
-    </div>
-
-    <div class="charDiv">
-      <p class="char">
         <strong>School:</strong>
         <%= @user_school.school_name %>
       </p>
@@ -43,8 +36,8 @@
     </div>
 
 
-    <form id="update_credit_pool" method='post'>
-        <label for='credit-amount' class='char'>Update Credit in Pool: </label>
+    <form method='post'>
+        <label for='credit-amount' class='char'>Update Credits in Pool: </label>
         <input type="number" step="1" min="1" id='credit-amount' class="margin-input" name="credits"/>
         <input name="credit-pool-add" type="submit" class="submit" value="Add Credits" formaction="/admin/add_to_pool"/>
         <input name="credit-pool-subtract" type="submit" class="submit" value="Subtract Credits" formaction="/admin/subtract_from_pool"/>
