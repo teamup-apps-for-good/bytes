@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
   def authenticate_admin
     @user = User.find(session[:user_id])
-    puts(@user)
     puts(@user.admin)
     if !@user || !@user.admin
       flash[:notice] = "You are not authorized to access this page."

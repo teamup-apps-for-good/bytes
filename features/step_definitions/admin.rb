@@ -1,34 +1,3 @@
-Given('that I am an admin with the email {string}') do |email|
-    #   first_name: 'First',
-    #   last_name: 'Last',
-    #   email:,
-    #   uin: uid
-    # }
-    response = { success: true }
-    stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{email}/validate_admin))
-      .to_return(status: 200, body: response.to_json)
-end
-
-Given('I am already logged in as an admin with the email of {string}') do |email|
-    visit root_path
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.add_mock(
-      :google_oauth2,
-      info: { email: }
-    )
-    stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{email}/validate_admin").
-          with(
-            headers: {
-            'Accept'=>'*/*',
-            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-            'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
-            'User-Agent'=>'Ruby'
-            }).
-          to_return(status: 200, body: "true", headers: {})
-    click_on 'Login with Google'
-    visit user_profile_path
-end
-
 Given('I am logged in as an admin') do
   user = User.create(name: 'John', uid: '3242985', email: 'John@tamu.edu', credits: '50', user_type: 'donor',
                      date_joined: '01/01/2022')
@@ -52,7 +21,7 @@ Given('I am logged in as an admin') do
           'User-Agent'=>'Ruby'
         }
       ).
-      to_return(status: 200, body: {valid: true}.to_json, headers: {})
+      to_return(status: 200, body: "true", headers: {})
 
 
   @user = user

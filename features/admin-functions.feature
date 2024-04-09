@@ -26,12 +26,23 @@ Scenario: Admin can manually add credits to the school's credit pool
 
 Scenario: Admin can manually remove credits from the school's credit pool
 
-    Given I am an admin user
-    And I am on the admin page
-    And I enter 10 credits in the update-credits field
+    Given I am on the login page
+    And I am logged in as an admin
+    When I am on the admin page
+    And I enter "10" credits in the update-credits field
     And I press "Subtract Credits"
     Then the school should have 40 credits in the pool
     And I should see "Successfully subtracted 10 credits from the pool"
+
+Scenario: Admin tries to remove more credits than there are available in the pool
+
+    Given I am on the login page
+    And I am logged in as an admin
+    When I am on the admin page
+    And I enter "80" credits in the update-credits field
+    And I press "Subtract Credits"
+    Then the school should have 50 credits in the pool
+    And I should see "Can't subtract more credits than there are available, only 50 credits currently in pool"
 
 Scenario: Admin can view users of a school
 
