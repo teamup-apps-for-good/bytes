@@ -1,0 +1,17 @@
+<%= stylesheet_link_tag "profile" %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
+
+<div class="outerDiv">
+  <div id="user-details">
+    <div class="titleDiv">
+      <p class="title">Feedback</p>
+    </div>
+  </div>
+  
+  <form action="/users/feedback" method='post'>
+    <textarea type="text" id='feedback' class="margin-input" style="width: 500px; height: 200px" name="feedback"> </textarea>
+    <div>
+      <input name="feedback-submission" type="submit" class="actionBtn" value="Submit Feedback" />
+    </div>
+  </form>
+</div>
