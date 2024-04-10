@@ -52,12 +52,12 @@
       <%= form.submit "Change to Donor", class: "actionBtn", data: { turbo_confirm: "Are you sure you want to change account types?" }  %>
     <% end %>
   <% end %>
-
-  <div class="actionBtn">
-      <%= link_to "Log Out", logout_path %>
-  </div>
+  <%= button_to "Give Feedback", new_feedback_path, :method => :get, class: "actionBtn" %>
+  <%= button_to "Log Out", logout_path, :method => :get, class: "actionBtn" %>
 
   <% if @user_school.present? && @user_school.logo_url.present? %>
-    <%= image_tag @user_school.logo_url, class: "school-logo" %>
+    <div style="margin-top: 10px">
+      <%= image_tag @user_school.logo_url, class: "school-logo" %>
+    </div>
   <% end %>
 </div>

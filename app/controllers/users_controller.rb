@@ -195,9 +195,9 @@ class UsersController < ApplicationController
   def receive
     @user = User.find_by(id: session[:user_id])
     @uid = @user.uid
-    puts "CREDIT POOL: " + @user.email.partition('@').last
+    # puts "CREDIT POOL: " + @user.email.partition('@').last
     @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
-    puts "ACTUAL: " + CreditPool.all.length.to_s
+    # puts "ACTUAL: " + CreditPool.all.length.to_s
   end
 
   def do_receive
@@ -272,6 +272,17 @@ class UsersController < ApplicationController
     else
       flash[:warning] = "Error updating user type to #{new_user_type}"
     end
+    redirect_to :user_profile
+  end
+
+  def feedback
+    @user = User.find_by(id: session[:user_id])
+  end
+
+  def submit_feedback
+    @user = User.find_by(id: session[:user_id])
+    ApplicationMailer.with(user: @user, feedback: params[:feedback]).feedback_email.deliver_now
+    flash[:notice] = 'Feedback sent!'
     redirect_to :user_profile
   end
 

@@ -63,4 +63,6 @@ Rails.application.routes.draw do
   post '/meetings/:id/complete', to: 'meetings#complete_transaction', as: 'complete-meeting'
   post '/meetings/:id/donor_cancel', to: 'meetings#donor_cancel', as: 'donor-cancel'
 
+  get '/users/feedback', to: 'users#feedback', as: 'new-feedback'
+  post '/users/feedback', to: 'users#submit_feedback', as: 'submit-feedback'
 end
