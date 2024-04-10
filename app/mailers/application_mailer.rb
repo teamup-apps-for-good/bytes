@@ -2,7 +2,7 @@
 
 # class for mailers
 class ApplicationMailer < ActionMailer::Base
-  default from: 'cyclone2531@gmail.com'
+  default from: 'bytes@email.com'
   layout 'mailer'
 
   def feedback_email
