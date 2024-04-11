@@ -9,21 +9,23 @@ Scenario: I can see the submit feedback button
     Given I am on the login page
     And I am logged in
     When I go to the profile page
-    Then I should see a button to submit user feedback
+    Then I should see "Give Feedback"
 
 Scenario: I can access the user feedback page
 
     Given I am on the login page
     And I am logged in
     When I go to the profile page
-    And I click the user-feedback button
+    When I press the 'Give Feedback' button
     Then I should be on the user-feedback page
 
 Scenario: I can submit user feedback
 
-    Given I am on the user-feedback page
-    And I have entered feedback comments
-    And I press send
-    Then it should send successfully
+    Given I am on the login page
+    And I am logged in
+    When I press the 'Give Feedback' button
+    And I fill in "feedback" with "this is my feedback"
+    When I press the 'Submit Feedback' button
+    Then I should see "Feedback sent!"
     
 

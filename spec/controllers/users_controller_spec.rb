@@ -295,6 +295,21 @@ RSpec.describe UsersController do
     end
   end
 
+  describe 'User feedback' do
+    before { session[:user_id] = User.find_by(uid: '110011').id }
+
+    it 'allows user to go to the feedback page' do
+      get :feedback
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'allows user to submit feedback' do
+      post :submit_feedback
+      expect(response).to redirect_to(user_profile_path)
+      expect(flash[:notice]).to eq('Feedback sent!')
+    end
+  end
+
   describe 'Admin user specific methods' do
     before { session[:user_id] = User.find_by(uid: '123477').id }
     before { User.find_by(uid: '123477').set_admin }
