@@ -30,8 +30,8 @@ RSpec.describe PagesController do
       expect(response).to redirect_to('/users/profile')
     end
 
-    it "sees metric-strings" do
-      30.times do #needs to be a better way, but for now will get good coverage with enough runs
+    it 'sees metric-strings' do
+      30.times do # needs to be a better way, but for now will get good coverage with enough runs
         get :index
         expect(response).to have_http_status(:success)
         # Add expectations for the output of each random function

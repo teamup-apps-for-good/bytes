@@ -7,20 +7,19 @@ class CreditPoolsController < ApplicationController
   # GET /credit_pools or /credit_pools.json
   def index
     @credit_pools = CreditPool.all
-    @types = ["donated", "received"]
+    @types = %w[donated received]
     @credit_pool = CreditPool.find_by(school_name: 'TAMU')
   end
 
   # GET /credit_pools/1 or /credit_pools/1.json
   def show
-    @credit_pool = CreditPool.find(params[:id])  
-    @types = ["donated", "received"]
+    @credit_pool = CreditPool.find(params[:id])
+    @types = %w[donated received]
     @user = User.find(session[:user_id])
   end
 
   # GET /credit_pools/new
-  def new
-  end
+  def new; end
 
   # GET /credit_pools/1/edit
   def edit
@@ -42,8 +41,8 @@ class CreditPoolsController < ApplicationController
     #     format.json { render json: @credit_pool.errors, status: :unprocessable_entity }
     #   end
     # end
-  rescue StandardError => e
-    flash[:warning] = "Credit Pool Creation Failed"
+  rescue StandardError
+    flash[:warning] = 'Credit Pool Creation Failed'
     redirect_to '/', alert: 'Login failed.'
   end
 
@@ -51,7 +50,10 @@ class CreditPoolsController < ApplicationController
   def update
     respond_to do |format|
       if @credit_pool.update(credit_pool_params)
-        format.html { redirect_to credit_pool_url(@credit_pool), notice: "#{@credit_pool.school_name}'s credit pool was successfully updated." }
+        format.html do
+          redirect_to credit_pool_url(@credit_pool),
+                      notice: "#{@credit_pool.school_name}'s credit pool was successfully updated."
+        end
         format.json { render :show, status: :ok, location: @credit_pool }
       else
         format.html { render :edit, status: :unprocessable_entity }

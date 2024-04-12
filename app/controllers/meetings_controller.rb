@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
+# controller class for meetings
 class MeetingsController < ApplicationController
-  before_action :set_uid, only: [:new, :create]
+  before_action :set_uid, only: %i[new create]
   helper_method :get_this_week
 
   def index
     @meetings = Meeting.where(accepted: false)
     @user = User.find(session[:user_id])
     @current_uid = current_user.uid
-    @user_meetings = Meeting.where(accepted: true).where("uid = ? OR accepted_uid = ?", @current_uid, @current_uid)
+    @user_meetings = Meeting.where(accepted: true).where('uid = ? OR accepted_uid = ?', @current_uid, @current_uid)
   end
 
   def new
@@ -39,7 +42,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.find_by(id: params[:id])
     respond_to do |format|
       if @meeting.update(meeting_params)
-        format.html { redirect_to '/meetings', notice: "Your meeting was successfully updated." }
+        format.html { redirect_to '/meetings', notice: 'Your meeting was successfully updated.' }
         format.json { render :show, status: :ok, location: @meeting }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,24 +68,24 @@ class MeetingsController < ApplicationController
   def accept_meeting
     @current_uid = current_user.uid
     @meeting = Meeting.find_by(id: params[:id])
-    if @meeting
-      @meeting.update(accepted: true, accepted_uid: @current_uid)
-      redirect_to meetings_path, notice: 'Meeting accepted.'
-    end
+    return unless @meeting
+
+    @meeting.update(accepted: true, accepted_uid: @current_uid)
+    redirect_to meetings_path, notice: 'Meeting accepted.'
   end
 
   def unaccept_meeting
     @current_uid = current_user.uid
     @meeting = Meeting.find_by(id: params[:id])
-    if @meeting
-      @meeting.update(accepted: false, accepted_uid: nil)
-      redirect_to meetings_path, notice: 'Meeting unaccepted.'
-    end
+    return unless @meeting
+
+    @meeting.update(accepted: false, accepted_uid: nil)
+    redirect_to meetings_path, notice: 'Meeting unaccepted.'
   end
 
   def get_next_week(id)
     @current_uid = current_user.uid
-    @meeting = Meeting.find_by(id: id)
+    @meeting = Meeting.find_by(id:)
     original_date = @meeting.date
     @date = original_date + 7
   end
@@ -92,11 +95,10 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.find_by(id: params[:id])
     if @meeting.recurring
       @meeting.update(date: get_next_week(@meeting.id), accepted: false, accepted_uid: nil)
-      redirect_to meetings_path, notice: 'Meeting Completed.'
     else
       @meeting.destroy
-      redirect_to meetings_path, notice: 'Meeting Completed.'
     end
+    redirect_to meetings_path, notice: 'Meeting Completed.'
   end
 
   def donor_cancel

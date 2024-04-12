@@ -27,8 +27,8 @@ RSpec.describe TransactionsController do
                        transaction_type: 'donated',
                        time: '2024-01-01T00:52:48',
                        amount: 2)
-                       
-    CreditPool.create({ school_name: 'TAMU', email_suffix: 'tamu.edu', id_name: 'UIN', credits: 1})
+
+    CreditPool.create({ school_name: 'TAMU', email_suffix: 'tamu.edu', id_name: 'UIN', credits: 1 })
   end
 
   describe 'when viewing a profile a user can see their transactions' do

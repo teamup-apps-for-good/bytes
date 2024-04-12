@@ -16,16 +16,16 @@ RSpec.describe SessionsController do
 
   describe 'When logging in' do
     it 'redirect to new user creation page for new user' do
-      stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/j@tamu.edu/validate_admin").
-        to_return(status: 200, body: "true", headers: {})
+      stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/j@tamu.edu/validate_admin')
+        .to_return(status: 200, body: 'true', headers: {})
       request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
       get :omniauth
       expect(response).to redirect_to '/users/new'
     end
 
     it 'changes session for already established user' do
-      stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/j@tamu.edu/validate_admin").
-        to_return(status: 200, body: "true", headers: {})
+      stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/j@tamu.edu/validate_admin')
+        .to_return(status: 200, body: 'true', headers: {})
       request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
       User.create({ name: 'John', uid: '123456', email: 'j@tamu.edu', user_type: 'donor' })
       get :omniauth
@@ -33,8 +33,8 @@ RSpec.describe SessionsController do
     end
 
     it 'sets admin value for the user through api call' do
-      stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/j@tamu.edu/validate_admin").
-        to_return(status: 200, body: "true", headers: {})
+      stub_request(:get, 'https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/j@tamu.edu/validate_admin')
+        .to_return(status: 200, body: 'true', headers: {})
       User.create({ name: 'John', uid: '123456', email: 'j@tamu.edu', user_type: 'donor' })
       get :omniauth
       expect(User.find_by(email: 'j@tamu.edu').admin).to eq(true)

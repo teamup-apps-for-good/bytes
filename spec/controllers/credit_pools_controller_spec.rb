@@ -6,7 +6,8 @@ RSpec.describe CreditPoolsController do
   before(:each) do
     User.destroy_all
     CreditPool.destroy_all
-    CreditPool.create({ school_name: 'TAMU', email_suffix: 'tamu.edu', id_name: 'UIN', credits: 1, logo_url: 'https://www.tamu.edu/_files/images/logos/primaryTAM.png'})
+    CreditPool.create({ school_name: 'TAMU', email_suffix: 'tamu.edu', id_name: 'UIN', credits: 1,
+                        logo_url: 'https://www.tamu.edu/_files/images/logos/primaryTAM.png' })
 
     user = User.create(name: 'John', uid: '123456', email: 'j@tamu.edu', credits: '50', user_type: 'donor',
                        date_joined: '01/01/2022')
@@ -63,8 +64,9 @@ RSpec.describe CreditPoolsController do
     end
 
     it 'able to go to the edit page' do
-      pool = CreditPool.find_by(school_name: 'TAMU')
-      get :edit, params: { id: CreditPool.find_by(school_name: 'TAMU').id }, session: {user_id: User.find_by(uid: 123456).id}
+      CreditPool.find_by(school_name: 'TAMU')
+      get :edit, params: { id: CreditPool.find_by(school_name: 'TAMU').id },
+                 session: { user_id: User.find_by(uid: 123_456).id }
       expect(response).to have_http_status(:success)
     end
   end

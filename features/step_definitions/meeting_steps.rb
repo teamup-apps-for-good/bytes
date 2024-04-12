@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given('I am on the new meeting page') do
   visit new_meeting_path
 end
@@ -10,34 +12,36 @@ Given('I have successfully scheduled a meeting') do
   fill_in 'meeting[date]', with: '2024-03-11'
   fill_in 'meeting[time]', with: '12:00 PM'
   fill_in 'meeting[location]', with: 'Conference Room'
-  click_button "Schedule Meeting"
+  click_button 'Schedule Meeting'
 end
 
 Given('I have successfully scheduled a recurring meeting') do
   fill_in 'meeting[date]', with: '2024-03-11'
   fill_in 'meeting[time]', with: '12:00 PM'
   fill_in 'meeting[location]', with: 'Conference Room'
-  checkbox = find("#newRecurring")
+  checkbox = find('#newRecurring')
   checkbox.click
-  click_button "Schedule Meeting"
+  click_button 'Schedule Meeting'
 end
 
 Given('there is a meeting listed') do
-  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: false, accepted_uid: nil)
+  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: false,
+                 accepted_uid: nil)
 end
 
 Given('I have an accepted meeting listed') do
-  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '123456789')
+  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true,
+                 accepted_uid: '123456789')
 end
 
 Given('I as a recipient have an accepted meeting listed') do
-  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '11112222')
+  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true,
+                 accepted_uid: '11112222')
 end
 
-
-
 Given('I have an accepted recurring meeting listed') do
-  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true, accepted_uid: '123456789', recurring: true)
+  Meeting.create(uid: '3242985', date: '2024-03-11', time: '12:00 PM', location: 'Conference Room', accepted: true,
+                 accepted_uid: '123456789', recurring: true)
 end
 
 When('I fill in the meeting form with valid details') do
@@ -83,21 +87,21 @@ Then('I should not see the meeting in the meetings list') do
 end
 
 Then('I should see the meeting in my meetings') do
-  table = find("#yourMeetingsTable")
+  table = find('#yourMeetingsTable')
   expect(table).to have_content('03/11/2024')
   expect(table).to have_content('12:00 PM')
   expect(table).to have_content('Conference Room')
 end
 
 Then('I should see the meeting listed publicly') do
-  table = find("#publicMeetingsTable")
+  table = find('#publicMeetingsTable')
   expect(table).to have_content('03/11/2024')
   expect(table).to have_content('12:00 PM')
   expect(table).to have_content('Conference Room')
 end
 
 Then('I should see the {string} button') do |string|
-  table = find("#publicMeetingsTable")
+  table = find('#publicMeetingsTable')
   expect(table).to have_content(string)
 end
 
@@ -108,12 +112,12 @@ Then('I should see the fields are autofilled with my meeting\'s info') do
 end
 
 Then('the meeting should have the updated information') do
-  table = find("#publicMeetingsTable")
+  table = find('#publicMeetingsTable')
   expect(table).to have_content('03/12/2024')
   expect(table).to have_content('12:30 PM')
   expect(table).to have_content('Conference Room 2')
 end
 
-Then('I should not see the {string} button') do |string|
+Then('I should not see the {string} button') do |_string|
   expect(page).to have_no_content('Edit')
 end
