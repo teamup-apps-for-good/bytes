@@ -30,6 +30,10 @@ body {
   width: 100%;
 }
 
+.table-container {
+  margin-top: 20px; /* Add margin top to create space between the text and the table */
+}
+
 .btnSchedule {
   background-color: #E8B1B0 ;
   color: #fff;

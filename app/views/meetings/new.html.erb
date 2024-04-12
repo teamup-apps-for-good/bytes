@@ -1,23 +1,92 @@
-<h1>Schedule a Meeting</h1>
-<%= form_for @meeting do |f| %>
-  <div>
-    <%= f.label :date %>
-    <%= f.date_field :date %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Schedule a Meeting</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <%= stylesheet_link_tag "profile" %>
+  <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Protest+Riot&family=Quicksand:wght@300..700&display=swap", media: 'all' %>
+  <style>
+    body {
+      background-color: #F4EDE5;
+    }
+
+    h1 {
+      font-family: "Protest Riot", sans-serif;
+      font-size: 50px;
+      color: #E3686C;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    form {
+      text-align: center;
+    }
+
+    form-group {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="submit"],
+    input[type="checkbox"] {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: space-between;
+      display: flex;
+      margin: 10px auto;
+      padding: 10px;
+      width: 20%;
+      height: 50%;
+    }
+
+    input[type="submit"] {
+      background-color: #E8B1B0;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      font-family: "Quicksand", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #E3686C;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="outerBack">
+    <a href="<%= meetings_path %>" class="back-button">&lt;</a>
   </div>
-  <div>
-    <%= f.label :time %>
-    <%= f.time_field :time %>
-  </div>
-  <div>
-    <%= f.label :location %>
-    <%= f.text_field :location %>
-  </div>
-  <div>
-    <%= f.label :recurring %>
-    <%= f.check_box :recurring, id: "newRecurring" %>
-  </div>
-  <%= f.hidden_field :accepted, value: false %>
-  <div>
-    <%= f.submit 'Schedule Meeting' %>
-  </div>
-<% end %>
+  <h1>Schedule a Meeting</h1>
+  <%= form_for @meeting do |f| %>
+    <div class="form-group">
+      <%= f.label :date %>
+      <%= f.date_field :date %>
+    </div>
+    <div class="form-group">
+      <%= f.label :time %>
+      <%= f.time_field :time %>
+    </div>
+    <div class="form-group">
+      <%= f.label :location %>
+      <%= f.text_field :location %>
+    </div>
+    <div class="form-group">
+      <%= f.label :recurring %>
+      <%= f.check_box :recurring, id: "newRecurring" %>
+    </div>
+    <%= f.hidden_field :accepted, value: false %>
+    <div class="form-group">
+      <%= f.submit 'Schedule Meeting' %>
+    </div>
+  <% end %>
+</body>
+</html>

@@ -14,30 +14,32 @@
       Viewing transactions for <%= @id_name %>: <%= User.find(session[:user_id]).uid %>
     </p>
 
-    <table class="transTable">
-      <thead class="thead-dark">
-        <tr>
-          <th class="text-center"><%= @id_name %></th>
-          <th class="text-center">Type</th>
-          <th class="text-center">Time</th>
-          <th class="text-center">Amount</th>
-          <th class="text-center">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @transactions.each do |transaction| %>
+    <div class="col-xs-12">
+      <table class="transTable">
+        <thead class="thead-dark">
           <tr>
-            <td><%= transaction.uid %></td>
-            <td><%= transaction.transaction_type %></td>
-            <td><%= transaction.created_at %></td>
-            <td><%= transaction.amount %></td>
-            <td>
-              <%= link_to "View transaction", transaction_path(transaction), class: 'actionBtn' %>
-            </td>
+            <th class="text-center"><%= @id_name %></th>
+            <th class="text-center">Type</th>
+            <th class="text-center">Time</th>
+            <th class="text-center">Amount</th>
+            <th class="text-center">Action</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @transactions.each do |transaction| %>
+            <tr>
+              <td><%= transaction.uid %></td>
+              <td><%= transaction.transaction_type %></td>
+              <td><%= transaction.created_at %></td>
+              <td><%= transaction.amount %></td>
+              <td>
+                <%= link_to "View transaction", transaction_path(transaction), class: 'actionBtn' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
