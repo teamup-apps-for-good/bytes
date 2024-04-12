@@ -10,14 +10,14 @@
 <body>
   <div class="outerDiv">
     <p class="title">Meetings</p>
-    <p class="char">
-      Public Meetings
-    </p>
     <% if @user.user_type == "donor" %>
       <div style="margin: 50px 0;">
         <%= link_to 'Schedule a Meeting', new_meeting_path, class: 'actionBtn' %>
       </div>
     <% end %>
+    <p class="char">
+      Public Meetings
+    </p>
 
     <div style="margin: 30px 0;">
       <table class="transTable" id="publicMeetingsTable">

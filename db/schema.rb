@@ -33,6 +33,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_201908) do
     t.string "accepted_uid"
   end
 
+  create_table "schools", force: :cascade do |t|
+    t.string "name"
+    t.string "domain"
+    t.string "logo"
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.string "uid"
     t.string "transaction_type"
