@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given('I am logged in as an admin') do
   user = User.create(name: 'John', uid: '3242985', email: 'John@tamu.edu', credits: '50', user_type: 'donor',
                      date_joined: '01/01/2022')
@@ -12,17 +14,16 @@ Given('I am logged in as an admin') do
   stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uid}))
     .to_return(status: 200, body: response.to_json)
 
-    stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{user.email}/validate_admin").
-      with(
-        headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
-          'User-Agent'=>'Ruby'
-        }
-      ).
-      to_return(status: 200, body: "true", headers: {})
-
+  stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{user.email}/validate_admin")
+    .with(
+      headers: {
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Host' => 'tamu-dining-62fbd726fd19.herokuapp.com',
+        'User-Agent' => 'Ruby'
+      }
+    )
+    .to_return(status: 200, body: 'true', headers: {})
 
   @user = user
   @id = user.id
@@ -42,18 +43,18 @@ Given('I am logged in as an admin') do
 end
 
 When('I visit the admin page') do
-    visit admin_home_path
+  visit admin_home_path
 end
 
-And('I enter {string} credits in the update-credits field') do |credits| 
-    fill_in "credit-amount", with: credits
+And('I enter {string} credits in the update-credits field') do |credits|
+  fill_in 'credit-amount', with: credits
 end
 
 Then('the school should have {int} credits in the pool') do |credits|
-    expect(page).to have_content("Credits in Pool: #{credits}")
+  expect(page).to have_content("Credits in Pool: #{credits}")
 end
 
 Then("I should be on my school's credit pool page") do
-  @creditpool = CreditPool.find_by(email_suffix: "tamu.edu")
+  @creditpool = CreditPool.find_by(email_suffix: 'tamu.edu')
   expect(page).to have_current_path("/credit_pools/#{@creditpool.id}")
 end

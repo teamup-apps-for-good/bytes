@@ -5,16 +5,16 @@ $user_request_limit = 10
 # controller class for Users
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_admin, only: [:admin_home, :admin_add_to_pool, :admin_subtract_from_pool]
+  before_action :authenticate_admin, only: %i[admin_home admin_add_to_pool admin_subtract_from_pool]
 
   # ----------- admin specific controller methods ---------------
 
   def authenticate_admin
     @user = User.find(session[:user_id])
-    if !@user || !@user.admin
-      flash[:notice] = "You are not authorized to access this page."
-      redirect_to root_path
-    end
+    return unless !@user || !@user.admin
+
+    flash[:notice] = 'You are not authorized to access this page.'
+    redirect_to root_path
   end
 
   def admin_home
@@ -68,7 +68,8 @@ class UsersController < ApplicationController
     @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
 
     if num_credits > @creditpool.credits
-      flash[:warning] = "Can't subtract more credits than there are available, only #{@creditpool.credits} credits currently in pool"
+      flash[:warning] =
+        "Can't subtract more credits than there are available, only #{@creditpool.credits} credits currently in pool"
       redirect_to :admin_home
       return
     end
@@ -183,7 +184,8 @@ class UsersController < ApplicationController
     @creditpool = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
 
     # create a transaction object
-    Transaction.create({ uid: @user.uid, transaction_type: 'donated', amount: num_credits, credit_pool_id: @creditpool.id })
+    Transaction.create({ uid: @user.uid, transaction_type: 'donated', amount: num_credits,
+                         credit_pool_id: @creditpool.id })
 
     @creditpool.add_credits(num_credits)
 
@@ -242,7 +244,8 @@ class UsersController < ApplicationController
     end
 
     @creditpool.subtract_credits(num_credits)
-    Transaction.create({ uid: @user.uid, transaction_type: 'received', amount: num_credits, credit_pool_id: @creditpool.id })
+    Transaction.create({ uid: @user.uid, transaction_type: 'received', amount: num_credits,
+                         credit_pool_id: @creditpool.id })
 
     # notify user it's successful somehow
     flash[:notice] = "CONFIRMATION Sucessfully recieved #{num_credits} credits!"
@@ -253,14 +256,14 @@ class UsersController < ApplicationController
     @user = User.find_by(id: session[:user_id])
     new_user_type = params[:new_user_type]
 
-    if new_user_type != "recipient" and new_user_type != "donor"
+    if (new_user_type != 'recipient') && (new_user_type != 'donor')
       flash[:warning] = "Error, invalid user type. User type must be 'donor' or 'recipient'"
       redirect_to :user_profile
       return -1
     end
 
-    if new_user_type == "recipient" and @user.fetch_num_credits > $user_request_limit
-      flash[:warning] = "Too many credits to be a recipient"
+    if (new_user_type == 'recipient') && (@user.fetch_num_credits > $user_request_limit)
+      flash[:warning] = 'Too many credits to be a recipient'
       redirect_to :user_profile
       return
     end

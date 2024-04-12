@@ -31,17 +31,16 @@ Given('I am logged in') do
   stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uid}))
     .to_return(status: 200, body: response.to_json)
 
-    stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{user.email}/validate_admin").
-      with(
-        headers: {
-          'Accept'=>'*/*',
-          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
-          'User-Agent'=>'Ruby'
-        }
-      ).
-      to_return(status: 200, body: {valid: false}.to_json, headers: {})
-
+  stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{user.email}/validate_admin")
+    .with(
+      headers: {
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Host' => 'tamu-dining-62fbd726fd19.herokuapp.com',
+        'User-Agent' => 'Ruby'
+      }
+    )
+    .to_return(status: 200, body: { valid: false }.to_json, headers: {})
 
   @user = user
   @id = user.id
@@ -74,17 +73,16 @@ Given('I log in with a different uid') do
   stub_request(:get, %(https://tamu-dining-62fbd726fd19.herokuapp.com/users/#{user.uid}))
     .to_return(status: 200, body: response.to_json)
 
-    stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{user.email}/validate_admin").
-    with(
+  stub_request(:get, "https://tamu-dining-62fbd726fd19.herokuapp.com/administrators/#{user.email}/validate_admin")
+    .with(
       headers: {
-        'Accept'=>'*/*',
-        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-        'Host'=>'tamu-dining-62fbd726fd19.herokuapp.com',
-        'User-Agent'=>'Ruby'
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Host' => 'tamu-dining-62fbd726fd19.herokuapp.com',
+        'User-Agent' => 'Ruby'
       }
-    ).
-    to_return(status: 200, body: "false", headers: {})
-
+    )
+    .to_return(status: 200, body: 'false', headers: {})
 
   @user = user
   @id = user.id
@@ -93,7 +91,7 @@ Given('I log in with a different uid') do
   @credits = user.credits
   @user_type = user.user_type
   @uid = user.uid
-  @user_school =  CreditPool.find_by(email_suffix: @user.email.partition('@').last)
+  @user_school = CreditPool.find_by(email_suffix: @user.email.partition('@').last)
   OmniAuth.config.test_mode = true
   OmniAuth.config.add_mock(
     :google_oauth2,
@@ -115,11 +113,11 @@ Then('I should be on the Transfer page') do
   expect(page).to have_current_path(user_transfer_path, ignore_query: true)
 end
 
-Then ('I should have a submit button with the text {string}') do |string|
+Then('I should have a submit button with the text {string}') do |string|
   expect(find('input[type="submit"]').value).to eq(string)
 end
 
-And ('I should not have a submit button with the text {string}') do |string|
+And('I should not have a submit button with the text {string}') do |string|
   expect(find('input[type="submit"]').value).not_to eq(string)
 end
 

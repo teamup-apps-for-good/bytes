@@ -124,8 +124,6 @@ RSpec.describe UsersController do
       expect(response).to have_http_status(:success)
     end
 
-
-
     it 'fails to creates an account due to incorrect UIN' do
       post :create, params: { user: { uid: '-1', user_type: 'donor' } },
                     session: { email: 'test@tamu.edu' }
@@ -224,11 +222,11 @@ RSpec.describe UsersController do
   end
 
   describe 'update user type' do
-    before {session[:user_id] = user.id}
-    before {user.fetch_num_credits}
+    before { session[:user_id] = user.id }
+    before { user.fetch_num_credits }
 
     it 'successfully changes user from donor to recipient' do
-      post :update_user_type, params: {new_user_type: 'recipient'}
+      post :update_user_type, params: { new_user_type: 'recipient' }
       user.reload
       expect(user.user_type).to eq('recipient')
     end
@@ -237,13 +235,13 @@ RSpec.describe UsersController do
       recipient_user = User.find_by(uid: '987654')
       session[:user_id] = recipient_user.id
       recipient_user.fetch_num_credits
-      post :update_user_type, params: {new_user_type: 'donor'}
+      post :update_user_type, params: { new_user_type: 'donor' }
       recipient_user.reload
       expect(recipient_user.user_type).to eq('donor')
     end
 
     it 'notifies user that they have changed to recipient' do
-      post :update_user_type, params: {new_user_type: 'recipient'}
+      post :update_user_type, params: { new_user_type: 'recipient' }
       expect(flash[:notice]).to eq('Type successfully updated to recipient')
     end
 
@@ -251,17 +249,17 @@ RSpec.describe UsersController do
       recipient_user = User.find_by(uid: '987654')
       session[:user_id] = recipient_user.id
       recipient_user.fetch_num_credits
-      post :update_user_type, params: {new_user_type: 'donor'}
+      post :update_user_type, params: { new_user_type: 'donor' }
       expect(flash[:notice]).to eq('Type successfully updated to donor')
     end
 
     it 'redirects back to the profile page' do
-      post :update_user_type, params: {new_user_type: 'recipient'}
+      post :update_user_type, params: { new_user_type: 'recipient' }
       expect(response).to redirect_to :user_profile
     end
 
     it 'gives an error message when the usertype given is not donor or recipient' do
-      post :update_user_type, params: {new_user_type: 'chef'}
+      post :update_user_type, params: { new_user_type: 'chef' }
       expect(flash[:warning]).to eq("Error, invalid user type. User type must be 'donor' or 'recipient'")
     end
 
@@ -269,8 +267,8 @@ RSpec.describe UsersController do
       many_creds_user = User.find_by(uid: '654321')
       session[:user_id] = many_creds_user.id
       many_creds_user.fetch_num_credits
-      post :update_user_type, params: {new_user_type: 'recipient'}
-      expect(flash[:warning]).to eq("Too many credits to be a recipient")
+      post :update_user_type, params: { new_user_type: 'recipient' }
+      expect(flash[:warning]).to eq('Too many credits to be a recipient')
     end
   end
 
@@ -328,104 +326,104 @@ RSpec.describe UsersController do
     end
 
     describe 'admin_add_to_pool' do
-      it 'properly increases credit pool' do 
-        post :admin_add_to_pool, params: {credits: 10}
+      it 'properly increases credit pool' do
+        post :admin_add_to_pool, params: { credits: 10 }
         expect(creditpool.reload.credits).to eq(110)
       end
 
-      it 'properly redirects to admin dashboard' do 
-        post :admin_add_to_pool, params: {credits: 10}
+      it 'properly redirects to admin dashboard' do
+        post :admin_add_to_pool, params: { credits: 10 }
         expect(response).to redirect_to :admin_home
       end
 
-      it 'gives a confirmation on successful increase of credits in pool' do 
-        post :admin_add_to_pool, params: {credits: 10}
-        expect(flash[:notice]).to eq("CONFIRMATION Successfully added 10 credits to the pool!")
+      it 'gives a confirmation on successful increase of credits in pool' do
+        post :admin_add_to_pool, params: { credits: 10 }
+        expect(flash[:notice]).to eq('CONFIRMATION Successfully added 10 credits to the pool!')
       end
 
       it "doesn't allow non-number credit input" do
-        post :admin_add_to_pool, params: {credits: 'not a number'}
+        post :admin_add_to_pool, params: { credits: 'not a number' }
         expect(flash[:warning]).to eq('ERROR Invalid input!')
       end
 
       it "doesn't allow non-integer credit input" do
-        post :admin_add_to_pool, params: {credits: 2.9393}
+        post :admin_add_to_pool, params: { credits: 2.9393 }
         expect(flash[:warning]).to eq('ERROR Invalid input!')
       end
 
       it "doesn't allow negative credit input" do
-        post :admin_add_to_pool, params: {credits: -5}
+        post :admin_add_to_pool, params: { credits: -5 }
         expect(flash[:warning]).to eq('ERROR Invalid input!')
       end
 
       it "doesn't allow 0 credits as input" do
-        post :admin_add_to_pool, params: {credits: 0}
+        post :admin_add_to_pool, params: { credits: 0 }
         expect(flash[:warning]).to eq('ERROR Invalid input!')
       end
 
       it "doesn't allow non-admin user to decrease credit pool using this method" do
         session[:user_id] = User.find_by(uid: '123456').id
-        post :admin_add_to_pool, params: {credits: 10}
+        post :admin_add_to_pool, params: { credits: 10 }
         expect(creditpool.reload.credits).to eq(100)
       end
 
       it 'redirects a non-admin user trying to call this method' do
         session[:user_id] = User.find_by(uid: '123456').id
-        post :admin_add_to_pool, params: {credits: 10}
+        post :admin_add_to_pool, params: { credits: 10 }
         expect(response).to redirect_to '/'
       end
     end
 
     describe 'admin_subtract_from_pool' do
-      it 'properly decreases credit pool' do 
-        post :admin_subtract_from_pool, params: {credits: 10}
+      it 'properly decreases credit pool' do
+        post :admin_subtract_from_pool, params: { credits: 10 }
         expect(creditpool.reload.credits).to eq(90)
       end
 
-      it 'properly redirects to admin dashboard' do 
-        post :admin_subtract_from_pool, params: {credits: 10}
+      it 'properly redirects to admin dashboard' do
+        post :admin_subtract_from_pool, params: { credits: 10 }
         expect(response).to redirect_to :admin_home
       end
 
-      it 'gives a confirmation on successful increase of credits in pool' do 
-        post :admin_subtract_from_pool, params: {credits: 10}
-        expect(flash[:notice]).to eq("CONFIRMATION Successfully subtracted 10 credits from the pool!")
+      it 'gives a confirmation on successful increase of credits in pool' do
+        post :admin_subtract_from_pool, params: { credits: 10 }
+        expect(flash[:notice]).to eq('CONFIRMATION Successfully subtracted 10 credits from the pool!')
       end
 
       it "doesn't allow admin to subtract more credits than there are available" do
-        post :admin_subtract_from_pool, params: {credits: 200}
+        post :admin_subtract_from_pool, params: { credits: 200 }
         expect(flash[:warning]).to eq("Can't subtract more credits than there are available, only 100 credits currently in pool")
       end
 
       it "doesn't allow non-number credit input" do
-        post :admin_subtract_from_pool, params: {credits: 'not a number'}
+        post :admin_subtract_from_pool, params: { credits: 'not a number' }
         expect(flash[:warning]).to eq('ERROR Invalid input!')
       end
 
       it "doesn't allow non-integer credit input" do
-        post :admin_subtract_from_pool, params: {credits: 3.4485}
+        post :admin_subtract_from_pool, params: { credits: 3.4485 }
         expect(flash[:warning]).to eq('ERROR Invalid input!')
       end
 
       it "doesn't allow negative credit input" do
-        post :admin_subtract_from_pool, params: {credits: -5}
+        post :admin_subtract_from_pool, params: { credits: -5 }
         expect(flash[:warning]).to eq('ERROR Invalid input!')
       end
 
       it "doesn't allow 0 credits as input" do
-        post :admin_subtract_from_pool, params: {credits: 0}
+        post :admin_subtract_from_pool, params: { credits: 0 }
         expect(flash[:warning]).to eq('ERROR Invalid input!')
       end
 
       it "doesn't allow non-admin user to decrease credit pool using this method" do
         session[:user_id] = User.find_by(uid: '123456').id
-        post :admin_subtract_from_pool, params: {credits: 10}
+        post :admin_subtract_from_pool, params: { credits: 10 }
         expect(creditpool.reload.credits).to eq(100)
       end
 
       it 'redirects a non-admin user trying to call this method' do
         session[:user_id] = User.find_by(uid: '123456').id
-        post :admin_subtract_from_pool, params: {credits: 10}
+        post :admin_subtract_from_pool, params: { credits: 10 }
         expect(response).to redirect_to '/'
       end
     end

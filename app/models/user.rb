@@ -39,7 +39,7 @@ class User < ApplicationRecord
     json_res = JSON.parse(res)
     if json_res == true
       update(admin: true)
-    else 
+    else
       update(admin: false)
     end
   end
