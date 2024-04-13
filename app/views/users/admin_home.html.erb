@@ -43,17 +43,22 @@
         <input name="credit-pool-subtract" type="submit" class="submit" value="Subtract Credits" formaction="/admin/subtract_from_pool"/>
     </form>
 
-    <div class="actionBtn">
-      <%= link_to "View Credit Pool", "/credit_pools/%d" % [@user_school.id] %>
-    </div>
-
-  <div class="actionBtn">
-      <%= link_to "Log Out", logout_path %>
+    <div class="row mt-3 justify-content-center">
+      <div class="col-auto mb-2">
+        <%= button_to "View Credit Pool", credit_pool_path(@user_school.id), method: :get, class: "btn actionBtn" %>
+      </div>
+      <div class="col-auto">
+        <%= button_to "Log Out", logout_path, method: :get, class: "btn actionBtn" %>
+      </div>
   </div>
 
-    <br>
-
   <% if @user_school.present? && @user_school.logo_url.present? %>
-    <%= image_tag @user_school.logo_url, class: "school-logo" %>
+    <div class="row mt-5">
+      <div class="col-md-6 offset-md-3">
+        <div class="text-center">
+          <%= image_tag @user_school.logo_url, class: "school-logo" %>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>

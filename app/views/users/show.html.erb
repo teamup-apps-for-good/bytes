@@ -62,11 +62,18 @@
           <% end %>
         <% end %>
         
+        
         <%= button_to "Give Feedback", new_feedback_path, :method => :get, class: "actionBtn" %>
         <%= button_to "Log Out", logout_path, :method => :get, class: "actionBtn" %>
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <% if @user.admin %><%= button_to "Go To Admin Dashboard", admin_home_path, :method => :get, class: "actionBtn" %><% end %>
+    </div>
+  <div>
 
   <% if @user_school.present? && @user_school.logo_url.present? %>
     <div class="row mt-5">

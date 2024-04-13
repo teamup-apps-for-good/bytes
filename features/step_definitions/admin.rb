@@ -58,3 +58,7 @@ Then("I should be on my school's credit pool page") do
   @creditpool = CreditPool.find_by(email_suffix: 'tamu.edu')
   expect(page).to have_current_path("/credit_pools/#{@creditpool.id}")
 end
+
+Then('I should be on the admin dashboard page') do
+  expect(page).to have_current_path(admin_home_path)
+end
