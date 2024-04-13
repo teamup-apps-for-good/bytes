@@ -13,7 +13,14 @@ Background:
     |   credits   |   email_suffix   |   id_name   |   school_name   |
     |      50     |     tamu.edu     |     UIN     |      TAMU       |
 
-Scenario: Admin can access the school's credit pool from landing page
+Scenario: Admin can go from their profile page to the admin dashboard
+    Given I am on the login page
+    And I am logged in as an admin
+    When I go to the profile page
+    And I press "Go To Admin Dashboard"
+    Then I should be on the admin dashboard page
+
+Scenario: Admin can access the school's credit pool from the admin dashboard
 
     Given I am on the login page
     And I am logged in as an admin
