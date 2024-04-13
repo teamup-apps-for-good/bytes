@@ -69,11 +69,13 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-4 offset-md-4">
-      <% if @user.admin %><%= button_to "Go To Admin Dashboard", admin_home_path, :method => :get, class: "actionBtn" %><% end %>
-    </div>
-  <div>
+  <% if @user.admin %>
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <%= button_to "Go To Admin Dashboard", admin_home_path, :method => :get, class: "actionBtn" %>
+      </div>
+    <div>
+  <% end %>
 
   <% if @user_school.present? && @user_school.logo_url.present? %>
     <div class="row mt-5">
