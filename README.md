@@ -25,7 +25,7 @@ Our project uses Google OAuth and there is a client secret & key associated with
     gmail:
       username: your_email_address
       password: your_email_passkey
-	  feedback_target: feedback_email_target_address
+      feedback_target: feedback_email_target_address
 ```
 
 
